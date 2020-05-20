@@ -1,0 +1,38 @@
+{
+  "name": "sda-live",
+  "scripts": {},
+  "env": {
+    "access_key_id": {
+      "required": true
+    },
+    "DATABASE_URL": {
+      "required": true
+    },
+    "password": {
+      "required": true
+    },
+    "secret_access_key": {
+      "required": true
+    },
+    "username": {
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "free"
+    }
+  },
+  "addons": [
+    "heroku-postgresql"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/ruby"
+    },
+    {
+      "url": "https://github.com/retailzipline/heroku-buildpack-imagemagick-heif.git"
+    }
+  ]
+}
