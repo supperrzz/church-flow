@@ -4,7 +4,7 @@ class Admin::EventsController < ApplicationController
   # GET /admin/events
   # GET /admin/events.json
   def index
-    @admin_events = Admin::Event.all
+    @admin_events = current_user.church.events
   end
 
   # GET /admin/events/1
@@ -14,7 +14,7 @@ class Admin::EventsController < ApplicationController
 
   # GET /admin/events/new
   def new
-    @admin_event = Admin::Event.new
+    @admin_event = current_user.church.events.new
   end
 
   # GET /admin/events/1/edit
@@ -24,7 +24,7 @@ class Admin::EventsController < ApplicationController
   # POST /admin/events
   # POST /admin/events.json
   def create
-    @admin_event = Admin::Event.new(admin_event_params)
+    @admin_event = current_user.church.events.new(admin_event_params)
 
     respond_to do |format|
       if @admin_event.save
@@ -64,11 +64,11 @@ class Admin::EventsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_admin_event
-      @admin_event = Admin::Event.find(params[:id])
+      @admin_event = current_user.church.events.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def admin_event_params
-      params.require(:admin_event).permit(:name, :start_datetime, :end_datetime, :address, :description, :link, :image)
+      params.require(:admin_event).permit(:name, :start_datetime, :end_datetime, :location, :address, :description, :link, :image)
     end
 end
