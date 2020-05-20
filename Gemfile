@@ -50,5 +50,19 @@ group :test do
   gem 'webdrivers'
 end
 
+# authentication and authorisation
+gem 'devise'
+gem 'pundit'
+
+# Dev email testing
+gem 'letter_opener', :group => :development
+
+# For client side validations
+gem 'client_side_validations'
+
+# AWS s3 storage
+gem "aws-sdk-s3", require: false
+gem "mini_magick" # image processing
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

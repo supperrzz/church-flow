@@ -1,0 +1,49 @@
+<br/>
+<div class="row">
+  <div class="col-12">
+    <%= link_to 'New Event', new_admin_event_path, class: 'btn btn-primary' %>
+  </div>
+</div>
+<br/>
+<div class="row">
+  <div class="col-12">
+    <h3>News</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Start datetime</th>
+          <th>End datetime</th>
+          <th>Location</th>
+          <th>Address</th>
+          <th>Description</th>
+          <th>Link</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @admin_events.each do |admin_event| %>
+          <tr>
+            <td>
+              <% if admin_event.image.attached? %>
+                <%= image_tag(url_for(admin_event.image.variant(resize: 100))) %>
+              <% end %>
+            </td>
+            <td><%= admin_event.name %></td>
+            <td><%= admin_event.start_datetime %></td>
+            <td><%= admin_event.end_datetime %></td>
+            <td><%= admin_event.location %></td>
+            <td><%= admin_event.address %></td>
+            <td><%= admin_event.description %></td>
+            <td><%= admin_event.link %></td>
+            <td><%= link_to 'Show', admin_event %></td>
+            <td><%= link_to 'Edit', edit_admin_event_path(admin_event) %></td>
+            <td><%= link_to 'Destroy', admin_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

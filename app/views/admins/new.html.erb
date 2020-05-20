@@ -1,0 +1,23 @@
+<div class="container-fluid">
+  <br/>
+  <div class="row">
+    <div class="col-12">
+    <%= form_for @admin, url: admins_path do |f| %>
+      <h3>New Admin</h3>
+      <div class="form-group">
+        <%= f.label :fname, 'First Name' %>
+        <%= f.text_field :fname, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :lname, 'Last Name' %>
+        <%= f.text_field :lname, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :email %>
+        <%= f.email_field :email, class: 'form-control' %>
+      </div>
+      <%= f.submit 'Send Invitation', class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+  </div>
+</div>

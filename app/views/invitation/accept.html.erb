@@ -1,0 +1,67 @@
+<div class="container-fluid">
+  <div classs="row">
+    <div class="col-12">
+      <div class="container-fluid">
+        <br/>
+        <div class="col-12">
+          <%= form_for @admin, as: :admin, url: complete_invitation_path(invite_token: params[:invite_token]), method: :post, validate: true do |f| %>
+            <h3>Save Info</h3>
+            <div class="form-group">
+              <%= f.label :fname, 'First Name' %>
+              <%= f.text_field :fname, class: 'form-control'  %>
+            </div>
+            <div class="form-group">
+              <%= f.label :lname, 'Last Name' %>
+              <%= f.text_field :lname, class: 'form-control'  %>
+            </div>
+            <div class="form-group">
+              <%= f.label :email %>
+              <%= f.email_field :email, class: 'form-control', disabled: true  %>
+            </div>
+            <div class="form-group">
+              <%= f.label :password %>
+              <%= f.password_field :password, class: 'form-control', validate: { presence: true }  %>
+            </div>
+            <%= f.fields_for :church_attributes, validate: true do |c| %>
+              <h4>Church Info</h4>
+              <div class="form-group">
+                <%= c.label :logo %>
+                <%= c.file_field :logo, class: 'form-control', validate: { presence: true }  %>
+              </div>
+              <div class="form-group">
+                <%= c.label :name %>
+                <%= c.text_field :name, class: 'form-control', validate: { presence: true }  %>
+              </div>
+              <div class="form-group">
+                <%= c.label :address %>
+                <%= c.text_area :address, class: 'form-control', style: 'resize: none;', validate: { presence: true }  %>
+              </div>
+              <div class="form-group">
+                <%= c.label :phone_number %>
+                <%= c.text_field :phone_number, class: 'form-control', validate: { presence: true }  %>
+              </div>
+              <div class="form-group">
+                <%= c.label :fb, 'Facebook Page' %>
+                <%= c.text_field :fb, class: 'form-control', validate: { presence: true }  %>
+              </div>
+              <div class="form-group">
+                <%= c.label :youtube, 'Youtube Channel' %>
+                <%= c.text_field :youtube, class: 'form-control', validate: { presence: true }  %>
+              </div>
+              <div class="form-group">
+                <%= c.label :instagram %>
+                <%= c.text_field :instagram, class: 'form-control', validate: { presence: true }  %>
+              </div>
+              <div class="form-group">
+                <%= c.label :give_link %>
+                <%= c.text_field :give_link, class: 'form-control', validate: { presence: true }  %>
+              </div>
+            <% end %>
+
+            <%= f.submit 'Save', class: 'btn btn-primary' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

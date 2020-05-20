@@ -10,6 +10,28 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+ *= require bootstrap
  *= require_tree .
  *= require_self
  */
+
+.field_with_errors .message {
+    color: #721c24;
+}
+.sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    padding: 70px 0 0;
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+}
+.sidebar .nav-link.active {
+    background: #7f7f7f;
+    color: #ffffff;
+}
+.navbar {
+    z-index: 1030;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
