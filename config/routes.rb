@@ -1,18 +1,31 @@
 Rails.application.routes.draw do
-  get 'settings/profile'
-  patch 'settings/profile' => 'settings#save_profile'
+  namespace :admin do
+    get 'member/index'
+    get 'member/edit'
+    get 'member/new'
+    get 'member/show'
 
-  namespace :admin do
+    get 'website/show'
+    get 'website/edit'
+    post 'website/update'
+    patch 'website/update'
+
+    resources :media_sermons
+
+    resources :media_images
+
     resources :events
-  end
-  namespace :admin do
+
     resources :news
-  end
-  namespace :admin do
+
     get 'church/show', as: :my_church
     get 'church/edit', as: :edit_church
     patch 'church/update', as: :update_my_church
   end
+
+  get 'settings/profile'
+  patch 'settings/profile' => 'settings#save_profile'
+
   devise_for :users
 
   devise_scope :user do

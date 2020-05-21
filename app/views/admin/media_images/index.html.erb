@@ -1,0 +1,34 @@
+<br/>
+<div class="row">
+  <div class="col-12">
+    <%= link_to 'New Media Image', new_admin_media_image_path, class: 'btn btn-primary' %>
+  </div>
+</div>
+<br/>
+<div class="row">
+  <div class="col-12">
+    <h3>Media Images</h3>
+    <% @admin_media_images.in_groups_of(3).each do |group| %>
+      <div class="row">
+        <% group.each do |admin_media_image| %>
+          <% if admin_media_image.present? %>
+            <div class="col-4">
+              <div class="card">
+                <% if admin_media_image.image.attached? %>
+                  <%= image_tag(url_for(admin_media_image.image.variant(resize: 300))) %>
+                <% end %>
+                <div class="card-body">
+                  <h5 class="card-title"><%= admin_media_image.caption %></h5>
+                  <%= link_to 'Show', admin_media_image, class: 'btn btn-primary' %>
+                  <%= link_to 'Edit', edit_admin_media_image_path(admin_media_image), class: 'btn btn-primary' %>
+                  <%= link_to 'Destroy', admin_media_image, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure ?' } %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    <%  end %>
+  </div>
+</div>
+<br>

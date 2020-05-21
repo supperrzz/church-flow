@@ -1,0 +1,35 @@
+<br/>
+<div class="row">
+  <div class="col-12">
+    <%= link_to 'New Media Sermon', new_admin_media_sermon_path, class: 'btn btn-primary' %>
+  </div>
+</div>
+<br/>
+<div class="row">
+  <div class="col-12">
+    <h3>Media Sermons</h3>
+    <% @admin_media_sermons.in_groups_of(3).each do |group| %>
+      <div class="row">
+        <% group.each do |admin_media_sermon| %>
+          <% if admin_media_sermon.present? %>
+            <div class="col-4">
+              <div class="card">
+                <% if admin_media_sermon.video.attached? %>
+                  <%= video_tag(url_for(admin_media_sermon.video), height: 300, class: 'card-img-top') %>
+                <% end %>
+                <div class="card-body">
+                  <h5 class="card-title">Title: <%= admin_media_sermon.title %></h5>
+                  <h5 class="card-title">Speaker: <%= admin_media_sermon.speaker %></h5>
+                  <h5 class="card-title">Scripture: <%= admin_media_sermon.scripture %></h5>
+                  <%= link_to 'Show', admin_media_sermon, class: 'btn btn-primary' %>
+                  <%= link_to 'Edit', edit_admin_media_sermon_path(admin_media_sermon), class: 'btn btn-primary' %>
+                  <%= link_to 'Destroy', admin_media_sermon, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure ?' } %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    <%  end %>
+  </div>
+</div>

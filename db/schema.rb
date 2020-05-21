@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_20_162319) do
+ActiveRecord::Schema.define(version: 2020_05_21_163136) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,24 @@ ActiveRecord::Schema.define(version: 2020_05_20_162319) do
     t.index ["church_id"], name: "index_admin_events_on_church_id"
   end
 
+  create_table "admin_media_images", force: :cascade do |t|
+    t.string "caption"
+    t.bigint "church_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["church_id"], name: "index_admin_media_images_on_church_id"
+  end
+
+  create_table "admin_media_sermons", force: :cascade do |t|
+    t.string "title"
+    t.string "speaker"
+    t.string "scripture"
+    t.bigint "church_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["church_id"], name: "index_admin_media_sermons_on_church_id"
+  end
+
   create_table "admin_news", force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -57,6 +75,17 @@ ActiveRecord::Schema.define(version: 2020_05_20_162319) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["church_id"], name: "index_admin_news_on_church_id"
+  end
+
+  create_table "admin_websites", force: :cascade do |t|
+    t.string "primary_color"
+    t.integer "heading_font"
+    t.integer "body_font"
+    t.string "youtube_live"
+    t.bigint "church_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["church_id"], name: "index_admin_websites_on_church_id"
   end
 
   create_table "churches", force: :cascade do |t|
@@ -92,5 +121,8 @@ ActiveRecord::Schema.define(version: 2020_05_20_162319) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "admin_media_images", "churches"
+  add_foreign_key "admin_media_sermons", "churches"
+  add_foreign_key "admin_websites", "churches"
   add_foreign_key "churches", "users"
 end

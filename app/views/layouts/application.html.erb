@@ -46,25 +46,23 @@
             <div class="sidebar-sticky">
               <ul class="nav flex-column">
                 <li class="nav-item">
-                  <a class="nav-link" href="#">
-                    Dashboard
-                  </a>
-                </li>
-                <li class="nav-item">
                   <%= link_to('News', admin_news_index_path, class: 'nav-link') %>
                 </li>
                 <li class="nav-item">
                   <%= link_to('Events', admin_events_path, class: 'nav-link') %>
                 </li>
+
                 <li class="nav-item">
-                  <a class="nav-link" href="#">
-                    Members
-                  </a>
+                  <%= link_to('Members', admin_member_index_path, class: 'nav-link') %>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">
-                    Website
-                  </a>
+                  <%= link_to('Website', admin_website_show_path, class: 'nav-link') %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to('Media Images', admin_media_images_path, class: 'nav-link') %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to('Media Sermons', admin_media_sermons_path, class: 'nav-link') %>
                 </li>
               </ul>
             </div>

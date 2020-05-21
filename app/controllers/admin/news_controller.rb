@@ -1,17 +1,13 @@
-class Admin::NewsController < ApplicationController
-  before_action :authenticate_user!, :check_admin
+class Admin::NewsController < Admin::AdminBaseController
   before_action :set_admin_news, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/news
-  # GET /admin/news.json
   def index
     @admin_news = current_user.church.news
   end
 
   # GET /admin/news/1
-  # GET /admin/news/1.json
-  def show
-  end
+  def show; end
 
   # GET /admin/news/new
   def new
@@ -19,63 +15,43 @@ class Admin::NewsController < ApplicationController
   end
 
   # GET /admin/news/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /admin/news
-  # POST /admin/news.json
   def create
     @admin_news = current_user.church.news.new(admin_news_params)
 
-    respond_to do |format|
-      if @admin_news.save
-        format.html { redirect_to @admin_news, notice: 'News was successfully created.' }
-        format.json { render :show, status: :created, location: @admin_news }
-      else
-        format.html { render :new }
-        format.json { render json: @admin_news.errors, status: :unprocessable_entity }
-      end
+    if @admin_news.save
+      redirect_to @admin_news, notice: 'News was successfully created.'
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /admin/news/1
-  # PATCH/PUT /admin/news/1.json
   def update
-    respond_to do |format|
-      if @admin_news.update(admin_news_params)
-        format.html { redirect_to @admin_news, notice: 'News was successfully updated.' }
-        format.json { render :show, status: :ok, location: @admin_news }
-      else
-        format.html { render :edit }
-        format.json { render json: @admin_news.errors, status: :unprocessable_entity }
-      end
+    if @admin_news.update(admin_news_params)
+      redirect_to @admin_news, notice: 'News was successfully updated.'
+    else
+      render :edit
     end
   end
 
   # DELETE /admin/news/1
-  # DELETE /admin/news/1.json
   def destroy
     @admin_news.destroy
-    respond_to do |format|
-      format.html { redirect_to admin_news_index_url, notice: 'News was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to admin_news_index_url, notice: 'News was successfully destroyed.'
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_admin_news
-      @admin_news = current_user.church.news.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def admin_news_params
-      params.require(:admin_news).permit(:title, :body, :image)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_admin_news
+    @admin_news = current_user.church.news.find(params[:id])
+  end
 
-    def check_admin
-      return if current_user.admin? && current_user.invitation_completed
-      flash[:error] = 'Access Denied.'
-      redirect_to root_path
-    end
+  # Only allow a list of trusted parameters through.
+  def admin_news_params
+    params.require(:admin_news).permit(:title, :body, :image)
+  end
 end

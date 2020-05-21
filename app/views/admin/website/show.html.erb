@@ -1,0 +1,20 @@
+<div class="container-fluid">
+  <br/>
+  <div class="row">
+    <div class="col-12">
+      <h3>My Website Config</h3>
+      <% if @website.present? %>
+        <% if @website.hero_image.attached? %>
+          <%= image_tag(url_for(@website.hero_image.variant(resize: 100))) %>
+        <% end %>
+        <p><strong>Primary Color</strong> <%= @website.primary_color %></p>
+        <p><strong>Heading Font</strong> <%= @website.heading_font %></p>
+        <p><strong>Body Font</strong> <%= @website.body_font %></p>
+        <p><strong>Youtube live</strong> <%= @website.youtube_live %></p>
+        <%= link_to('Edit', admin_website_edit_path, class: 'btn btn-primary') %>
+      <% else %>
+        <%= link_to('Add config', admin_website_edit_path, class: 'btn btn-primary') %>
+      <% end %>
+    </div>
+  </div>
+</div>

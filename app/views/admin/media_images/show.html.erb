@@ -1,0 +1,13 @@
+<p>
+  <strong>Image:</strong>
+  <% if @admin_media_image.image.attached? %>
+    <%= image_tag(url_for(@admin_media_image.image.variant(resize: 100))) %>
+  <% end %>
+</p>
+<p>
+  <strong>Caption:</strong>
+  <%= @admin_media_image.caption %>
+</p>
+
+<%= link_to 'Edit', edit_admin_media_image_path(@admin_media_image) %> |
+<%= link_to 'Back', admin_media_images_path %>

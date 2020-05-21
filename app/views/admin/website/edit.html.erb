@@ -1,0 +1,34 @@
+<div class="container-fluid">
+  <br/>
+  <div class="row">
+    <div class="col-12">
+      <%= form_for @website, url: admin_website_update_path do |c| %>
+        <h4>Website Config</h4>
+        <div class="form-group">
+          <%= c.label :hero_image %>
+          <% if @website.hero_image.attached? %>
+            <%= image_tag(url_for(@website.hero_image.variant(resize: 100))) %>
+          <% end %>
+          <%= c.file_field :hero_image, class: 'form-control', validate: { presence: true }  %>
+        </div>
+        <div class="form-group">
+          <%= c.label :primary_color %>
+          <%= c.text_field :primary_color, class: 'form-control'  %>
+        </div>
+        <div class="form-group">
+          <%= c.label :heading_font %>
+          <%= c.number_field :heading_font, class: 'form-control', style: 'resize: none;'  %>
+        </div>
+        <div class="form-group">
+          <%= c.label :body_font %>
+          <%= c.number_field :body_font, class: 'form-control'  %>
+        </div>
+        <div class="form-group">
+          <%= c.label :youtube_live %>
+          <%= c.text_field :youtube_live, class: 'form-control'  %>
+        </div>
+        <%= c.submit 'Save', class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+</div>

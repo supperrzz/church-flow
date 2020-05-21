@@ -1,5 +1,4 @@
-class Admin::ChurchController < ApplicationController
-  before_action :authenticate_user!, :check_admin
+class Admin::ChurchController < Admin::AdminBaseController
 
   def show
     @church = current_user.church
@@ -21,12 +20,6 @@ class Admin::ChurchController < ApplicationController
   end
 
   private
-
-  def check_admin
-    return if current_user.admin? && current_user.invitation_completed
-    flash[:error] = 'Access Denied.'
-    redirect_to root_path
-  end
 
   def church_params
     params.require(:church).permit(
