@@ -1,0 +1,23 @@
+<p>
+  <% if @admin_member.profile_picture.attached? %>
+  <%= image_tag(url_for(@admin_member.profile_picture.variant(resize: 100))) %>
+  <% end %>
+</p>
+
+<p>
+  <strong>First Name:</strong>
+  <%= @admin_member.fname %>
+</p>
+
+<p>
+  <strong>Last Name:</strong>
+  <%= @admin_member.lname %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @admin_member.email %>
+</p>
+
+<%= link_to 'Edit', edit_admin_member_path(@admin_member) %> |
+<%= link_to 'Back', admin_members_path %>

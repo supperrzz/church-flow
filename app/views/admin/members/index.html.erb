@@ -1,0 +1,41 @@
+<br/>
+<div class="row">
+  <div class="col-12">
+    <%= link_to 'New Member', new_admin_member_path, class: 'btn btn-primary' %>
+  </div>
+</div>
+<br/>
+<div class="row">
+  <div class="col-12">
+    <h3>Members</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Profile Picture</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @admin_members.each do |admin_member| %>
+          <tr>
+            <td><%= admin_member.fname %></td>
+            <td><%= admin_member.lname %></td>
+            <td><%= admin_member.email %></td>
+            <td>
+              <% if admin_member.profile_picture.attached? %>
+                <%= image_tag(url_for(admin_member.profile_picture.variant(resize: 100))) %>
+              <% end %>
+            </td>
+            <td><%= link_to 'Show', admin_member %></td>
+            <td><%= link_to 'Edit', edit_admin_member_path(admin_member) %></td>
+            <td><%= link_to 'Destroy', admin_member, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
