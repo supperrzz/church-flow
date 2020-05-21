@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, # :registerable,
          :recoverable, :rememberable, :validatable
 
-  enum role: %i[member admin super_admin]
+  enum role: {admin: 1,  super_admin: 2 }
 
   has_one :church
   has_one_attached :profile_picture

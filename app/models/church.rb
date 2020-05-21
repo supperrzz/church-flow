@@ -5,6 +5,7 @@ class Church < ApplicationRecord
   has_many :media_images, :class_name => 'Admin::MediaImage'
   has_many :media_sermons, :class_name => 'Admin::MediaSermon'
   has_one :website, :class_name => 'Admin::Website'
+  has_many :members, :class_name => 'Admin::Member'
 
   has_one_attached :logo
 end
