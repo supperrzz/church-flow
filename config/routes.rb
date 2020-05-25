@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
+  devise_for :members, class_name: "Admin::Member"
   namespace :admin do
-    get 'member/index'
-    get 'member/edit'
-    get 'member/new'
-    get 'member/show'
+    resources :members
 
     get 'website/show'
     get 'website/edit'
@@ -26,7 +24,9 @@ Rails.application.routes.draw do
   get 'settings/profile'
   patch 'settings/profile' => 'settings#save_profile'
 
-  devise_for :users
+  devise_for :users, controllers: {
+      registrations: 'user/registrations'
+  }
 
   devise_scope :user do
     get 'invitation/accept', as: :accept_invitation

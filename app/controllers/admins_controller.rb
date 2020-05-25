@@ -17,7 +17,9 @@ class AdminsController < ApplicationController
     @admin.email = params[:user][:email]
     @admin.fname = params[:user][:fname]
     @admin.lname = params[:user][:lname]
+    @admin.skip_confirmation!
     if @admin.save
+      @admin.create_invitation_token
       flash[:notice] = 'Invitation Sent'
       redirect_to admins_path
     else

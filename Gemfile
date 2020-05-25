@@ -54,8 +54,12 @@ end
 gem 'devise'
 gem 'pundit'
 
-# Dev email testing
-gem 'letter_opener', :group => :development
+group :development do
+  # Dev email testing
+  gem 'letter_opener'
+  # Anotate models
+  gem 'annotate'
+end
 
 # For client side validations
 gem 'client_side_validations'

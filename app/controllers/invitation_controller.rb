@@ -6,7 +6,7 @@ class InvitationController < DeviseController
   end
 
   def complete
-    if @admin.update params.require(:admin).permit(:fname, :lname, church_attributes: {})
+    if @admin.update params.require(:admin).permit(:fname, :lname, :password)
       @admin.update invite_token: nil, invite_sent_at: nil, invitation_completed: true
       sign_in(@admin)
       flash[:notice] = 'Information saved.'

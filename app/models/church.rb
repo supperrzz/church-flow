@@ -1,3 +1,27 @@
+# == Schema Information
+#
+# Table name: churches
+#
+#  id           :bigint           not null, primary key
+#  address      :text
+#  fb           :string
+#  give_link    :text
+#  instagram    :string
+#  name         :string
+#  phone_number :string
+#  youtube      :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  user_id      :bigint           not null
+#
+# Indexes
+#
+#  index_churches_on_user_id  (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (user_id => users.id)
+#
 class Church < ApplicationRecord
   belongs_to :user
   has_many :news, :class_name => 'Admin::News'
