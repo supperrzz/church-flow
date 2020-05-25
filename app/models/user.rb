@@ -35,7 +35,7 @@ class User < ApplicationRecord
 
   enum role: { admin: 1, super_admin: 2 }
 
-  has_one :church
+  has_one :church, dependent: :destroy
   has_one_attached :profile_picture
 
   accepts_nested_attributes_for :church
