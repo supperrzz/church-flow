@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 
   get 'settings/profile'
   patch 'settings/profile' => 'settings#save_profile'
+  delete 'settings/profile' => 'settings#destroy'
 
   devise_for :users, controllers: {
       registrations: 'user/registrations'

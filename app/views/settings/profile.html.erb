@@ -27,4 +27,12 @@
       <% end %>
     </div>
   </div>
+  <br/>
+  <% if current_user.admin? %>
+    <div class="row">
+      <div class="col-12">
+        <%= link_to('Delete My Account', settings_profile_path, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete. This action can\'t be reverted.' }) %>
+      </div>
+    </div>
+  <% end %>
 </div>

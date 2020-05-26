@@ -1,4 +1,6 @@
 class SettingsController < ApplicationController
+  before_action :authenticate_user!
+
   def profile
   end
 
@@ -10,5 +12,17 @@ class SettingsController < ApplicationController
       flash.now[:error] = current_user.error.full_messages.first
       render 'settings/profile'
     end
+  end
+
+  def destroy
+    if current_user.admin?
+      user = current_user
+      sign_out current_user
+      flash[:notice] = 'Account deleted successfully.'
+      user.destroy
+    else
+      flash[:error] = 'Operation not allowed.'
+    end
+    redirect_to root_path
   end
 end

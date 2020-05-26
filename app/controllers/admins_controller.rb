@@ -1,5 +1,5 @@
 class AdminsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, :check_super_admin
 
   def index
     @admins = User.where(role: :admin)
@@ -30,5 +30,13 @@ class AdminsController < ApplicationController
 
   def destroy
 
+  end
+
+  private
+
+  def check_super_admin
+    return if current_user.super_admin?
+    flash[:notice] = 'Access denied'
+    redirect_to root_path
   end
 end
