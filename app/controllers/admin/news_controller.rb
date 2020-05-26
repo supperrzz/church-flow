@@ -1,4 +1,5 @@
-class Admin::NewsController < Admin::AdminBaseController
+# frozen_string_literal: true
+class Admin::NewsController < ApplicationController
   before_action :set_admin_news, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/news

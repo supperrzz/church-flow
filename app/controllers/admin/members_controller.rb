@@ -1,4 +1,5 @@
-class Admin::MembersController < Admin::AdminBaseController
+# frozen_string_literal: true
+class Admin::MembersController < ApplicationController
   before_action :set_admin_member, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/members

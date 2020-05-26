@@ -1,4 +1,5 @@
-class Admin::WebsiteController < Admin::AdminBaseController
+# frozen_string_literal: true
+class Admin::WebsiteController < ApplicationController
   def show
     @website = current_user.church.website
   end

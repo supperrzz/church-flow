@@ -1,4 +1,5 @@
-class Admin::MediaSermonsController < Admin::AdminBaseController
+# frozen_string_literal: true
+class Admin::MediaSermonsController < ApplicationController
   before_action :set_admin_media_sermon, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/media_sermons

@@ -1,24 +1,26 @@
 Rails.application.routes.draw do
-  devise_for :members, class_name: "Admin::Member"
-  namespace :admin do
-    resources :members
+  devise_for :members, class_name: 'Admin::Member'
+  authenticate :user, lambda { |u| u.admin? } do
+    namespace :admin do
+      resources :members
 
-    get 'website/show'
-    get 'website/edit'
-    post 'website/update'
-    patch 'website/update'
+      get 'website/show'
+      get 'website/edit'
+      post 'website/update'
+      patch 'website/update'
 
-    resources :media_sermons
+      resources :media_sermons
 
-    resources :media_images
+      resources :media_images
 
-    resources :events
+      resources :events
 
-    resources :news
+      resources :news
 
-    get 'church/show', as: :my_church
-    get 'church/edit', as: :edit_church
-    patch 'church/update', as: :update_my_church
+      get 'church/show', as: :my_church
+      get 'church/edit', as: :edit_church
+      patch 'church/update', as: :update_my_church
+    end
   end
 
   get 'settings/profile'
@@ -34,7 +36,9 @@ Rails.application.routes.draw do
     post 'invitation/complete', as: :complete_invitation
   end
 
-  resources :admins
+  authenticate :user, lambda { |u| u.super_admin? } do
+    resources :admins
+  end
 
-  root to: "home#index"
+  root to: 'home#index'
 end

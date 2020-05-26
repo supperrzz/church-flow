@@ -1,4 +1,5 @@
-class Admin::MediaImagesController < Admin::AdminBaseController
+# frozen_string_literal: true
+class Admin::MediaImagesController < ApplicationController
   before_action :set_admin_media_image, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/media_images

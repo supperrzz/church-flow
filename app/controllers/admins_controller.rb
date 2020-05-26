@@ -1,5 +1,5 @@
 class AdminsController < ApplicationController
-  before_action :authenticate_user!, :check_super_admin
+  before_action :set_admin, only: %i[show edit update destroy]
 
   def index
     @admins = User.where(role: :admin)
@@ -9,6 +9,16 @@ class AdminsController < ApplicationController
   def new
     @admin = User.new
     authorize @admin
+  end
+
+  def edit; end
+
+  def update
+    if @admin.update(admin_params)
+      redirect_to admin_path(@admin), notice: 'Admin was successfully updated.'
+    else
+      render :edit, error: @admin.error.full_messages.first
+    end
   end
 
   def create
@@ -29,14 +39,17 @@ class AdminsController < ApplicationController
   end
 
   def destroy
-
+    @admin.destroy
+    redirect_to admins_url, notice: 'Admin was successfully destroyed.'
   end
 
   private
 
-  def check_super_admin
-    return if current_user.super_admin?
-    flash[:notice] = 'Access denied'
-    redirect_to root_path
+  def set_admin
+    @admin = User.find(params[:id])
+  end
+
+  def admin_params
+    params.require(:user).permit(:email, :fname, :lname)
   end
 end

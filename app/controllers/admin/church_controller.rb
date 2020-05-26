@@ -1,4 +1,5 @@
-class Admin::ChurchController < Admin::AdminBaseController
+# frozen_string_literal: true
+class Admin::ChurchController < ApplicationController
 
   def show
     @church = current_user.church
