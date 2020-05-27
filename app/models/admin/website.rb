@@ -6,6 +6,7 @@
 #  body_font     :string
 #  heading_font  :string
 #  primary_color :string
+#  subdomain     :string
 #  youtube_live  :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
