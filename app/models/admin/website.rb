@@ -3,8 +3,8 @@
 # Table name: admin_websites
 #
 #  id            :bigint           not null, primary key
-#  body_font     :integer
-#  heading_font  :integer
+#  body_font     :string
+#  heading_font  :string
 #  primary_color :string
 #  youtube_live  :string
 #  created_at    :datetime         not null
@@ -23,4 +23,10 @@ class Admin::Website < ApplicationRecord
   belongs_to :church
 
   has_one_attached :hero_image
+
+  FONTS = {
+    'Roboto': 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap',
+    'Open Sans': 'https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap',
+    'Merriweather': 'https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap'
+  }.freeze
 end

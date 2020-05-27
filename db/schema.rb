@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_25_171851) do
+ActiveRecord::Schema.define(version: 2020_05_27_074908) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,8 +95,8 @@ ActiveRecord::Schema.define(version: 2020_05_25_171851) do
 
   create_table "admin_websites", force: :cascade do |t|
     t.string "primary_color"
-    t.integer "heading_font"
-    t.integer "body_font"
+    t.string "heading_font"
+    t.string "body_font"
     t.string "youtube_live"
     t.bigint "church_id", null: false
     t.datetime "created_at", precision: 6, null: false
