@@ -1,11 +1,10 @@
 class SettingsController < ApplicationController
   before_action :authenticate_user!
 
-  def profile
-  end
+  def profile; end
 
   def save_profile
-    if current_user.update(params.require(:user).permit(:profile_picture, :fname, :lname, :email))
+    if current_user.update(user_params)
       flash[:success] = 'Profile saved.'
       redirect_to settings_profile_path
     else
@@ -24,5 +23,11 @@ class SettingsController < ApplicationController
       flash[:error] = 'Operation not allowed.'
     end
     redirect_to root_path
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:profile_picture, :fname, :lname, :email, :time_zone)
   end
 end

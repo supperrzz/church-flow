@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 class Admin::EventsController < ApplicationController
   before_action :set_admin_event, only: %i[show edit update destroy]
+  before_action :set_time_zone, except: :destroy
 
   # GET /admin/events
   def index
@@ -54,5 +55,9 @@ class Admin::EventsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def admin_event_params
     params.require(:admin_event).permit(:name, :start_datetime, :end_datetime, :location, :address, :description, :link, :image)
+  end
+
+  def set_time_zone
+    Time.zone = current_user.time_zone || 'Pacific Time (US & Canada)'
   end
 end

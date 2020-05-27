@@ -17,6 +17,7 @@
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
 #  role                   :integer          default("admin")
+#  time_zone              :string
 #  unconfirmed_email      :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
@@ -41,6 +42,7 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :church
 
   validates_presence_of :fname, :lname
+  validates_inclusion_of :time_zone, in: ActiveSupport::TimeZone.all.map(&:name)
 
   after_create :create_church, if: :admin?
 
