@@ -14,6 +14,8 @@ class HomeController < ApplicationController
           sign_out current_user
         end
       end
+    else
+      new_user_session_path
     end
   end
 end
