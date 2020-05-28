@@ -6,7 +6,6 @@
 #  body_font     :string
 #  heading_font  :string
 #  primary_color :string
-#  subdomain     :string
 #  youtube_live  :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -25,6 +24,7 @@ class Admin::Website < ApplicationRecord
 
   has_one_attached :hero_image
 
+  validates_presence_of :body_font, :heading_font, :primary_color
   FONTS = {
     'Roboto': 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap',
     'Open Sans': 'https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap',

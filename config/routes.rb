@@ -28,7 +28,8 @@ Rails.application.routes.draw do
   delete 'settings/profile' => 'settings#destroy'
 
   devise_for :users, controllers: {
-      registrations: 'user/registrations'
+    registrations: 'user/registrations',
+    sessions: 'user/sessions'
   }
 
   devise_scope :user do

@@ -11,7 +11,6 @@
         <p><strong>Heading Font</strong> <%= @website.heading_font %></p>
         <p><strong>Body Font</strong> <%= @website.body_font %></p>
         <p><strong>Youtube live</strong> <%= @website.youtube_live %></p>
-        <p><strong>Subdomain</strong> <%= @website.subdomain %></p>
         <%= link_to('Edit', admin_website_edit_path, class: 'btn btn-primary') %>
       <% else %>
         <%= link_to('Add config', admin_website_edit_path, class: 'btn btn-primary') %>

@@ -6,11 +6,10 @@ class InvitationController < DeviseController
   end
 
   def complete
-    if @admin.update params.require(:admin).permit(:fname, :lname, :password)
+    if @admin.update params.require(:admin).permit(:fname, :lname, :password, :subdomain)
       @admin.update invite_token: nil, invite_sent_at: nil, invitation_completed: true
-      sign_in(@admin)
-      flash[:notice] = 'Information saved.'
-      redirect_to root_path
+      flash[:notice] = 'Invitation completed please signin.'
+      redirect_to new_user_session_url(subdomain: @admin.subdomain)
     else
       flash.now[:error] = @admin.errors.full_messages.first
       render :accept

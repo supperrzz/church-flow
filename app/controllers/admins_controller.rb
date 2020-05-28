@@ -27,8 +27,10 @@ class AdminsController < ApplicationController
     @admin.email = params[:user][:email]
     @admin.fname = params[:user][:fname]
     @admin.lname = params[:user][:lname]
+    @admin.subdomain = params[:user][:subdomain]
+    @admin.time_zone = params[:user][:time_zone]
     @admin.skip_confirmation!
-    if @admin.save
+    if @admin.save(validate: false)
       @admin.create_invitation_token
       flash[:notice] = 'Invitation Sent'
       redirect_to admins_path
@@ -50,6 +52,6 @@ class AdminsController < ApplicationController
   end
 
   def admin_params
-    params.require(:user).permit(:email, :fname, :lname)
+    params.require(:user).permit(:email, :fname, :lname, :subdomain, :time_zone)
   end
 end

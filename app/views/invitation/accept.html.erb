@@ -19,6 +19,10 @@
               <%= f.email_field :email, class: 'form-control', disabled: true  %>
             </div>
             <div class="form-group">
+              <%= f.label :subdomain %>
+              <%= f.text_field :subdomain, class: 'form-control'  %>
+            </div>
+            <div class="form-group">
               <%= f.label :password %>
               <%= f.password_field :password, class: 'form-control', validate: { presence: true }  %>
             </div>

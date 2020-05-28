@@ -23,6 +23,6 @@ class Admin::WebsiteController < ApplicationController
   private
 
   def website_params
-    params.require(:admin_website).permit(:primary_color, :heading_font, :body_font, :youtube_live, :hero_image, :subdomain)
+    params.require(:admin_website).permit(:primary_color, :heading_font, :body_font, :youtube_live, :hero_image)
   end
 end

@@ -17,6 +17,7 @@
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
 #  role                   :integer          default("admin")
+#  subdomain              :string
 #  time_zone              :string
 #  unconfirmed_email      :string
 #  created_at             :datetime         not null
@@ -25,24 +26,27 @@
 # Indexes
 #
 #  index_users_on_confirmation_token    (confirmation_token) UNIQUE
-#  index_users_on_email                 (email) UNIQUE
+#  index_users_on_email_and_subdomain   (email,subdomain) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, request_keys: [:subdomain]
 
   enum role: { admin: 1, super_admin: 2 }
 
   has_one :church, dependent: :destroy
+  has_one :website, through: :church
   has_one_attached :profile_picture
 
   accepts_nested_attributes_for :church
 
   validates_presence_of :fname, :lname
   validates_inclusion_of :time_zone, in: ActiveSupport::TimeZone.all.map(&:name)
+  validates_uniqueness_of :subdomain
+  validates_format_of :subdomain, with: /\A^[A-Za-z0-9]+\Z/i
 
   after_create :create_church, if: :admin?
 
@@ -78,5 +82,10 @@ class User < ApplicationRecord
     invitable = find_or_initialize_with_error_by(:invite_token, invitation_token)
     invitable.errors.add(:invitation_token, :invalid) if invitable.invite_token && invitable.persisted? && !invitable.valid_invitation?
     invitable unless only_valid && invitable.errors.present?
+  end
+
+  def self.find_for_authentication(warden_conditions)
+    where(email: warden_conditions[:email],
+          subdomain: warden_conditions[:subdomain]).first
   end
 end
