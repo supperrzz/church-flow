@@ -127,4 +127,6 @@ Rails.application.configure do
     authentication:       'plain',
     enable_starttls_auto: true
   }
+
+  config.hosts << /[a-z0-9]+\.sda\.live/
 end
