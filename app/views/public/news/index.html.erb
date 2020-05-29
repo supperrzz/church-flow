@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-12">
+    <h3>News</h3>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Image</th>
+        <th>Title</th>
+        <th>Body</th>
+        <th></th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @news.each do |article| %>
+        <tr>
+          <td>
+            <% if article.image.attached? %>
+              <%= image_tag(url_for(article.image.variant(resize: 100))) %>
+            <% end %>
+          </td>
+          <td><%= article.title %></td>
+          <td><%= article.body %></td>
+          <td><%= link_to 'Show', public_article_path(article) %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

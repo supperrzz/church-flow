@@ -1,0 +1,39 @@
+<% if @event.image.attached? %>
+  <%= image_tag(url_for(@event.image.variant(resize: 100))) %>
+<% end %>
+<p>
+  <strong>Name:</strong>
+  <%= @event.name %>
+</p>
+
+<p>
+  <strong>Start datetime:</strong>
+  <%= @event.start_datetime %>
+</p>
+
+<p>
+  <strong>End datetime:</strong>
+  <%= @event.end_datetime %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @event.location %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @event.address %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @event.description %>
+</p>
+
+<p>
+  <strong>Link:</strong>
+  <%= @event.link %>
+</p>
+
+<%= link_to 'Back', public_events_path %>

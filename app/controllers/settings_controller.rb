@@ -19,10 +19,11 @@ class SettingsController < ApplicationController
       sign_out current_user
       flash[:notice] = 'Account deleted successfully.'
       user.destroy
+      redirect_to admin_root_path
     else
       flash[:error] = 'Operation not allowed.'
+      redirect_to super_admin_root_path
     end
-    redirect_to root_path
   end
 
   private

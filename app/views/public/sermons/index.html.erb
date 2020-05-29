@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col-12">
+    <h3>Media Sermons</h3>
+    <% @sermons.in_groups_of(3).each do |group| %>
+      <div class="row">
+        <% group.each do |sermon| %>
+          <% if sermon.present? %>
+            <div class="col-4">
+              <div class="card">
+                <% if sermon.video.attached? %>
+                  <%= video_tag(url_for(sermon.video), height: 300, class: 'card-img-top') %>
+                <% end %>
+                <div class="card-body">
+                  <h5 class="card-title">Title: <%= sermon.title %></h5>
+                  <h5 class="card-title">Speaker: <%= sermon.speaker %></h5>
+                  <h5 class="card-title">Scripture: <%= sermon.scripture %></h5>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    <%  end %>
+  </div>
+</div>

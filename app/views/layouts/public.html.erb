@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SdaLive</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <%= link_to('SDA Live', root_path, class: 'navbar-brand') %>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <%= link_to('Login', new_user_session_path, class: 'nav-link') %>
+      </li>
+
+    </ul>
+  </div>
+</nav>
+<div class="container-fluid">
+  <div class="row">
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <%= link_to('News', public_news_path, class: 'nav-link') %>
+          </li>
+          <li class="nav-item">
+            <%= link_to('Sermons', public_sermons_path, class: 'nav-link') %>
+          </li>
+          <li class="nav-item">
+            <%= link_to('Events', public_events_path, class: 'nav-link') %>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      <%= render partial: 'layouts/flash' %>
+      <%= yield %>
+    </main>
+  </div>
+</div>
+</body>
+</html>

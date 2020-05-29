@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :members, class_name: 'Admin::Member'
-  authenticate :user, lambda { |u| u.admin? } do
+  # devise_for :members, class_name: 'Admin::Member'
+  authenticated :user, lambda { |u| u.admin? } do
     namespace :admin, path: '/' do
 
-      root to: 'website#show'
+      root to: 'website#show', as: :admin_root
+      get '/dashboard' => 'dashboard#index', as: :dashboard
       get 'website/edit'
       post 'website/update'
       patch 'website/update'
@@ -30,7 +31,11 @@ Rails.application.routes.draw do
 
   get 'settings/profile'
   patch 'settings/profile' => 'settings#save_profile'
-  delete 'settings/profile' => 'settings#destroy'
+
+  # Only allow admin to delete it's profile
+  authenticated :user, lambda { |u| u.admin? } do
+    delete 'settings/profile' => 'settings#destroy'
+  end
 
   devise_for :users, controllers: {
     registrations: 'user/registrations',
@@ -42,9 +47,27 @@ Rails.application.routes.draw do
     post 'invitation/complete', as: :complete_invitation
   end
 
-  authenticate :user, lambda { |u| u.super_admin? } do
+  authenticated :user, lambda { |u| u.super_admin? } do
+    root to: 'home#index', as: :super_admin_root
     resources :admins
   end
 
-  root to: 'home#index'
+  unauthenticated :user do
+    root to: 'home#index', constraints: { subdomain: 'www' }
+
+    # Public routes
+    constraints lambda { |req| req.subdomain != 'www' } do
+      root to: 'public/home#index', as: :church_subdomain
+
+      namespace :public, path: '/' do
+        get 'news' => 'news#index'
+        get 'article/:id' => 'news#show', as: :article
+
+        get 'sermons' => 'sermons#index'
+
+        get 'events' => 'events#index'
+        get 'event/:id' => 'events#show', as: :event
+      end
+    end
+  end
 end

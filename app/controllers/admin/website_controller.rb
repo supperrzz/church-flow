@@ -14,7 +14,7 @@ class Admin::WebsiteController < ApplicationController
       @website = Admin::Website.new(church: current_user.church)
     end
     if @website.update(website_params)
-      redirect_to root_path, notice: 'Saved website config.'
+      redirect_to admin_root_path, notice: 'Saved website config.'
     else
       render 'admin/website/edit'
     end
