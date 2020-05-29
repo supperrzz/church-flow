@@ -11,8 +11,6 @@ module SdaLive
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
 
-    config.hosts << 'www.lvh.me'
-    config.hosts << 'ratnamy.lvh.me'
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers

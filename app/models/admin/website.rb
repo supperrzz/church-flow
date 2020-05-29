@@ -25,6 +25,10 @@ class Admin::Website < ApplicationRecord
   has_one_attached :hero_image
 
   validates_presence_of :body_font, :heading_font, :primary_color
+
+  attr_accessor :subdomain
+  validates_format_of :subdomain, with: /\A^[A-Za-z0-9]+\Z/i
+
   FONTS = {
     'Roboto': 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap',
     'Open Sans': 'https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap',

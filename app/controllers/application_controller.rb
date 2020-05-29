@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   include Pundit
@@ -5,7 +7,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: %i[fname lname subdomain time_zone])
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[fname lname time_zone])
   end
 
   def after_sign_in_path_for(resource)

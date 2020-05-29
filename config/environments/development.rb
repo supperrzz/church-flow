@@ -66,4 +66,6 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
 
   config.active_storage.service = :local
+
+  config.hosts << /[a-z0-9]+\.lvh\.me/
 end

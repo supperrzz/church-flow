@@ -9,12 +9,25 @@ class Admin::WebsiteController < ApplicationController
   end
 
   def update
+    subdomain = website_params[:subdomain]
     @website = current_user.church.website
     unless @website.present?
       @website = Admin::Website.new(church: current_user.church)
     end
     if @website.update(website_params)
-      redirect_to admin_root_path, notice: 'Saved website config.'
+      if current_user.subdomain != subdomain
+        if User.exists?(subdomain: subdomain)
+          @website.subdomain = subdomain
+          @website.errors.add(:subdomain, 'already exists.')
+          render 'admin/website/edit'
+        else
+          current_user.update subdomain: subdomain
+          sign_out(current_user)
+          redirect_to root_url(subdomain: subdomain)
+        end
+      else
+        redirect_to admin_root_path, notice: 'Saved website config.'
+      end
     else
       render 'admin/website/edit'
     end
@@ -23,6 +36,6 @@ class Admin::WebsiteController < ApplicationController
   private
 
   def website_params
-    params.require(:admin_website).permit(:primary_color, :heading_font, :body_font, :youtube_live, :hero_image)
+    params.require(:admin_website).permit(:primary_color, :heading_font, :body_font, :youtube_live, :hero_image, :subdomain)
   end
 end

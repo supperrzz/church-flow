@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Public::EventsController < PublicController
   def index
     @events = @church.events

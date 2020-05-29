@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   authenticated :user, lambda { |u| u.admin? } do
     namespace :admin, path: '/' do
 
-      root to: 'website#show', as: :admin_root
+      root to: 'website#show', as: :root
       get '/dashboard' => 'dashboard#index', as: :dashboard
       get 'website/edit'
       post 'website/update'

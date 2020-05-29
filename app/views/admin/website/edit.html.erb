@@ -27,6 +27,11 @@
           <%= c.label :youtube_live %>
           <%= c.text_field :youtube_live, class: 'form-control'  %>
         </div>
+        <div class="form-group">
+          <%= c.label :subdomain %>
+          <%= c.text_field :subdomain, value: @website.subdomain || current_user.subdomain, class: 'form-control'  %>
+          <small>Changing this will log you out and you need to login into your new domain.</small>
+        </div>
         <%= c.submit 'Save', class: 'btn btn-primary' %>
       <% end %>
     </div>

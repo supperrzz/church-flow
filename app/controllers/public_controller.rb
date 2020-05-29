@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PublicController < ActionController::Base
   before_action :get_church
   layout 'public'
@@ -9,7 +11,7 @@ class PublicController < ActionController::Base
     if user.present?
       @church = user.church
     else
-      flash[:error] = 'Invalid url'
+      # flash[:error] = 'Invalid url'
       redirect_to root_url(subdomain: 'www')
     end
   end

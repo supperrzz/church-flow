@@ -88,4 +88,13 @@ class User < ApplicationRecord
     where(email: warden_conditions[:email],
           subdomain: warden_conditions[:subdomain]).first
   end
+
+  def get_subdomain
+    temp_subdomain = SecureRandom.hex(4)
+    loop do
+      temp_subdomain = SecureRandom.hex(4)
+      break unless self.class.exists?(subdomain: temp_subdomain)
+    end
+    temp_subdomain
+  end
 end

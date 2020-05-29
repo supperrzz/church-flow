@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class InvitationController < DeviseController
   prepend_before_action :resource_from_invitation_token
 
