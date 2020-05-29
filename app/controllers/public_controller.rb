@@ -10,7 +10,7 @@ class PublicController < ActionController::Base
       @church = user.church
     else
       flash[:error] = 'Invalid url'
-      redirect_to root_path(subdomain: 'www')
+      redirect_to root_url(subdomain: 'www')
     end
   end
 end
