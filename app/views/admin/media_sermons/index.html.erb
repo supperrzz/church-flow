@@ -15,8 +15,7 @@
             <div class="col-4">
               <div class="card">
                 <% if admin_media_sermon.video.attached? %>
-                  <%= video_tag(url_for(admin_media_sermon.video), height: 300, class: 'card-img-top',
-                                controls: true, preload: 'auto', data: { setup: '{}' }) %>
+                  <%= video_tag(url_for(admin_media_sermon.video), height: 300, class: 'card-img-top', controls: true) %>
                 <% end %>
                 <div class="card-body">
                   <h5 class="card-title">Title: <%= admin_media_sermon.title %></h5>
