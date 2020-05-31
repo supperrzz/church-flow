@@ -1,7 +1,8 @@
 <p>
   <strong>Video:</strong>
   <% if @admin_media_sermon.video.attached? %>
-    <%= video_tag(url_for(@admin_media_sermon.video), height: 300) %>
+    <%= video_tag(url_for(@admin_media_sermon.video), height: 300,
+                  controls: true, preload: 'auto', data: { setup: '{}' }) %>
   <% end %>
 </p>
 
