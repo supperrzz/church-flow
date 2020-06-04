@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @admin_live_stream.name %>
+</p>
+
+<p>
+  <strong>Playback policy:</strong>
+  <%= @admin_live_stream.playback_policy %>
+</p>
+
+<p>
+  <strong>Endpoint to Broadcast:</strong>
+  <div><span class="badge badge-secondary">rtmp://global-live.mux.com:5222/app</span> (Standard RTMP entry point. Compatible with the majority of streaming applications and services.)</div>
+  <div><span class="badge badge-secondary">rtmps://global-live.mux.com:443/app</span> (Secure RTMPS entry point. Compatible with less streaming applications, but offers a higher level of security.)</div>
+</p>
+
+<p>
+  <strong>Stream Key:</strong>
+  <%= @admin_live_stream.mux_stream_key %>
+</p>
+
+<%= link_to 'Back', admin_live_streams_path %>

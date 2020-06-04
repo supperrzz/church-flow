@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_28_082715) do
+ActiveRecord::Schema.define(version: 2020_06_03_225125) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,18 @@ ActiveRecord::Schema.define(version: 2020_05_28_082715) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "location"
     t.index ["church_id"], name: "index_admin_events_on_church_id"
+  end
+
+  create_table "admin_live_streams", force: :cascade do |t|
+    t.string "name"
+    t.string "playback_policy"
+    t.string "mux_stream_id"
+    t.string "mux_stream_key"
+    t.json "simulcast_targets", default: [], array: true
+    t.bigint "church_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["church_id"], name: "index_admin_live_streams_on_church_id"
   end
 
   create_table "admin_media_images", force: :cascade do |t|
@@ -91,6 +103,15 @@ ActiveRecord::Schema.define(version: 2020_05_28_082715) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["church_id"], name: "index_admin_news_on_church_id"
+  end
+
+  create_table "admin_simulcast_targets", force: :cascade do |t|
+    t.string "stream_key"
+    t.string "url"
+    t.bigint "admin_live_stream_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["admin_live_stream_id"], name: "index_admin_simulcast_targets_on_admin_live_stream_id"
   end
 
   create_table "admin_websites", force: :cascade do |t|
@@ -144,9 +165,11 @@ ActiveRecord::Schema.define(version: 2020_05_28_082715) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "admin_live_streams", "churches"
   add_foreign_key "admin_media_images", "churches"
   add_foreign_key "admin_media_sermons", "churches"
   add_foreign_key "admin_members", "churches"
+  add_foreign_key "admin_simulcast_targets", "admin_live_streams"
   add_foreign_key "admin_websites", "churches"
   add_foreign_key "churches", "users"
 end

@@ -30,6 +30,7 @@ class Church < ApplicationRecord
   has_many :media_sermons, class_name: 'Admin::MediaSermon', dependent: :destroy
   has_one :website, class_name: 'Admin::Website', dependent: :destroy
   has_many :members, class_name: 'Admin::Member', dependent: :destroy
+  has_many :live_streams, class_name: 'Admin::LiveStream', dependent: :destroy
 
   has_one_attached :logo
 end

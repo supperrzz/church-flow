@@ -1,0 +1,26 @@
+<h1>Streams</h1>
+
+<%= link_to 'Add New Stream', new_admin_live_stream_path, class: 'btn btn-primary' %>
+<br/>
+<br/>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Playback policy</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @admin_live_streams.each do |admin_live_stream| %>
+      <tr>
+        <td><%= admin_live_stream.name %></td>
+        <td><%= admin_live_stream.playback_policy %></td>
+        <td><%= link_to 'Show', admin_live_stream %></td>
+        <td><%= link_to 'Destroy', admin_live_stream, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

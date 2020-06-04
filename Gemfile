@@ -65,8 +65,11 @@ end
 gem 'client_side_validations'
 
 # AWS s3 storage
-gem "aws-sdk-s3", require: false
-gem "mini_magick" # image processing
+gem 'aws-sdk-s3', require: false
+gem 'mini_magick' # image processing
+
+# MUX integration
+gem 'mux_ruby', :git => 'git://github.com/muxinc/mux-ruby.git'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

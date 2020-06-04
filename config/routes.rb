@@ -9,6 +9,9 @@ Rails.application.routes.draw do
       post 'website/update'
       patch 'website/update'
 
+      resources :live_streams, only: %i[index create], path: 'streams'
+      resources :live_streams, only: %i[destroy show new], path: 'stream'
+
       resources :media_sermons, only: %i[index create], path: 'sermons'
       resources :media_sermons, except: %i[index create], path: 'sermon'
 

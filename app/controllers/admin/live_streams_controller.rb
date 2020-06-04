@@ -1,0 +1,57 @@
+class Admin::LiveStreamsController < ApplicationController
+  before_action :set_admin_live_stream, only: %i[show destroy]
+
+  # GET /admin/live_streams
+  def index
+    @admin_live_streams = current_user.church.live_streams
+  end
+
+  # GET /admin/live_stream/1
+  def show; end
+
+  # GET /admin/live_stream/new
+  def new
+    @admin_live_stream = current_user.church.live_streams.new
+  end
+
+  # POST /admin/live_streams
+  def create
+    @admin_live_stream = current_user.church.live_streams.new(admin_live_stream_params)
+    if @admin_live_stream.save
+      live_stream = MuxLiveStream.new
+      mux_live_stream = live_stream.create(@admin_live_stream)
+      if mux_live_stream&.data&.id
+        @admin_live_stream.update mux_stream_id: mux_live_stream.data.id, mux_stream_key: mux_live_stream.data.stream_key
+        redirect_to @admin_live_stream, notice: 'Live stream was successfully created.'
+      else
+        @admin_live_stream.destroy
+        redirect_to admin_live_streams_path, error: 'Something went wrong.'
+      end
+    else
+      render :new
+    end
+  end
+
+  # DELETE /admin/live_streams/1
+  def destroy
+    live_stream = MuxLiveStream.new
+    delete_resp = live_stream.delete(@admin_live_stream)
+    if delete_resp
+      redirect_to admin_live_streams_url, notice: 'Live stream was successfully destroyed.'
+    else
+      redirect_to admin_live_streams_path, error: 'Something went wrong.'
+    end
+  end
+
+  private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_admin_live_stream
+    @admin_live_stream = current_user.church.live_streams.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def admin_live_stream_params
+    params.require(:admin_live_stream).permit(:name, :playback_policy)
+  end
+end
