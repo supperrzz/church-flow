@@ -68,6 +68,9 @@ gem 'client_side_validations'
 gem 'aws-sdk-s3', require: false
 gem 'mini_magick' # image processing
 
+# nested forms
+gem 'cocoon'
+
 # MUX integration
 gem 'mux_ruby', :git => 'git://github.com/muxinc/mux-ruby.git'
 

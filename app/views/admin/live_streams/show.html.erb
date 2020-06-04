@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Name:</strong>
   <%= @admin_live_stream.name %>
@@ -20,5 +18,28 @@
   <strong>Stream Key:</strong>
   <%= @admin_live_stream.mux_stream_key %>
 </p>
+
+<h3>Other Targets</h3>
+<table class="table">
+  <thead>
+  <tr>
+    <th>Platform</th>
+    <th>Endpoint</th>
+    <th>Stream Key</th>
+    <th colspan="2"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @admin_live_stream.admin_simulcast_targets.each do |simulcast_target| %>
+    <tr>
+      <td><%= simulcast_target.platform %></td>
+      <td><%= simulcast_target.url %></td>
+      <td><%= simulcast_target.stream_key %></td>
+      <td><%= link_to 'Destroy', admin_live_stream_path, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
 
 <%= link_to 'Back', admin_live_streams_path %>

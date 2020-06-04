@@ -12,6 +12,8 @@ class Admin::LiveStreamsController < ApplicationController
   # GET /admin/live_stream/new
   def new
     @admin_live_stream = current_user.church.live_streams.new
+    @admin_live_stream.admin_simulcast_targets.new(platform: 'Facebook')
+    @admin_live_stream.admin_simulcast_targets.new(platform: 'Youtube')
   end
 
   # POST /admin/live_streams
@@ -21,13 +23,25 @@ class Admin::LiveStreamsController < ApplicationController
       live_stream = MuxLiveStream.new
       mux_live_stream = live_stream.create(@admin_live_stream)
       if mux_live_stream&.data&.id
-        @admin_live_stream.update mux_stream_id: mux_live_stream.data.id, mux_stream_key: mux_live_stream.data.stream_key
-        redirect_to @admin_live_stream, notice: 'Live stream was successfully created.'
+        success = true
+        @admin_live_stream.admin_simulcast_targets.each do |target|
+          success = live_stream.add_simulcast_target(mux_live_stream.data.id, target.id, target.url, target.stream_key)
+          break unless success
+        end
+        if success
+          @admin_live_stream.update mux_stream_id: mux_live_stream.data.id, mux_stream_key: mux_live_stream.data.stream_key
+          redirect_to @admin_live_stream, notice: 'Live stream was successfully created.'
+        else
+          @admin_live_stream.destroy
+          redirect_to admin_live_streams_path, error: 'Something went wrong.'
+        end
       else
+        live_stream.delete(@admin_live_stream)
         @admin_live_stream.destroy
         redirect_to admin_live_streams_path, error: 'Something went wrong.'
       end
     else
+      puts @admin_live_stream.errors.full_messages
       render :new
     end
   end
@@ -52,6 +66,8 @@ class Admin::LiveStreamsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def admin_live_stream_params
-    params.require(:admin_live_stream).permit(:name, :playback_policy)
+    params.require(:admin_live_stream)
+          .permit(:name, :playback_policy,
+                  admin_simulcast_targets_attributes: %i[id platform url stream_key _destroy])
   end
 end

@@ -2,15 +2,14 @@
 #
 # Table name: admin_live_streams
 #
-#  id                :bigint           not null, primary key
-#  mux_stream_key    :string
-#  name              :string
-#  playback_policy   :string
-#  simulcast_targets :json             is an Array
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
-#  church_id         :bigint           not null
-#  mux_stream_id     :string
+#  id              :bigint           not null, primary key
+#  mux_stream_key  :string
+#  name            :string
+#  playback_policy :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  church_id       :bigint           not null
+#  mux_stream_id   :string
 #
 # Indexes
 #
@@ -22,9 +21,13 @@
 #
 class Admin::LiveStream < ApplicationRecord
   belongs_to :church
-  has_many :simulcast_targets, class_name: 'Admin::SimulcastTarget'
+  has_many :admin_simulcast_targets, class_name: 'Admin::SimulcastTarget',
+           foreign_key: :admin_live_stream_id, dependent: :destroy, inverse_of: :admin_live_stream
+
+  accepts_nested_attributes_for :admin_simulcast_targets, reject_if: :all_blank, allow_destroy: true
 
   PLAYBACK_POLICIES = [MuxRuby::PlaybackPolicy::PUBLIC, MuxRuby::PlaybackPolicy::SIGNED].freeze
 
   validates_inclusion_of :playback_policy, within: PLAYBACK_POLICIES
+  validates_presence_of :name
 end

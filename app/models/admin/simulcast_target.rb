@@ -3,6 +3,7 @@
 # Table name: admin_simulcast_targets
 #
 #  id                   :bigint           not null, primary key
+#  platform             :string
 #  stream_key           :string
 #  url                  :string
 #  created_at           :datetime         not null
@@ -19,4 +20,6 @@
 #
 class Admin::SimulcastTarget < ApplicationRecord
   belongs_to :admin_live_stream, class_name: 'Admin::LiveStream'
+
+  validates_presence_of :platform, :url, :stream_key
 end
