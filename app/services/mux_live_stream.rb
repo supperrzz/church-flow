@@ -5,8 +5,7 @@ class MuxLiveStream
 
   def create(admin_live_stream)
     create_asset_request = create_asset_request_obj
-    create_live_stream_request = create_live_stream_request_obj(create_asset_request)
-    create_live_stream_request.passthrough = admin_live_stream.id.to_s
+    create_live_stream_request = create_live_stream_request_obj(create_asset_request, admin_live_stream)
     @live_api.create_live_stream(create_live_stream_request)
   rescue MuxRuby::ApiError => e
     puts e.message
@@ -37,11 +36,12 @@ class MuxLiveStream
     create_asset_request
   end
 
-  def create_live_stream_request_obj(create_asset_request)
+  def create_live_stream_request_obj(create_asset_request, admin_live_stream)
     create_live_stream_request = MuxRuby::CreateLiveStreamRequest.new
     create_live_stream_request.new_asset_settings = create_asset_request
     create_live_stream_request.playback_policy = [admin_live_stream.playback_policy]
     create_live_stream_request.reduced_latency = true
+    create_live_stream_request.passthrough = admin_live_stream.id.to_s
     create_live_stream_request.test = Rails.env.development?
     create_live_stream_request
   end
