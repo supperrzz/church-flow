@@ -2,6 +2,7 @@ require 'openssl'
 require 'base64'
 
 class NotifyController < ApplicationController
+  skip_before_action :verify_authenticity_token
   # Events that can be triggered for live stream
   # video.live_stream.created
   # video.live_stream.connected
