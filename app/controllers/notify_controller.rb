@@ -1,3 +1,6 @@
+require 'openssl'
+require 'base64'
+
 class NotifyController < ApplicationController
   # Events that can be triggered for live stream
   # video.live_stream.created
@@ -17,6 +20,7 @@ class NotifyController < ApplicationController
   # video.live_stream.simulcast_target.errored
   # video.live_stream.simulcast_target.deleted
   def mux
+    puts params
     verify_mux_signature
     params[:type] # contains type of webhooks event https://docs.mux.com/docs/webhooks
     params[:id] # id of webhook event
@@ -30,11 +34,14 @@ class NotifyController < ApplicationController
   private
 
   def verify_mux_signature
-    mux_header = request.headers['Mux-Signature']
+    puts mux_header = request.headers['Mux-Signature']
     if mux_header
       timestamp, signature = mux_header.split(',')
-      signed_payload = timestamp + '.' + params.as_json
-      expected_signature = OpenSSL::HMAC.digest('sha256', ENV[:mux_secret], signed_payload)
+      puts 'timestamp: ' + timestamp
+      puts 'signature: ' + signature
+      puts signed_payload = timestamp + '.' + params.as_json
+      puts hash = OpenSSL::HMAC.digest('sha256', ENV[:mux_secret], signed_payload)
+      puts expected_signature = Base64.encode64(hash)
       signature == expected_signature
     else
       false
