@@ -4,6 +4,7 @@
 #
 #  id         :bigint           not null, primary key
 #  caption    :string
+#  image_data :text
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  church_id  :bigint           not null
@@ -19,5 +20,6 @@
 class Admin::MediaImage < ApplicationRecord
   belongs_to :church
 
-  has_one_attached :image
+  # has_one_attached :image
+  include ImageUploader::Attachment(:image)
 end

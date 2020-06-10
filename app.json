@@ -33,6 +33,9 @@
     },
     {
       "url": "https://github.com/retailzipline/heroku-buildpack-imagemagick-heif.git"
+    },
+    {
+      "url": "https://github.com/brandoncc/heroku-buildpack-vips.git"
     }
   ]
 }

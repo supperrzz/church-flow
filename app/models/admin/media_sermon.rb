@@ -6,6 +6,7 @@
 #  scripture  :string
 #  speaker    :string
 #  title      :string
+#  video_data :text
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  church_id  :bigint           not null
@@ -21,5 +22,6 @@
 class Admin::MediaSermon < ApplicationRecord
   belongs_to :church
 
-  has_one_attached :video
+  # has_one_attached :image
+  include VideoUploader::Attachment(:video)
 end

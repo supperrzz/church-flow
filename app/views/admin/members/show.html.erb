@@ -1,6 +1,6 @@
 <p>
-  <% if @admin_member.profile_picture.attached? %>
-  <%= image_tag(url_for(@admin_member.profile_picture.variant(resize: 100))) %>
+  <% if @admin_member.profile_picture.present? %>
+    <%= image_tag(@admin_member.profile_picture.url, height: 200) %>
   <% end %>
 </p>
 

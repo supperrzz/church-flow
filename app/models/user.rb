@@ -13,6 +13,7 @@
 #  invite_sent_at         :datetime
 #  invite_token           :string
 #  lname                  :string
+#  profile_picture_data   :text
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
@@ -39,7 +40,8 @@ class User < ApplicationRecord
 
   has_one :church, dependent: :destroy
   has_one :website, through: :church
-  has_one_attached :profile_picture
+  # has_one_attached :profile_picture
+  include ImageUploader::Attachment(:profile_picture)
 
   accepts_nested_attributes_for :church
 

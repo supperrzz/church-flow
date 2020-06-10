@@ -4,6 +4,7 @@
 #
 #  id         :bigint           not null, primary key
 #  body       :text
+#  image_data :text
 #  title      :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -17,5 +18,6 @@ class Admin::News < ApplicationRecord
   belongs_to :church
 
   validates_presence_of :title, :body
-  has_one_attached :image
+  # has_one_attached :image
+  include ImageUploader::Attachment(:image)
 end

@@ -6,7 +6,9 @@ class SettingsController < ApplicationController
   def profile; end
 
   def save_profile
-    if current_user.update(user_params)
+    user = current_user
+    if user.update(user_params)
+      user.profile_picture_derivatives! if user.profile_picture_changed?
       flash[:success] = 'Profile saved.'
       redirect_to settings_profile_path
     else

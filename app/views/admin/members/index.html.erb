@@ -26,8 +26,8 @@
             <td><%= admin_member.lname %></td>
             <td><%= admin_member.email %></td>
             <td>
-              <% if admin_member.profile_picture.attached? %>
-                <%= image_tag(url_for(admin_member.profile_picture.variant(resize: 100))) %>
+              <% if admin_member.profile_picture.present? %>
+                <%= image_tag(admin_member.profile_picture.url, height: 100) %>
               <% end %>
             </td>
             <td><%= link_to 'Show', admin_member %></td>

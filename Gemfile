@@ -66,7 +66,10 @@ gem 'client_side_validations'
 
 # AWS s3 storage
 gem 'aws-sdk-s3', require: false
+gem 'image_processing', '~> 1.8'
+gem 'marcel', '~> 0.3'
 gem 'mini_magick' # image processing
+gem 'shrine', '~> 3.0'
 
 # nested forms
 gem 'cocoon'

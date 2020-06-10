@@ -6,6 +6,7 @@
 #  address        :text
 #  description    :text
 #  end_datetime   :datetime
+#  image_data     :text
 #  link           :string
 #  location       :string
 #  name           :string
@@ -23,5 +24,6 @@ class Admin::Event < ApplicationRecord
 
   validates_presence_of :name, :start_datetime, :end_datetime, :address, :description, :link, :location
   validates_length_of :location, maximum: 150
-  has_one_attached :image
+  # has_one_attached :image
+  include ImageUploader::Attachment(:image)
 end

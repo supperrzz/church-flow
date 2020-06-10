@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'notify/mux'
+  post 'notify/mux'
   # devise_for :members, class_name: 'Admin::Member'
   authenticated :user, lambda { |u| u.admin? } do
     namespace :admin, path: '/' do
