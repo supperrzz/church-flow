@@ -6,6 +6,7 @@
 #  mux_stream_key  :string
 #  name            :string
 #  playback_policy :string
+#  status          :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  church_id       :bigint           not null

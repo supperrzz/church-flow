@@ -26,7 +26,6 @@
     <th>Platform</th>
     <th>Endpoint</th>
     <th>Stream Key</th>
-    <th colspan="2"></th>
   </tr>
   </thead>
 
@@ -36,7 +35,6 @@
       <td><%= simulcast_target.platform %></td>
       <td><%= simulcast_target.url %></td>
       <td><%= simulcast_target.stream_key %></td>
-      <td><%= link_to 'Destroy', admin_live_stream_path, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>
   </tbody>
