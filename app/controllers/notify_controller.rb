@@ -24,16 +24,8 @@ class NotifyController < ApplicationController
     puts params
     verify_mux_signature
     case params[:type]
-    when 'video.live_stream.created'
-      set_live_stream_status('created')
-    when 'video.live_stream.connected'
-      set_live_stream_status('connected')
-    when 'video.live_stream.recording'
-      set_live_stream_status('recording')
     when 'video.live_stream.active'
       set_live_stream_status('active')
-    when 'video.live_stream.disconnected'
-      set_live_stream_status('disconnected')
     when 'video.live_stream.idle'
       set_live_stream_status('idle')
     end
@@ -54,7 +46,7 @@ class NotifyController < ApplicationController
     if live_stream.present?
       puts "\n\n\n\n############## Changed status of live stream #{live_stream.id} to #{status}\n\n\n\n"
       live_stream.update(status: status)
-      live_stream.update(playback_id: params[:object][:playback_ids][0][:id]) if status == 'active'
+      live_stream.update(playback_id: params[:data][:playback_ids][0][:id]) if status == 'active'
     else
       puts "\n\n\n\n############## live stream not found\n\n\n\n"
     end
