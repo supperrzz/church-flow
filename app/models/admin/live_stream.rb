@@ -11,6 +11,7 @@
 #  updated_at      :datetime         not null
 #  church_id       :bigint           not null
 #  mux_stream_id   :string
+#  playback_id     :string
 #
 # Indexes
 #

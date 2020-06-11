@@ -53,7 +53,8 @@ class NotifyController < ApplicationController
     live_stream = Admin::LiveStream.find_by mux_stream_id: mux_stream_id
     if live_stream.present?
       puts "\n\n\n\n############## Changed status of live stream #{live_stream.id} to #{status}\n\n\n\n"
-      live_stream.update status: status
+      live_stream.update(status: status)
+      live_stream.update(playback_id: params[:object][:playback_ids][0][:id]) if status == 'active'
     else
       puts "\n\n\n\n############## live stream not found\n\n\n\n"
     end
