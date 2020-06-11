@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'notify/mux'
   post 'notify/mux'
   # devise_for :members, class_name: 'Admin::Member'
   authenticated :user, lambda { |u| u.admin? } do
@@ -72,6 +71,7 @@ Rails.application.routes.draw do
 
         get 'events' => 'events#index'
         get 'event/:id' => 'events#show', as: :event
+        get 'streams' => 'live_streams#index', as: :streams
       end
     end
   end
