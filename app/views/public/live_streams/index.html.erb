@@ -1,7 +1,7 @@
 <% if @live_stream.present? %>
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <%#= video_tag id: 'video', controls: true, poster: 'https://image.mux.com/@live_stream.playback_id/thumbnail.jpg' %>
-  <video id="video"></video>
+  <video id="video" controls></video>
   <script>
       let video = document.getElementById('video');
       let videoSrc = 'https://stream.mux.com/<%= @live_stream.playback_id %>.m3u8';

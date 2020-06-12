@@ -6,8 +6,8 @@
         <h4>Website Config</h4>
         <div class="form-group">
           <%= c.label :hero_image %>
-          <% if @website.hero_image.attached? %>
-            <%= image_tag(url_for(@website.hero_image.variant(resize: 100))) %>
+          <% if @website.hero_image.present? %>
+            <%= image_tag(@website.hero_image.url, height: 100) %>
           <% end %>
           <%= c.file_field :hero_image, class: 'form-control', validate: { presence: true }  %>
         </div>

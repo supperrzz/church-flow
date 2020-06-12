@@ -4,8 +4,8 @@
     <div class="col-12">
       <h3>My Website Config</h3>
       <% if @website.present? %>
-        <% if @website.hero_image.attached? %>
-          <%= image_tag(url_for(@website.hero_image.variant(resize: 100))) %>
+        <% if @website.hero_image.present? %>
+          <%= image_tag(@website.hero_image.url, height: 100) %>
         <% end %>
         <p><strong>Primary Color</strong> <%= @website.primary_color %></p>
         <p><strong>Heading Font</strong> <%= @website.heading_font %></p>
