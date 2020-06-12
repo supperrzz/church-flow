@@ -71,7 +71,7 @@ Rails.application.routes.draw do
 
         get 'events' => 'events#index'
         get 'event/:id' => 'events#show', as: :event
-        get 'streams' => 'live_streams#index', as: :streams
+        get 'live' => 'live_streams#index', as: :streams
       end
     end
   end
