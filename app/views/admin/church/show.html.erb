@@ -3,8 +3,8 @@
   <div class="row">
     <div class="col-12">
       <h3>My Church Details</h3>
-      <% if @church.logo.attached? %>
-        <%= image_tag(url_for(@church.logo.variant(resize: 100))) %>
+      <% if @church.logo.present? %>
+        <%= image_tag(@church.logo.url, height: 100) %>
       <% end %>
       <p><strong>Name</strong> <%= @church.name %></p>
       <p><strong>Address</strong> <%= @church.address %></p>

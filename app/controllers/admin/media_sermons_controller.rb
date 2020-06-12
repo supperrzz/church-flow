@@ -54,6 +54,6 @@ class Admin::MediaSermonsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def admin_media_sermon_params
-    params.require(:admin_media_sermon).permit(:title, :speaker, :scripture, :church_id, :video)
+    params.require(:admin_media_sermon).permit(:title, :speaker, :scripture, :church_id, :video, :published)
   end
 end

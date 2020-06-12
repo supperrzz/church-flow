@@ -6,8 +6,8 @@
         <h4>Church Info</h4>
         <div class="form-group">
           <%= c.label :logo %>
-          <% if @church.logo.attached? %>
-            <%= image_tag(url_for(@church.logo.variant(resize: 100))) %>
+          <% if @church.logo.present? %>
+            <%= image_tag(@church.logo.url, height: 100) %>
           <% end %>
           <%= c.file_field :logo, class: 'form-control', validate: { presence: true }  %>
         </div>

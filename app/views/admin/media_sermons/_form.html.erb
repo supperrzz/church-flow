@@ -25,6 +25,11 @@
         <%= form.text_field :scripture, class: 'form-control' %>
       </div>
 
+      <div class="form-group">
+        <%= form.check_box :published %>
+        <%= form.label :published %>
+      </div>
+
       <div class="actions">
         <%= form.submit 'Save', class: 'btn btn-primary' %>
       </div>

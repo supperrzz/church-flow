@@ -3,6 +3,7 @@
 # Table name: admin_media_sermons
 #
 #  id         :bigint           not null, primary key
+#  published  :boolean          default(FALSE)
 #  scripture  :string
 #  speaker    :string
 #  title      :string
@@ -21,6 +22,9 @@
 #
 class Admin::MediaSermon < ApplicationRecord
   belongs_to :church
+
+  scope :published, -> { where(published: true) }
+  scope :unpublished, -> { where(published: false) }
 
   # has_one_attached :image
   include VideoUploader::Attachment(:video)

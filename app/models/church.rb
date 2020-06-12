@@ -7,6 +7,7 @@
 #  fb           :string
 #  give_link    :text
 #  instagram    :string
+#  logo_data    :text
 #  name         :string
 #  phone_number :string
 #  youtube      :string
@@ -32,5 +33,6 @@ class Church < ApplicationRecord
   has_many :members, class_name: 'Admin::Member', dependent: :destroy
   has_many :live_streams, class_name: 'Admin::LiveStream', dependent: :destroy
 
-  has_one_attached :logo
+  # has_one_attached :logo
+  include ImageUploader::Attachment(:logo)
 end

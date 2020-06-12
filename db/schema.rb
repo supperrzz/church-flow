@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_11_173353) do
+ActiveRecord::Schema.define(version: 2020_06_12_041001) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(version: 2020_06_11_173353) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "video_data"
+    t.boolean "published", default: false
     t.index ["church_id"], name: "index_admin_media_sermons_on_church_id"
   end
 
@@ -144,6 +145,7 @@ ActiveRecord::Schema.define(version: 2020_06_11_173353) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "logo_data"
     t.index ["user_id"], name: "index_churches_on_user_id"
   end
 
