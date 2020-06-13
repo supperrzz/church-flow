@@ -21,7 +21,8 @@ class Admin::WebsiteController < ApplicationController
           @website.errors.add(:subdomain, 'already exists.')
           render 'admin/website/edit'
         else
-          current_user.update subdomain: subdomain
+          User.where(subdomain: current_user.subdomain).update_all(subdomain: subdomain)
+          # current_user.update subdomain: subdomain
           sign_out(current_user)
           redirect_to root_url(subdomain: subdomain)
         end

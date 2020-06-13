@@ -30,9 +30,9 @@
                 <%= image_tag(admin_member.profile_picture.url, height: 100) %>
               <% end %>
             </td>
-            <td><%= link_to 'Show', admin_member %></td>
+            <td><%= link_to 'Show', admin_member_path(admin_member) %></td>
             <td><%= link_to 'Edit', edit_admin_member_path(admin_member) %></td>
-            <td><%= link_to 'Destroy', admin_member, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td><%= link_to 'Destroy', admin_member_path(admin_member), method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>
         <% end %>
       </tbody>

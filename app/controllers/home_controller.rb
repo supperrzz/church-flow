@@ -15,6 +15,8 @@ class HomeController < ApplicationController
           current_user.create_invitation_token
           sign_out current_user
         end
+      else
+        redirect_to member_home_path
       end
       # else
       # new_user_session_path
