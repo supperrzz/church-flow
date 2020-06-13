@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
+  namespace :members do
+    get 'home/index'
+  end
   post 'notify/mux'
-  # devise_for :members, class_name: 'Admin::Member'
+
   authenticated :user, lambda { |u| u.admin? } do
     namespace :admin, path: '/' do
 
@@ -42,8 +45,7 @@ Rails.application.routes.draw do
   end
 
   devise_for :users, controllers: {
-    registrations: 'user/registrations',
-    sessions: 'user/sessions'
+    registrations: 'user/registrations'
   }
 
   devise_scope :user do
@@ -54,6 +56,11 @@ Rails.application.routes.draw do
   authenticated :user, lambda { |u| u.super_admin? } do
     root to: 'home#index', as: :super_admin_root
     resources :admins
+  end
+
+  # Member Routes
+  authenticated :user, lambda { |u| u.member? } do
+    root to: 'members/home#index', as: :member_home
   end
 
   unauthenticated :user do
