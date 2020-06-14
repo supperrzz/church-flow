@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_12_041001) do
+ActiveRecord::Schema.define(version: 2020_06_14_124238) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -119,6 +119,7 @@ ActiveRecord::Schema.define(version: 2020_06_12_041001) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "platform"
+    t.string "mux_simulcast_id"
     t.index ["admin_live_stream_id"], name: "index_admin_simulcast_targets_on_admin_live_stream_id"
   end
 

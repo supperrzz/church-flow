@@ -23,6 +23,17 @@ class MuxLiveStream
     false
   end
 
+  def delete_simulcast_target(mux_live_stream_id, id)
+    create_simulcast_target = MuxRuby::CreateSimulcastTargetRequest.new
+    create_simulcast_target.passthrough = id.to_s
+    create_simulcast_target.stream_key = stream_key
+    create_simulcast_target.url = url
+    @live_api.create_live_stream_simulcast_target(mux_live_stream_id, create_simulcast_target)
+  rescue MuxRuby::ApiError => e
+    puts e.message
+    false
+  end
+
   def delete(admin_live_stream)
     @live_api.delete_live_stream(admin_live_stream.mux_stream_id)
     admin_live_stream.destroy

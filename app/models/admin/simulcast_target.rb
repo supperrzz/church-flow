@@ -9,6 +9,7 @@
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  admin_live_stream_id :bigint           not null
+#  mux_simulcast_id     :string
 #
 # Indexes
 #
@@ -22,4 +23,13 @@ class Admin::SimulcastTarget < ApplicationRecord
   belongs_to :admin_live_stream, class_name: 'Admin::LiveStream'
 
   validates_presence_of :platform, :url, :stream_key
+
+  before_destroy :delete_mux_simulcast
+
+  def delete_mux_simulcast
+    return unless mux_simulcast_id.present?
+
+    live_api = MuxRuby::LiveStreamsApi.new
+    live_api.delete_live_stream_simulcast_target(admin_live_stream.mux_stream_id, mux_simulcast_id)
+  end
 end

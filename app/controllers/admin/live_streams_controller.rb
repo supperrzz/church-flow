@@ -25,8 +25,12 @@ class Admin::LiveStreamsController < ApplicationController
       if mux_live_stream&.data&.id
         success = true
         @admin_live_stream.admin_simulcast_targets.each do |target|
-          success = live_stream.add_simulcast_target(mux_live_stream.data.id, target.id, target.url, target.stream_key)
-          break unless success
+          target_resp = live_stream.add_simulcast_target(mux_live_stream.data.id, target.id, target.url, target.stream_key)
+          unless target_resp&.data&.id
+            success = false
+            break
+          end
+          target.update(mux_simulcast_id: target_resp.data.id)
         end
         if success
           @admin_live_stream.update mux_stream_id: mux_live_stream.data.id, mux_stream_key: mux_live_stream.data.stream_key
