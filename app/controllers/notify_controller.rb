@@ -28,6 +28,8 @@ class NotifyController < ApplicationController
       set_live_stream_status('active')
     when 'video.live_stream.idle'
       set_live_stream_status('idle')
+    when 'video.asset.static_renditions.ready'
+      get_mp4_and_store_in_s3
     end
      # contains type of webhooks event https://docs.mux.com/docs/webhooks
     params[:id] # id of webhook event
@@ -50,6 +52,10 @@ class NotifyController < ApplicationController
     else
       puts "\n\n\n\n############## live stream not found\n\n\n\n"
     end
+  end
+
+  def get_mp4_and_store_in_s3
+    object_id = params[:object][:id]
   end
 
   def verify_mux_signature

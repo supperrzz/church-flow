@@ -47,6 +47,7 @@ class MuxLiveStream
   def create_asset_request_obj(asset_url = nil)
     create_asset_request = MuxRuby::CreateAssetRequest.new
     create_asset_request.playback_policy = [MuxRuby::PlaybackPolicy::PUBLIC]
+    create_asset_request.mp4_support = 'standard'
     if asset_url.present?
       create_asset_request.input = {
         url: asset_url,

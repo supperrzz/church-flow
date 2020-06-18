@@ -28,3 +28,4 @@ Shrine.plugin :derivatives            # deriving different versions
 Shrine.plugin :validation_helpers     # validations related to files
 Shrine.plugin :pretty_location        # adds pretty locations
 Shrine.plugin :determine_mime_type, analyzer: :marcel
+Shrine.plugin :remote_url, max_size: 1024*1024*1024
