@@ -55,7 +55,38 @@ class NotifyController < ApplicationController
   end
 
   def get_mp4_and_store_in_s3
+    # {"type":"video.asset.static_renditions.ready",
+    #   "request_id":null,
+    #   "object":{
+    #       "type":"asset",
+    #       "id":"EUnIVx57TNhXfFzBGRzXNGfi5YDTICXZ7dZzIYz25Mg"
+    #   },
+    #   "id":"55ff3e16-c557-49eb-b7c3-99a62afe00b9",
+    #   "environment":{"name":"Production","id":"fqbrh9"},
+    #   "data":{
+    #     "tracks":[{"type":"video","max_width":640,"max_height":400,"max_frame_rate":30,"id":"np9CsluXBnUwm1H8iPlMKSQpHVT3uZFkbsK7XrHBRp4"},{"type":"audio","max_channels":2,"max_channel_layout":"stereo","id":"01xk02TOzBQAzjz00uxnJI02vdkfR2LC8x3g56Ru302mOSZ8"}],
+    #     "status":"ready",
+    #     "static_renditions":{"status":"ready","files":[{"width":576,"name":"low.mp4","height":360,"filesize":1284970,"ext":"mp4","bitrate":233600},{"width":640,"name":"medium.mp4","height":400,"filesize":1220345,"ext":"mp4","bitrate":221848}]},
+    #     "playback_ids":[{"policy":"public","id":"r1t92sPukNU9zPbg3d1EcGDwjHWW00VS02Rk2g7edHsuU"}],
+    #     "passthrough":"8","mp4_support":"standard","max_stored_resolution":"SD","max_stored_frame_rate":30,"master_access":"none","live_stream_id":"NeVEgZu00GSpcAo2cJ1GpDrIYnBsbiwaqus64zZwLh3c","id":"EUnIVx57TNhXfFzBGRzXNGfi5YDTICXZ7dZzIYz25Mg","duration":43.509333,"created_at":1592504239,"aspect_ratio":"8:5"},"created_at":"2020-06-18T18:18:25.000000Z","attempts":[],"accessor_source":null,"accessor":null}
     object_id = params[:object][:id]
+    live_stream = Admin::LiveStream.find_by id: params[:data][:passthrough]
+    if live_stream.present?
+      puts 'live stream present'
+      playback_id = params[:data][:playback_ids][0][:id]
+      puts "playback id #{playback_id}"
+
+      files = params[:data][:static_renditions][:files].map { |file| file[:name] }
+      url = "https://stream.mux.com/#{playback_id}/low.mp4"
+      if files.include? 'high.mp4'
+        url = "https://stream.mux.com/#{playback_id}/high.mp4"
+      elsif files.include? 'medium.mp4'
+        url = "https://stream.mux.com/#{playback_id}/medium.mp4"
+      end
+      live_stream.church.media_sermons.create(video_remote_url: url)
+    else
+      puts 'live stream not present'
+    end
   end
 
   def verify_mux_signature
