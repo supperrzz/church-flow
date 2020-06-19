@@ -7,10 +7,10 @@
         <%= form.text_field :name, class: 'form-control' %>
       </div>
 
-      <div class="form-group">
-        <%= form.label :playback_policy %>
-        <%= form.select :playback_policy, Admin::LiveStream::PLAYBACK_POLICIES, {}, class: 'form-control', validate: false %>
-      </div>
+      <!--<div class="form-group">
+        <%#= form.label :playback_policy %>
+        <%#= form.select :playback_policy, Admin::LiveStream::PLAYBACK_POLICIES, {}, class: 'form-control', validate: false %>
+      </div>-->
       <div class="row">
         <%= form.fields_for :admin_simulcast_targets do |target| %>
           <%= render 'admin/live_streams/admin_simulcast_target_fields', f: target %>

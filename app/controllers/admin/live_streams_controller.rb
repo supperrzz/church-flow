@@ -19,6 +19,7 @@ class Admin::LiveStreamsController < ApplicationController
   # POST /admin/live_streams
   def create
     @admin_live_stream = current_user.church.live_streams.new(admin_live_stream_params)
+    @admin_live_stream.playback_policy = MuxRuby::PlaybackPolicy::PUBLIC
     if @admin_live_stream.save
       live_stream = MuxLiveStream.new
       mux_live_stream = live_stream.create(@admin_live_stream)
