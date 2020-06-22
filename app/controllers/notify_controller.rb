@@ -48,7 +48,13 @@ class NotifyController < ApplicationController
     if live_stream.present?
       puts "\n\n\n\n############## Changed status of live stream #{live_stream.id} to #{status}\n\n\n\n"
       live_stream.update(status: status)
-      live_stream.update(playback_id: params[:data][:playback_ids][0][:id]) if status == 'active'
+      if status == 'active'
+        live_stream.update(playback_id: params[:data][:playback_ids][0][:id])
+        subdomain = live_stream.church.user.subdomain
+        ActionCable.server.broadcast("livestream_channel_#{subdomain}",
+                                     video: "https://stream.mux.com/#{live_stream.playback_id}.m3u8",
+                                     poster: "https://image.mux.com/#{live_stream.playback_id}/thumbnail.jpg")
+      end
     else
       puts "\n\n\n\n############## live stream not found\n\n\n\n"
     end
