@@ -1,5 +1,4 @@
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-<%#= video_tag id: 'video', controls: true, poster: 'https://image.mux.com/@live_stream.playback_id/thumbnail.jpg' %>
 <video id="video" width="100%" controls></video>
 <% if @live_stream.present? %>
   <script>
@@ -35,5 +34,5 @@
       }
   </script>
 <% else %>
-  <h3 class="no-live-stream">No live streams currently.</h3>
+  <h3 id="no-live-stream">No live streams currently.</h3>
 <% end %>

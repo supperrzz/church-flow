@@ -54,6 +54,8 @@ class NotifyController < ApplicationController
         ActionCable.server.broadcast("livestream_channel_#{subdomain}",
                                      video: "https://stream.mux.com/#{live_stream.playback_id}.m3u8",
                                      poster: "https://image.mux.com/#{live_stream.playback_id}/thumbnail.jpg")
+      elsif status == 'idle'
+        ActionCable.server.broadcast("livestream_channel_#{subdomain}", {})
       end
     else
       puts "\n\n\n\n############## live stream not found\n\n\n\n"

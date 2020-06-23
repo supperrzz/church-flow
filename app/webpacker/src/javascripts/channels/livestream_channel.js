@@ -14,9 +14,9 @@ document.addEventListener('turbolinks:load', () => {
 
     received(data) {
       // Called when there's incoming data on the websocket for this channel
-      console.log(data)
       let video = document.getElementById('video');
       if (data.video && video) {
+        $('#no-live-stream').hide();
         video.poster = data.poster;
         let videoSrc = data.video;
         if (Hls.isSupported()) {
@@ -32,6 +32,10 @@ document.addEventListener('turbolinks:load', () => {
             video.play();
           });
         }
+      } else if(video) {
+        $('#no-live-stream').show();
+        video.removeAttribute('poster');
+        video.removeAttribute('src');
       }
     }
   });
