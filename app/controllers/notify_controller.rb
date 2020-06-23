@@ -26,8 +26,8 @@ class NotifyController < ApplicationController
     case params[:type]
     when 'video.live_stream.active'
       set_live_stream_status('active')
-    when 'video.live_stream.idle'
-      set_live_stream_status('idle')
+    when 'video.live_stream.disconnected'
+      set_live_stream_status('disconnected')
     when 'video.asset.static_renditions.ready'
       get_mp4_and_store_in_s3
     end
@@ -54,7 +54,7 @@ class NotifyController < ApplicationController
         ActionCable.server.broadcast("livestream_channel_#{subdomain}",
                                      video: "https://stream.mux.com/#{live_stream.playback_id}.m3u8",
                                      poster: "https://image.mux.com/#{live_stream.playback_id}/thumbnail.jpg")
-      elsif status == 'idle'
+      elsif status == 'disconnected'
         ActionCable.server.broadcast("livestream_channel_#{subdomain}", video: false)
       end
     else
