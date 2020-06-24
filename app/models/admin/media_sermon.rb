@@ -44,7 +44,9 @@ class Admin::MediaSermon < ApplicationRecord
   end
 
   def generate_hls_video
-    GenerateHlsJob.perform_later(id)
+    delete_hls_video
+    update(hls_url: nil, hls_thumbnail_url: nil)
+    GenerateHlsJob.set(wait: 1.minute).perform_later(id)
   end
 
   def delete_hls_video
