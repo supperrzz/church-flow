@@ -76,12 +76,18 @@ GEM
       aws-partitions (~> 1, >= 1.239.0)
       aws-sigv4 (~> 1.1)
       jmespath (~> 1.0)
+    aws-sdk-elastictranscoder (1.21.0)
+      aws-sdk-core (~> 3, >= 3.71.0)
+      aws-sigv4 (~> 1.1)
     aws-sdk-kms (1.27.0)
       aws-sdk-core (~> 3, >= 3.71.0)
       aws-sigv4 (~> 1.1)
     aws-sdk-s3 (1.60.1)
       aws-sdk-core (~> 3, >= 3.83.0)
       aws-sdk-kms (~> 1)
+      aws-sigv4 (~> 1.1)
+    aws-sdk-sns (1.24.0)
+      aws-sdk-core (~> 3, >= 3.71.0)
       aws-sigv4 (~> 1.1)
     aws-sigv4 (1.1.0)
       aws-eventstream (~> 1.0, >= 1.0.2)
@@ -106,6 +112,7 @@ GEM
       rails (>= 5.0.0.1, < 6.1)
     cocoon (1.2.14)
     concurrent-ruby (1.1.6)
+    connection_pool (2.2.2)
     content_disposition (1.0.0)
     crass (1.0.6)
     devise (4.7.1)
@@ -167,6 +174,8 @@ GEM
     pundit (2.1.0)
       activesupport (>= 3.0.0)
     rack (2.2.2)
+    rack-protection (2.0.8.1)
+      rack
     rack-proxy (0.6.5)
       rack
     rack-test (1.1.0)
@@ -226,6 +235,11 @@ GEM
     shrine (3.2.1)
       content_disposition (~> 1.0)
       down (~> 5.1)
+    sidekiq (6.0.4)
+      connection_pool (>= 2.2.2)
+      rack (>= 2.0.0)
+      rack-protection (>= 2.0.0)
+      redis (>= 4.1.0)
     spring (2.1.0)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -274,7 +288,9 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
+  aws-sdk-elastictranscoder
   aws-sdk-s3
+  aws-sdk-sns
   bootsnap (>= 1.4.2)
   byebug
   capybara (>= 2.15)
@@ -296,6 +312,7 @@ DEPENDENCIES
   sass-rails (>= 6)
   selenium-webdriver
   shrine (~> 3.0)
+  sidekiq
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)

@@ -22,10 +22,14 @@
     "web": {
       "quantity": 1,
       "size": "free"
+    },
+    "": {
+      "quantity"
     }
   },
   "addons": [
-    "heroku-postgresql"
+    "heroku-postgresql",
+    "rediscloud"
   ],
   "buildpacks": [
     {

@@ -64,6 +64,10 @@ end
 # For client side validations
 gem 'client_side_validations'
 
+# AWS sdk
+gem 'aws-sdk-elastictranscoder'
+gem 'aws-sdk-sns'
+
 # AWS s3 storage
 gem 'aws-sdk-s3', require: false
 gem 'image_processing', '~> 1.8'
@@ -76,6 +80,9 @@ gem 'cocoon'
 
 # MUX integration
 gem 'mux_ruby', :git => 'git://github.com/muxinc/mux-ruby.git'
+
+# Sidekiq background processing
+gem 'sidekiq'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

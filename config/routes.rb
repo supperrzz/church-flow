@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     get 'home/index'
   end
   post 'notify/mux'
+  post 'sns/notify' => 'sns_hls_notify#notify'
 
   authenticated :user, lambda { |u| u.admin? } do
     namespace :admin, path: '/' do
