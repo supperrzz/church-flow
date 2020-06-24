@@ -9,7 +9,7 @@ class GenerateHlsJob < ApplicationJob
       if media_sermon.hls_url.present?
         s3 = Aws::S3::Resource.new
         folder = "mediasermon/#{media_sermon.id}/video/"
-        objects = s3.bucket(ENV['S3_BUCKET_NAME']).objects({prefix: folder})
+        objects = s3.bucket('sda-live-hls').objects({prefix: folder})
         objects.batch_delete!
         media_sermon.update(hls_url: nil, hls_thumbnail_url: nil)
       end
