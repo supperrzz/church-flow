@@ -17,8 +17,12 @@ document.addEventListener('turbolinks:load', () => {
       // Called when there's incoming data on the websocket for this channel
       let video = document.getElementById('video');
       let heading = document.getElementById('no-live-stream');
+      let embedContainer = document.getElementById('no-live-stream');
       if (data.video && video) {
         heading.hidden = true;
+        if(embedContainer) {
+          embedContainer.innerHTML = data.html_embed;
+        }
         video.poster = data.poster;
         let videoSrc = data.video;
         if (Hls.isSupported()) {
@@ -38,6 +42,9 @@ document.addEventListener('turbolinks:load', () => {
         heading.hidden = false;
         video.removeAttribute('poster');
         video.removeAttribute('src');
+        if(embedContainer) {
+          embedContainer.innerHTML = '';
+        }
       }
     }
   });

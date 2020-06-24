@@ -51,9 +51,12 @@ class NotifyController < ApplicationController
       subdomain = live_stream.church.user.subdomain
       if status == 'active'
         live_stream.update(playback_id: params[:data][:playback_ids][0][:id])
+        html_embed = render(partial: 'admin/live_streams/embed_code_partial',
+                            locals: { playback_id: live_stream.playback_id })
         ActionCable.server.broadcast("livestream_channel_#{subdomain}",
                                      video: "https://stream.mux.com/#{live_stream.playback_id}.m3u8",
-                                     poster: "https://image.mux.com/#{live_stream.playback_id}/thumbnail.jpg")
+                                     poster: "https://image.mux.com/#{live_stream.playback_id}/thumbnail.jpg",
+                                     html_embed: html_embed)
       elsif status == 'idle'
         ActionCable.server.broadcast("livestream_channel_#{subdomain}", video: false)
       end
