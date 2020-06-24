@@ -42,9 +42,11 @@ class Admin::MediaSermon < ApplicationRecord
   end
 
   def generate_hls_video
+    puts 'Started Deleting old HLS if present'
     delete_hls_video
+    puts 'Completed Deleting old HLS if present'
     update(hls_url: nil, hls_thumbnail_url: nil)
-    GenerateHlsJob.set(wait: 1.minute).perform_later(id)
+    GenerateHlsJob.perform_now(id)
   end
 
   def delete_hls_video

@@ -4,14 +4,6 @@ class GenerateHlsJob < ApplicationJob
   def perform(media_sermon_id)
     media_sermon = Admin::MediaSermon.find_by(id: media_sermon_id)
     if media_sermon.present? && media_sermon.video.present?
-      # Delete if old hls present
-      puts 'Started Deleting old HLS if present'
-      if media_sermon.hls_url.present?
-        media_sermon.delete_hls_video
-        media_sermon.update(hls_url: nil, hls_thumbnail_url: nil)
-      end
-      puts 'Completed Deleting old HLS if present'
-
       # Generating new Hls
       puts 'Started generating new HLS'
       input_key = media_sermon.video.id
