@@ -13,8 +13,7 @@ class SnsHlsNotifyController < ApplicationController
     case message_body['Type']
     when 'SubscriptionConfirmation'
       puts message_body['TopicArn']
-      head :ok
-      # confirm_subscription ? (head :ok) : (head :bad_request)
+      confirm_subscription ? (head :ok) : (head :bad_request)
     when 'Notification'
       message = JSON.parse(message_body['Message'])
       puts message
@@ -41,9 +40,9 @@ class SnsHlsNotifyController < ApplicationController
   end
 
   def confirm_subscription
-    AWS_SNS_CLIENT.confirm_subscription(
-        topic_arn: message_body['TopicArn'],
-        token: message_body['Token']
+    Aws::SNS::Client.confirm_subscription(
+      topic_arn: message_body['TopicArn'],
+      token: message_body['Token']
     )
     true
   rescue Aws::SNS::Errors::ServiceError => e
