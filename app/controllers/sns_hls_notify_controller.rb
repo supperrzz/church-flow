@@ -40,7 +40,7 @@ class SnsHlsNotifyController < ApplicationController
   end
 
   def confirm_subscription
-    Aws::SNS::Client.confirm_subscription(
+    AWS_SNS_CLIENT.confirm_subscription(
       topic_arn: message_body['TopicArn'],
       token: message_body['Token']
     )
