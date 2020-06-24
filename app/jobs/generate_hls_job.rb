@@ -4,6 +4,19 @@ class GenerateHlsJob < ApplicationJob
   def perform(media_sermon_id)
     media_sermon = Admin::MediaSermon.find_by(id: media_sermon_id)
     if media_sermon.present? && media_sermon.video.present?
+      # Delete if old hls present
+      puts 'Started Deleting old HLS if present'
+      if media_sermon.hls_url.present?
+        s3 = Aws::S3::Resource.new
+        folder = "mediasermon/#{media_sermon.id}/video/"
+        objects = s3.bucket(ENV['S3_BUCKET_NAME']).objects({prefix: folder})
+        objects.batch_delete!
+        media_sermon.update(hls_url: nil, hls_thumbnail_url: nil)
+      end
+      puts 'Completed Deleting old HLS if present'
+
+      # Generating new Hls
+      puts 'Started generating new HLS'
       input_key = media_sermon.video.id
       output_key_prefix = "mediasermon/#{media_sermon.id}/video/"
       # Pipeline id in AWS

@@ -31,11 +31,17 @@ class Admin::MediaSermon < ApplicationRecord
   # has_one_attached :image
   include VideoUploader::Attachment(:video)
 
+  after_save :generate_hls_video, if: :video_changed?
+
   def get_video_url
     hls_url || video.try(:url)
   end
 
   def get_thumbnail_url
     hls_thumbnail_url
+  end
+
+  def generate_hls_video
+    GenerateHlsJob.perform_now(id)
   end
 end
