@@ -25,6 +25,11 @@
   <%= @admin_media_sermon.published %>
 </p>
 
+<p>
+  <strong>Video:</strong>
+  <%= @admin_media_sermon.get_video_url %>
+</p>
+
 <%= link_to 'Edit', edit_admin_media_sermon_path(@admin_media_sermon) %> |
 <%= link_to 'Back', admin_media_sermons_path %>
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
