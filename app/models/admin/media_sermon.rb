@@ -33,6 +33,8 @@ class Admin::MediaSermon < ApplicationRecord
 
   after_save :generate_hls_video, if: :video_changed?
 
+  before_destroy :delete_hls_video
+
   def get_video_url
     hls_url || video.try(:url)
   end
@@ -42,6 +44,15 @@ class Admin::MediaSermon < ApplicationRecord
   end
 
   def generate_hls_video
-    GenerateHlsJob.perform_now(id)
+    GenerateHlsJob.perform_later(id)
+  end
+
+  def delete_hls_video
+    return unless hls_url.blank?
+
+    s3 = Aws::S3::Resource.new
+    folder = "mediasermon/#{id}/video/"
+    objects = s3.bucket('sda-live-hls').objects({prefix: folder})
+    objects.batch_delete!
   end
 end

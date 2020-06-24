@@ -7,10 +7,7 @@ class GenerateHlsJob < ApplicationJob
       # Delete if old hls present
       puts 'Started Deleting old HLS if present'
       if media_sermon.hls_url.present?
-        s3 = Aws::S3::Resource.new
-        folder = "mediasermon/#{media_sermon.id}/video/"
-        objects = s3.bucket('sda-live-hls').objects({prefix: folder})
-        objects.batch_delete!
+        media_sermon.delete_hls_video
         media_sermon.update(hls_url: nil, hls_thumbnail_url: nil)
       end
       puts 'Completed Deleting old HLS if present'
