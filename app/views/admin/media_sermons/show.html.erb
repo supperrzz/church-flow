@@ -29,7 +29,7 @@
 <%= link_to 'Back', admin_media_sermons_path %>
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 <script>
-    $(document).ready(function() {
+    document.addEventListener('turbolinks:load', function() {
         let videos = document.getElementsByClassName('video');
         length = videos.length
         for (let i = 0; i < length; i++) {
