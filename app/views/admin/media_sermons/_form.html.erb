@@ -4,8 +4,8 @@
 
       <div class="form-group">
         <%= form.label :video %>
-        <% if admin_media_sermon.video.present? %>
-          <%= video_tag(admin_media_sermon.video.url, height: 300, controls: true)  %>
+        <% if admin_media_sermon.get_video_url.present? %>
+          <%= video_tag(admin_media_sermon.get_video_url, height: 300, controls: true)  %>
         <% end %>
         <%= form.file_field :video, accept: 'video/*'  %>
       </div>

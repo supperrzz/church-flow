@@ -1,7 +1,7 @@
 <p>
   <strong>Video:</strong>
-  <% if @admin_media_sermon.video.present? %>
-    <%= video_tag(@admin_media_sermon.video.url, height: 300, controls: true)  %>
+  <% if @admin_media_sermon.get_video_url.present? %>
+    <%= video_tag(@admin_media_sermon.get_video_url, height: 300, controls: true)  %>
   <% end %>
 </p>
 

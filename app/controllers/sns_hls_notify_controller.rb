@@ -34,7 +34,7 @@ class SnsHlsNotifyController < ApplicationController
             )
           end
           hls_url = "https://sda-live-hls.s3-us-west-1.amazonaws.com/#{message['outputKeyPrefix']}" \
-                    "/#{message['playlists'][0]['name']}.m3u8"
+                    "#{message['playlists'][0]['name']}.m3u8"
           media_sermon.update hls_url: hls_url, hls_thumbnail_url: thumbnail_url
           message['outputKeyPrefix']
         end

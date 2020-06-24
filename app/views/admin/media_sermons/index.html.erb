@@ -14,8 +14,8 @@
           <% if admin_media_sermon.present? %>
             <div class="col-4">
               <div class="card">
-                <% if admin_media_sermon.video.present? %>
-                  <%= video_tag(admin_media_sermon.video.url, height: 300, class: 'card-img-top', controls: true)  %>
+                <% if admin_media_sermon.get_video_url.present? %>
+                  <%= video_tag(admin_media_sermon.get_video_url, height: 300, class: 'card-img-top', controls: true)  %>
                 <% end %>
                 <div class="card-body">
                   <h5 class="card-title">Title: <%= admin_media_sermon.title %></h5>

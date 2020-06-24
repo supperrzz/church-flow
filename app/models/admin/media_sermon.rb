@@ -30,4 +30,8 @@ class Admin::MediaSermon < ApplicationRecord
 
   # has_one_attached :image
   include VideoUploader::Attachment(:video)
+
+  def get_video_url
+    hls_url || video.try(:url)
+  end
 end
