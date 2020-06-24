@@ -1,7 +1,7 @@
 <p>
   <strong>Video:</strong>
   <% if @admin_media_sermon.get_video_url.present? %>
-    <%= video_tag(@admin_media_sermon.get_video_url, height: 300, controls: true, poster: @admin_media_sermon.get_thumbnail_url)  %>
+    <%= video_tag(@admin_media_sermon.get_video_url, class: 'video', height: 300, controls: true, poster: @admin_media_sermon.get_thumbnail_url)  %>
   <% end %>
 </p>
 
@@ -27,3 +27,19 @@
 
 <%= link_to 'Edit', edit_admin_media_sermon_path(@admin_media_sermon) %> |
 <%= link_to 'Back', admin_media_sermons_path %>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<script>
+    let videos = document.getElementsByClassName('video');
+    length = videos.length
+    for (let i = 0; i < length; i++) {
+        let videoSrc = videos[i].src;
+        if (Hls.isSupported() && videoSrc.indexOf('.m3u8') !== -1) {
+            const hls = new Hls();
+            hls.loadSource(videoSrc);
+            hls.attachMedia(video);
+        }
+        else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = videoSrc;
+        }
+    }
+</script>
