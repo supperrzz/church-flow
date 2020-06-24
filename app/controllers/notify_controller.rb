@@ -91,7 +91,8 @@ class NotifyController < ApplicationController
       elsif files.include? 'medium.mp4'
         url = "https://stream.mux.com/#{playback_id}/medium.mp4"
       end
-      live_stream.church.media_sermons.create(video_remote_url: url)
+      sermon = live_stream.church.media_sermons.create(video_remote_url: url)
+      sermon.generate_hls_video
     else
       puts 'live stream not present'
     end
