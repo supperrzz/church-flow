@@ -1,4 +1,3 @@
-require 'Digest'
 class GenerateHlsJob < ApplicationJob
   queue_as :default
 
@@ -21,7 +20,7 @@ class GenerateHlsJob < ApplicationJob
       output_key_prefix = output_key_prefix # hls_outputs/17/video
       transcoder_client = Aws::ElasticTranscoder::Client.new(region: region)
       input = { key: input_key }
-      output_key = Digest::SHA256.hexdigest(input_key.encode('UTF-8'))
+      output_key = SecureRandom.hex
       hls_audio = {
         key: 'hlsAudio/' + output_key,
         preset_id: hls_64k_audio_preset_id,
