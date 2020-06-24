@@ -2,15 +2,17 @@
 #
 # Table name: admin_media_sermons
 #
-#  id         :bigint           not null, primary key
-#  published  :boolean          default(FALSE)
-#  scripture  :string
-#  speaker    :string
-#  title      :string
-#  video_data :text
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  church_id  :bigint           not null
+#  id                :bigint           not null, primary key
+#  hls_thumbnail_url :text
+#  hls_url           :text
+#  published         :boolean          default(FALSE)
+#  scripture         :string
+#  speaker           :string
+#  title             :string
+#  video_data        :text
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  church_id         :bigint           not null
 #
 # Indexes
 #
