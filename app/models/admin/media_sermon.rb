@@ -48,7 +48,7 @@ class Admin::MediaSermon < ApplicationRecord
   end
 
   def delete_hls_video
-    return unless hls_url.blank?
+    return if hls_url.blank?
 
     s3 = Aws::S3::Resource.new
     folder = "mediasermon/#{id}/video/"
