@@ -31,8 +31,6 @@ class Admin::MediaSermon < ApplicationRecord
   # has_one_attached :image
   include VideoUploader::Attachment(:video)
 
-  after_save :generate_hls_video, if: :video_changed?
-
   before_destroy :delete_hls_video
 
   def get_video_url
