@@ -1,6 +1,6 @@
 import consumer from "./consumer"
 
-document.addEventListener('page:load', () => {
+window.addEventListener('load', () => {
   const subdomain  = window.location.host.split('.')[0];
   consumer.subscriptions.create({ channel: "LivestreamChannel", room_id: subdomain }, {
     connected() {
