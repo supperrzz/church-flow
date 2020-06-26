@@ -24,7 +24,7 @@
                   <h5 class="card-title">Published: <%= admin_media_sermon.published %></h5>
                   <h5 class="card-title">Video url: <%= admin_media_sermon.get_video_url %></h5>
                   <% if admin_media_sermon.video.present? %>
-                    <h5 class="card-title">Download url: <%= link_to 'Download', admin_media_sermon.video.try(:url), class: 'btn btn-primary' %></h5>
+                    <%= link_to 'Download', admin_media_sermon.video.try(:url), class: 'btn btn-primary', target: '_blank' %>
                   <% end %>
                   <%= link_to 'Show', admin_media_sermon, class: 'btn btn-primary' %>
                   <%= link_to 'Edit', edit_admin_media_sermon_path(admin_media_sermon), class: 'btn btn-primary' %>
