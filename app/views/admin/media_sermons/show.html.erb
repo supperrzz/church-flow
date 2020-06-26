@@ -3,7 +3,7 @@
   <% if @admin_media_sermon.get_video_url.present? %>
     <div id="hls-player"></div>
     <script>
-        const playerInstance = jwplayer('hls-player');
+        playerInstance = jwplayer('hls-player');
         playerInstance.setup({
             file: '<%= @admin_media_sermon.get_video_url %>',
             image: '<%= @admin_media_sermon.get_thumbnail_url %>',

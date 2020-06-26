@@ -17,11 +17,10 @@
                 <% if admin_media_sermon.get_video_url.present? %>
                   <div id="hls-player-<%= admin_media_sermon.id %>"></div>
                   <script>
-                      let playerInstance = jwplayer('hls-player-<%= admin_media_sermon.id %>');
+                      playerInstance = jwplayer('hls-player-<%= admin_media_sermon.id %>');
                       playerInstance.setup({
                           file: '<%= admin_media_sermon.get_video_url %>',
                           image: '<%= admin_media_sermon.get_thumbnail_url %>',
-                          height: 300,
                           controls: true
                       })
                   </script>
