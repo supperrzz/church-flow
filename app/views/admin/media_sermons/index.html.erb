@@ -15,7 +15,16 @@
             <div class="col-4">
               <div class="card">
                 <% if admin_media_sermon.get_video_url.present? %>
-                  <%= video_tag(admin_media_sermon.get_video_url, height: 300, class: 'card-img-top video', controls: true, poster: admin_media_sermon.get_thumbnail_url)  %>
+                  <div class="hls-player-<%= admin_media_sermon.id %>"></div>
+                  <script>
+                      const playerInstance = jwplayer(document.getElementsByClassName('hls-player-<%= admin_media_sermon.id %>'));
+                      playerInstance.setup({
+                          file: <%= admin_media_sermon.get_video_url %>,
+                          image: <%= admin_media_sermon.get_thumbnail_url %>,
+                          height: 300,
+                          controls: true
+                      })
+                  </script>
                 <% end %>
                 <div class="card-body">
                   <h5 class="card-title">Title: <%= admin_media_sermon.title %></h5>

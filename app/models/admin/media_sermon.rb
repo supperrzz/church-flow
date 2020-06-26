@@ -36,6 +36,9 @@ class Admin::MediaSermon < ApplicationRecord
   def get_video_url
     hls_url || video.try(:url)
   end
+  def get_video_type
+    hls_url ? 'application/x-mpegURL' : ''
+  end
 
   def get_thumbnail_url
     hls_thumbnail_url
