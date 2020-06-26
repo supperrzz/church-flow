@@ -1,7 +1,8 @@
 <p>
   <strong>Video:</strong>
   <% if @admin_media_sermon.get_video_url.present? %>
-    <%= video_tag(@admin_media_sermon.get_video_url, class: 'video-js vjs-default-skin', height: 300, controls: true, 'data-setup': '{}', poster: @admin_media_sermon.get_thumbnail_url)  %>
+    <%= video_tag([@admin_media_sermon.get_video_url], class: 'video-js vjs-default-skin', height: 300, controls: true,
+                  data: { setup: '{}' }, poster: @admin_media_sermon.get_thumbnail_url)  %>
   <% end %>
 </p>
 

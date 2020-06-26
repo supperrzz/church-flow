@@ -33,11 +33,11 @@ class SnsHlsNotifyController < ApplicationController
 
     hls_url = "https://#{ENV['CLOUDFRONT_URL']}/#{message['outputKeyPrefix']}" \
                   "#{message['playlists'][0]['name']}.m3u8"
-    media_sermon.update hls_url: hls_url, hls_thumbnail_url: fetch_thumbnail_url
+    media_sermon.update hls_url: hls_url, hls_thumbnail_url: fetch_thumbnail_url(message)
     message['outputKeyPrefix']
   end
 
-  def fetch_thumbnail_url
+  def fetch_thumbnail_url(message)
     s3_client = Aws::S3::Client.new
     files = s3_client.list_objects(bucket: 'sda-live-hls', prefix: message['outputKeyPrefix']).contents
     thumbnail_pattern = message['outputs'].last['thumbnailPattern'].split('-')[0]
