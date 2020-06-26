@@ -28,6 +28,8 @@ class NotifyController < ApplicationController
       set_live_stream_status('active')
     when 'video.live_stream.idle'
       set_live_stream_status('idle')
+    when 'video.live_stream.disconnected'
+      set_live_stream_status('disconnected')
     when 'video.asset.static_renditions.ready'
       get_mp4_and_store_in_s3
     end
@@ -51,8 +53,8 @@ class NotifyController < ApplicationController
       subdomain = live_stream.church.user.subdomain
       if status == 'active'
         live_stream.update(playback_id: params[:data][:playback_ids][0][:id])
-        html_embed = render(partial: 'admin/live_streams/embed_code_partial',
-                            locals: { playback_id: live_stream.playback_id })
+        html_embed = render_to_string(partial: 'admin/live_streams/embed_code_partial',
+                                      locals: { playback_id: live_stream.playback_id })
         ActionCable.server.broadcast("livestream_channel_#{subdomain}",
                                      video: "https://stream.mux.com/#{live_stream.playback_id}.m3u8",
                                      poster: "https://image.mux.com/#{live_stream.playback_id}/thumbnail.jpg",
