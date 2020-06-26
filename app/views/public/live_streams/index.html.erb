@@ -2,25 +2,16 @@
 <video id="video" width="100%" controls></video>
 <% if @live_stream.present? %>
   <script>
-      let video = document.getElementById('video');
-      video.poster = "https://image.mux.com/<%= @live_stream.playback_id %>/thumbnail.jpg";
-      let videoSrc = 'https://stream.mux.com/<%= @live_stream.playback_id %>.m3u8';
-      if (Hls.isSupported()) {
-          var hls = new Hls();
-          hls.loadSource(videoSrc);
-          hls.attachMedia(video);
-          hls.on(Hls.Events.MANIFEST_PARSED, function() {
-              // video.play();
-          });
-      }
-      // listened-for when the URL is not on the white-list is 'loadedmetadata'.
-      else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-          video.src = videoSrc;
-          video.addEventListener('loadedmetadata', function() {
-              video.play();
-          });
-      }
+      poster = "https://image.mux.com/<%= @live_stream.playback_id %>/thumbnail.jpg";
+      videoSrc = 'https://stream.mux.com/<%= @live_stream.playback_id %>.m3u8';
+      let playerInstance = jwplayer('video');
+      playerInstance.setup({
+          file: videoSrc,
+          image: poster,
+          controls: true
+      })
   </script>
+  <h3 id="no-live-stream" hidden>No live streams currently.</h3>
 <% else %>
   <h3 id="no-live-stream">No live streams currently.</h3>
 <% end %>
