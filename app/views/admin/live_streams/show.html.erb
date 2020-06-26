@@ -42,8 +42,8 @@
 <video id="video" width="50%" controls></video>
 <% if @admin_live_stream.status == 'active' %>
   <script>
-      poster = "https://image.mux.com/<%= @live_stream.playback_id %>/thumbnail.jpg";
-      videoSrc = 'https://stream.mux.com/<%= @live_stream.playback_id %>.m3u8';
+      poster = "https://image.mux.com/<%= @admin_live_stream.playback_id %>/thumbnail.jpg";
+      videoSrc = 'https://stream.mux.com/<%= @admin_live_stream.playback_id %>.m3u8';
       let playerInstance = jwplayer('video');
       playerInstance.setup({
           file: videoSrc,
