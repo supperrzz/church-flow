@@ -1,6 +1,6 @@
 import consumer from "./consumer"
 
-document.addEventListener('turbolinks:load', () => {
+document.addEventListener('page:load', () => {
   const subdomain  = window.location.host.split('.')[0];
   consumer.subscriptions.create({ channel: "LivestreamChannel", room_id: subdomain }, {
     connected() {
@@ -23,21 +23,12 @@ document.addEventListener('turbolinks:load', () => {
         if(embedContainer) {
           embedContainer.innerHTML = data.html_embed;
         }
-        video.poster = data.poster;
-        let videoSrc = data.video;
-        if (Hls.isSupported()) {
-          var hls = new Hls();
-          hls.loadSource(videoSrc);
-          hls.attachMedia(video);
-          hls.on(Hls.Events.MANIFEST_PARSED, function() {
-            // video.play();
-          });
-        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-          video.src = videoSrc;
-          video.addEventListener('loadedmetadata', function() {
-            video.play();
-          });
-        }
+        let playerInstance = jwplayer('video');
+        playerInstance.setup({
+          file: data.video,
+          image: data.poster,
+          controls: true
+        })
       } else if(video) {
         heading.hidden = false;
         video.removeAttribute('poster');
