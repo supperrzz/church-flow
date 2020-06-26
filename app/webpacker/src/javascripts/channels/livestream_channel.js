@@ -31,8 +31,8 @@ document.addEventListener('page:load', () => {
         })
       } else if(video) {
         heading.hidden = false;
-        video.removeAttribute('poster');
-        video.removeAttribute('src');
+        let playerInstance = jwplayer('video');
+        playerInstance.remove();
         if(embedContainer) {
           embedContainer.innerHTML = '';
         }
