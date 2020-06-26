@@ -40,5 +40,13 @@
         <%= link_to('Delete My Account', settings_profile_path, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete. This action can\'t be reverted.' }) %>
       </div>
     </div>
+    <br/>
+    <br/>
+    <br/>
+    <%= render partial: '/settings/subdomain_form', locals: { subdomain: current_user.subdomain } %>
+    <br/>
+    <br/>
+    <br/>
+    <%= render partial: '/settings/church_form', locals: { church: current_user.church }  %>
   <% end %>
 </div>

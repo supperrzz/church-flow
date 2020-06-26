@@ -2,6 +2,11 @@
   <strong>Video:</strong>
   <% if @admin_media_sermon.get_video_url.present? %>
     <%= video_tag(@admin_media_sermon.get_video_url, class: 'video', height: 300, controls: true, poster: @admin_media_sermon.get_thumbnail_url)  %>
+    <video-js class="vjs-default-skin" controls>
+      <source
+        src="<%= @admin_media_sermon.get_video_url %>"
+        type="application/x-mpegURL">
+    </video-js>
   <% end %>
 </p>
 
@@ -29,10 +34,16 @@
   <strong>Video url:</strong>
   <%= @admin_media_sermon.get_video_url %>
 </p>
+<% if @admin_media_sermon.video.present? %>
+  <p>
+    <strong>Download url:</strong>
+    <%= link_to 'Download', @admin_media_sermon.video.try(:url), class: 'btn btn-primary' %>
+  </p>
+<% end %>
 
 <%= link_to 'Edit', edit_admin_media_sermon_path(@admin_media_sermon) %> |
 <%= link_to 'Back', admin_media_sermons_path %>
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 <script>
     document.addEventListener('turbolinks:load', function() {
         let videos = document.getElementsByClassName('video');
@@ -48,4 +59,4 @@
             }
         }
     });
-</script>
+</script>-->
