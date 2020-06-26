@@ -15,7 +15,7 @@
             <div class="col-4">
               <div class="card">
                 <% if admin_media_sermon.get_video_url.present? %>
-                  <div class="hls-player-<%= admin_media_sermon.id %>"></div>
+                  <div id="hls-player-<%= admin_media_sermon.id %>"></div>
                   <script>
                       const playerInstance = jwplayer(document.getElementsByClassName('hls-player-<%= admin_media_sermon.id %>'));
                       playerInstance.setup({
