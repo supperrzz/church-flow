@@ -17,7 +17,7 @@
                 <% if admin_media_sermon.get_video_url.present? %>
                   <div id="hls-player-<%= admin_media_sermon.id %>"></div>
                   <script>
-                      const playerInstance = jwplayer(document.getElementsByClassName('hls-player-<%= admin_media_sermon.id %>'));
+                      const playerInstance = jwplayer('hls-player-<%= admin_media_sermon.id %>');
                       playerInstance.setup({
                           file: '<%= admin_media_sermon.get_video_url %>',
                           image: '<%= admin_media_sermon.get_thumbnail_url %>',

@@ -5,12 +5,12 @@
       <div class="form-group">
         <%= form.label :video %>
         <% if admin_media_sermon.get_video_url.present? %>
-          <div class="hls-player"></div>
+          <div id="hls-player"></div>
           <script>
-              const playerInstance = jwplayer(document.getElementsByClassName('hls-player'));
+              const playerInstance = jwplayer('hls-player');
               playerInstance.setup({
-                  file: <%= admin_media_sermon.get_video_url %>,
-                  image: <%= admin_media_sermon.get_thumbnail_url %>,
+                  file: '<%= admin_media_sermon.get_video_url %>',
+                  image: '<%= admin_media_sermon.get_thumbnail_url %>',
                   height: 300,
                   controls: true
               })
