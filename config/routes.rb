@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   post 'notify/mux'
   post 'sns/notify' => 'sns_hls_notify#notify'
 
+  get 'embed/:embed_code' => 'embed#index'
+
   authenticated :user, lambda { |u| u.admin? } do
     namespace :admin, path: '/' do
 

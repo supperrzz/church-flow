@@ -3,6 +3,7 @@
 # Table name: admin_live_streams
 #
 #  id              :bigint           not null, primary key
+#  embed_code      :string
 #  mux_stream_key  :string
 #  name            :string
 #  playback_policy :string
@@ -15,7 +16,8 @@
 #
 # Indexes
 #
-#  index_admin_live_streams_on_church_id  (church_id)
+#  index_admin_live_streams_on_church_id   (church_id)
+#  index_admin_live_streams_on_embed_code  (embed_code)
 #
 # Foreign Keys
 #
@@ -32,4 +34,13 @@ class Admin::LiveStream < ApplicationRecord
 
   validates_inclusion_of :playback_policy, within: PLAYBACK_POLICIES
   validates_presence_of :name
+  validates_uniqueness_of :embed_code
+
+  before_create :create_embed_code
+
+  def create_embed_code
+    begin
+      self.embed_code = SecureRandom.hex
+    end while self.class.exists?(embed_code: embed_code)
+  end
 end

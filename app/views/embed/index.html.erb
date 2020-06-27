@@ -1,0 +1,19 @@
+<% if @admin_live_stream.present? %>
+  <% if @admin_live_stream.status == 'active' %>
+    <video id="video" width="50%" controls></video>
+    <script>
+        poster = "https://image.mux.com/<%= @admin_live_stream.playback_id %>/thumbnail.jpg";
+        videoSrc = 'https://stream.mux.com/<%= @admin_live_stream.playback_id %>.m3u8';
+        let playerInstance = jwplayer('video');
+        playerInstance.setup({
+            file: videoSrc,
+            image: poster,
+            controls: true
+        })
+    </script>
+  <% else %>
+    <h3 id="no-live-stream">No live streams currently.</h3>
+  <% end %>
+<% else %>
+  <h3>Wrong embed code</h3>
+<% end %>

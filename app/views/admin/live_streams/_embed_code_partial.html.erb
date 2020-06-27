@@ -2,28 +2,8 @@
   <div class="card-body">
     <h4>Embed Code:</h4>
     <pre id="embed-code">
-        <%= "<script src='https://cdn.jsdelivr.net/npm/hls.js@latest'></script>
-        <video id='video' width='100%' controls></video>
-        <script>
-            let video = document.getElementById('video');
-            video.poster = 'https://image.mux.com/#{playback_id}/thumbnail.jpg';
-            let videoSrc = 'https://stream.mux.com/#{playback_id}.m3u8';
-            if (Hls.isSupported()) {
-                var hls = new Hls();
-                hls.loadSource(videoSrc);
-                hls.attachMedia(video);
-                hls.on(Hls.Events.MANIFEST_PARSED, function() {
-                    video.play();
-                });
-            }
-            else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                video.src = videoSrc;
-                video.addEventListener('loadedmetadata', function() {
-                    video.play();
-                });
-            }
-        </script>" %>
-      </pre>
+<%= "<iframe width='560' height='315' src='https://#{request.host}/embed/#{embed_code}' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>" %>
+    </pre>
 
   </div>
 </div>

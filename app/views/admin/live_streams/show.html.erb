@@ -56,8 +56,6 @@
   <h3 id="no-live-stream">No live streams currently.</h3>
 <% end %>
 <div id="embed-code-container">
-  <% if @live_stream.present? %>
-    <%= render partial: 'admin/live_streams/embed_code_partial', locals: { playback_id: @live_stream.playback_id } %>
-  <% end %>
+  <%= render partial: 'admin/live_streams/embed_code_partial', locals: { embed_code: @admin_live_stream.embed_code } %>
 </div>
 <%= link_to 'Back', admin_live_streams_path %>

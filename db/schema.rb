@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_24_114631) do
+ActiveRecord::Schema.define(version: 2020_06_27_053248) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,7 +61,9 @@ ActiveRecord::Schema.define(version: 2020_06_24_114631) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "status"
     t.string "playback_id"
+    t.string "embed_code"
     t.index ["church_id"], name: "index_admin_live_streams_on_church_id"
+    t.index ["embed_code"], name: "index_admin_live_streams_on_embed_code"
   end
 
   create_table "admin_media_images", force: :cascade do |t|
