@@ -2,7 +2,7 @@
   <div class="card-body">
     <h4>Embed Code:</h4>
     <pre id="embed-code">
-<%= "<iframe width='560' height='315' src='https://#{request.host}/embed/#{embed_code}' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>" %>
+<%= "<iframe width='560' height='315' src='#{request.protocol}#{request.host}/embed/#{embed_code}' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>" %>
     </pre>
 
   </div>
