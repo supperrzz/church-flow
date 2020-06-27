@@ -17,12 +17,8 @@ window.addEventListener('load', () => {
       // Called when there's incoming data on the websocket for this channel
       let video = document.getElementById('video');
       let heading = document.getElementById('no-live-stream');
-      let embedContainer = document.getElementById('embed-code-container');
       if (data.video && video) {
         heading.hidden = true;
-        if(embedContainer) {
-          embedContainer.innerHTML = data.html_embed;
-        }
         let playerInstance = jwplayer('video');
         playerInstance.setup({
           file: data.video,
@@ -33,9 +29,6 @@ window.addEventListener('load', () => {
         heading.hidden = false;
         let playerInstance = jwplayer('video');
         playerInstance.remove();
-        if(embedContainer) {
-          embedContainer.innerHTML = '';
-        }
       }
     }
   });
