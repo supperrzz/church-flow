@@ -9,7 +9,7 @@ class EmbedController < ApplicationController
   private
 
   def allow_iframe
-    # response.headers.except! 'X-Frame-Options'
-    response.headers['X-FRAME-OPTIONS'] = 'ALLOW-FROM *'
+    response.headers.except! 'X-Frame-Options'
+    # response.headers['X-FRAME-OPTIONS'] = 'ALLOW-FROM *'
   end
 end
