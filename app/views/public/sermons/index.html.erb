@@ -7,7 +7,17 @@
           <% if sermon.present? %>
             <div class="col-4">
               <div class="card">
-                <% if sermon.get_video_url.present? %>
+                  <% if sermon.get_video_url.present? %>
+                    <div id="hls-player-<%= sermon.id %>" class="card-img-top video"></div>
+                    <script>
+                        playerInstance = jwplayer('hls-player-<%= sermon.id %>');
+                        playerInstance.setup({
+                            file: '<%= sermon.get_video_url %>',
+                            image: '<%= sermon.get_thumbnail_url %>',
+                            controls: true
+                        })
+                    </script>
+                  <% end %>
                   <%= video_tag(sermon.get_video_url, height: 300, controls: true, class: 'card-img-top video', poster: sermon.get_thumbnail_url) %>
                 <% end %>
                 <div class="card-body">
@@ -23,20 +33,3 @@
     <%  end %>
   </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-<script>
-    document.addEventListener('turbolinks:load', function() {
-        let videos = document.getElementsByClassName('video');
-        length = videos.length
-        for (let i = 0; i < length; i++) {
-            let videoSrc = videos[i].src;
-            if (Hls.isSupported() && videoSrc.indexOf('.m3u8') !== -1) {
-                const hls = new Hls();
-                hls.loadSource(videoSrc);
-                hls.attachMedia(videos[i]);
-            } else if (videos[i].canPlayType('application/vnd.apple.mpegurl')) {
-                videos[i].src = videoSrc;
-            }
-        }
-    });
-</script>
