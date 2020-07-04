@@ -12,8 +12,8 @@
                   <script>
                       playerInstance = jwplayer('hls-player-<%= sermon.id %>');
                       playerInstance.setup({
-                          file: '<%= html_safe(sermon.get_video_url) %>',
-                          image: '<%= html_safe(sermon.get_thumbnail_url) %>',
+                          file: '<%= raw(sermon.get_video_url) %>',
+                          image: '<%= raw(sermon.get_thumbnail_url) %>',
                           controls: true
                       })
                   </script>
