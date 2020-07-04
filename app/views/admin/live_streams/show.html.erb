@@ -19,13 +19,22 @@
   <%= @admin_live_stream.mux_stream_key %>
 </p>
 
-<h3>Other Targets</h3>
+<div class="row">
+  <div class="col-6">
+    <h3>Other Targets</h3>
+  </div>
+  <div class="col-6">
+    <%= link_to 'Add Target', admin_new_target_path, class: 'btn btn-primary float-right' %>
+  </div>
+</div>
+<br/>
 <table class="table">
   <thead>
   <tr>
     <th>Platform</th>
     <th>Endpoint</th>
     <th>Stream Key</th>
+    <th></th>
   </tr>
   </thead>
 
@@ -35,6 +44,10 @@
       <td><%= simulcast_target.platform %></td>
       <td><%= simulcast_target.url %></td>
       <td><%= simulcast_target.stream_key %></td>
+      <td>
+        <%= link_to 'Delete', admin_destroy_target_path(target_id: simulcast_target.id), class: 'btn btn-danger',
+        data: { confirm: 'Are you sure ?' }, method: :delete %>
+      </td>
     </tr>
   <% end %>
   </tbody>

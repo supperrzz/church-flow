@@ -1,24 +1,31 @@
 <div class="row">
   <div class="col-12">
     <%= form_with(model: admin_media_sermon, local: true) do |form| %>
-
+      <% if admin_media_sermon.id.blank? %>
+        <div class="form-group">
+          <%= form.label :video %>
+          <% if admin_media_sermon.get_video_url.present? %>
+            <div id="hls-player"></div>
+            <script>
+                playerInstance = jwplayer('hls-player');
+                playerInstance.setup({
+                    file: '<%= admin_media_sermon.get_video_url %>',
+                    image: '<%= admin_media_sermon.get_thumbnail_url %>',
+                    height: 300,
+                    controls: true
+                })
+            </script>
+          <% end %>
+          <%= form.file_field :video, accept: 'video/mp4'  %>
+        </div>
+      <% end %>
       <div class="form-group">
-        <%= form.label :video %>
-        <% if admin_media_sermon.get_video_url.present? %>
-          <div id="hls-player"></div>
-          <script>
-              playerInstance = jwplayer('hls-player');
-              playerInstance.setup({
-                  file: '<%= admin_media_sermon.get_video_url %>',
-                  image: '<%= admin_media_sermon.get_thumbnail_url %>',
-                  height: 300,
-                  controls: true
-              })
-          </script>
+        <%= form.label :thumbnail %>
+        <% if admin_media_sermon.get_thumbnail_url.present? %>
+          <%= image_tag(admin_media_sermon.get_thumbnail_url, height: 100) %>
         <% end %>
-        <%= form.file_field :video, accept: 'video/*'  %>
+        <%= form.file_field :thumbnail, accept: 'image/*'  %>
       </div>
-
       <div class="form-group">
         <%= form.label :title %>
         <%= form.text_field :title, class: 'form-control' %>

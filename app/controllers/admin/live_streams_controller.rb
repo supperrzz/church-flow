@@ -1,5 +1,5 @@
 class Admin::LiveStreamsController < ApplicationController
-  before_action :set_admin_live_stream, only: %i[show destroy]
+  before_action :set_admin_live_stream, only: %i[show destroy new_target create_target destroy_target]
 
   # GET /admin/live_streams
   def index
@@ -62,11 +62,52 @@ class Admin::LiveStreamsController < ApplicationController
     end
   end
 
+  def new_target
+    @target = @admin_live_stream.admin_simulcast_targets.new
+  end
+
+  def create_target
+    @target = @admin_live_stream.admin_simulcast_targets.new(admin_simulcast_targets_params)
+    if @target.save
+      live_stream = MuxLiveStream.new
+      target_resp = live_stream.add_simulcast_target(@admin_live_stream.mux_stream_id, @target.id, @target.url, @target.stream_key)
+      if target_resp && target_resp&.data&.id
+        @target.update(mux_simulcast_id: target_resp.data.id)
+        flash[:notice] = 'Target was successfully created.'
+        redirect_to @admin_live_stream
+      else
+        @target.destroy
+        flash[:error] = 'Something went wrong.'
+        redirect_to admin_live_stream_path
+      end
+    else
+      flash.now[:error] = @target.errors.full_messages.first
+      render :new_target
+    end
+  end
+
+  def destroy_target
+    @target = @admin_live_stream.admin_simulcast_targets.find_by(id: params[:target_id])
+    if @target.present?
+      live_stream = MuxLiveStream.new
+      live_stream.delete_simulcast_target(@admin_live_stream.mux_stream_id, @target.mux_simulcast_id)
+      @target.destroy
+      flash.now[:success] = 'Target deleted'
+    else
+      flash.now[:error] = 'No target found'
+    end
+    redirect_to admin_live_stream_path
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_admin_live_stream
-    @admin_live_stream = current_user.church.live_streams.find(params[:id])
+    @admin_live_stream = current_user.church.live_streams.find_by(id: params[:id])
+    return unless @admin_live_stream.blank?
+
+    flash[:error] = 'No live stream found'
+    redirect_to admin_live_streams_path
   end
 
   # Only allow a list of trusted parameters through.
@@ -74,5 +115,10 @@ class Admin::LiveStreamsController < ApplicationController
     params.require(:admin_live_stream)
           .permit(:name, :playback_policy,
                   admin_simulcast_targets_attributes: %i[id platform url stream_key _destroy])
+  end
+
+  def admin_simulcast_targets_params
+    params.require(:admin_simulcast_target)
+          .permit(:id, :platform, :url, :stream_key)
   end
 end

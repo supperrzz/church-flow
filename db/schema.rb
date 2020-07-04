@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_27_053248) do
+ActiveRecord::Schema.define(version: 2020_07_04_115305) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(version: 2020_06_27_053248) do
     t.boolean "published", default: false
     t.text "hls_url"
     t.text "hls_thumbnail_url"
+    t.text "thumbnail_data"
     t.index ["church_id"], name: "index_admin_media_sermons_on_church_id"
   end
 

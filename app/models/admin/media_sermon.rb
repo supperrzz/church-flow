@@ -8,6 +8,7 @@
 #  published         :boolean          default(FALSE)
 #  scripture         :string
 #  speaker           :string
+#  thumbnail_data    :text
 #  title             :string
 #  video_data        :text
 #  created_at        :datetime         not null
@@ -30,18 +31,20 @@ class Admin::MediaSermon < ApplicationRecord
 
   # has_one_attached :image
   include VideoUploader::Attachment(:video)
+  include ImageUploader::Attachment(:thumbnail)
 
   before_destroy :delete_hls_video
 
   def get_video_url
     hls_url || video.try(:url)
   end
+
   def get_video_type
     hls_url ? 'application/x-mpegURL' : ''
   end
 
   def get_thumbnail_url
-    hls_thumbnail_url
+    thumbnail.try(:url) || hls_thumbnail_url
   end
 
   def generate_hls_video

@@ -21,6 +21,9 @@ Rails.application.routes.draw do
 
       resources :live_streams, only: %i[index create], path: 'streams'
       resources :live_streams, only: %i[destroy show new], path: 'stream'
+      get 'stream/:id/targets/new' => 'live_streams#new_target', as: :new_target
+      post 'stream/:id/targets/create' => 'live_streams#create_target', as: :create_target
+      delete 'stream/:id/targets/:target_id' => 'live_streams#destroy_target', as: :destroy_target
 
       resources :media_sermons, only: %i[index create], path: 'sermons'
       resources :media_sermons, except: %i[index create], path: 'sermon'

@@ -38,6 +38,11 @@
   <strong>Video url:</strong>
   <%= @admin_media_sermon.get_video_url %>
 </p>
+
+<p>
+  <strong>Thumbnail url:</strong>
+  <%= @admin_media_sermon.get_thumbnail_url %>
+</p>
 <% if @admin_media_sermon.video.present? %>
   <p>
     <strong>Download url:</strong>
