@@ -30,11 +30,11 @@ Rails.application.routes.draw do
 
       # resources :media_images, path: 'gallery'
 
-      # resources :events, only: %i[index create], path: 'events'
-      # resources :events, except: %i[index create], path: 'event'
+      resources :events, only: %i[index create], path: 'events'
+      resources :events, except: %i[index create], path: 'event'
 
-      # resources :news, only: %i[index create], path: 'news'
-      # resources :news, except: %i[index create], path: 'article'
+      resources :news, only: %i[index create], path: 'news'
+      resources :news, except: %i[index create], path: 'article'
 
       resources :members, only: %i[index create], path: 'members'
       resources :members, except: %i[index create], path: 'member'
