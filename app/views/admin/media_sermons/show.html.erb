@@ -46,7 +46,7 @@
 <% if @admin_media_sermon.video.present? %>
   <p>
     <strong>Download url:</strong>
-    <%= link_to 'Download', @admin_media_sermon.video.url(response_content_disposition: ContentDisposition.attachment), class: 'btn btn-primary' %>
+    <%= link_to 'Download', @admin_media_sermon.video.url(response_content_disposition: ContentDisposition.attachment, host: ENV['CLOUDFRONT_ASSETS_ENDPOINT'], public: true), class: 'btn btn-primary' %>
   </p>
 <% end %>
 
