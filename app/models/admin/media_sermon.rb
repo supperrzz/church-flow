@@ -36,7 +36,7 @@ class Admin::MediaSermon < ApplicationRecord
   before_destroy :delete_hls_video
 
   def get_video_url
-    hls_url || video.try(:url)
+    hls_url || video&.url(host: ENV['CLOUDFRONT_ASSETS_ENDPOINT'])
   end
 
   def get_video_type
@@ -44,7 +44,7 @@ class Admin::MediaSermon < ApplicationRecord
   end
 
   def get_thumbnail_url
-    thumbnail.try(:url) || hls_thumbnail_url
+    video&.url(host: ENV['CLOUDFRONT_ASSETS_ENDPOINT']) || hls_thumbnail_url
   end
 
   def generate_hls_video

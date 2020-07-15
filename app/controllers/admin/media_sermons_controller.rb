@@ -24,7 +24,7 @@ class Admin::MediaSermonsController < ApplicationController
     @admin_media_sermon = current_user.church.media_sermons.new(create_admin_media_sermon_params)
 
     if @admin_media_sermon.save
-      @admin_media_sermon.generate_hls_video if create_admin_media_sermon_params[:video].present?
+      # @admin_media_sermon.generate_hls_video if create_admin_media_sermon_params[:video].present?
       redirect_to @admin_media_sermon, notice: 'Media sermon was successfully created.'
     else
       render :new
@@ -34,7 +34,7 @@ class Admin::MediaSermonsController < ApplicationController
   # PATCH/PUT /admin/media_sermons/1
   def update
     if @admin_media_sermon.update(update_admin_media_sermon_params)
-      @admin_media_sermon.generate_hls_video if update_admin_media_sermon_params[:video].present?
+      # @admin_media_sermon.generate_hls_video if update_admin_media_sermon_params[:video].present?
       redirect_to @admin_media_sermon, notice: 'Media sermon was successfully updated.'
     else
       render :edit

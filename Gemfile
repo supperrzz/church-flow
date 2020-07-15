@@ -69,6 +69,7 @@ gem 'aws-sdk-elastictranscoder'
 gem 'aws-sdk-sns'
 
 # AWS s3 storage
+gem 'aws-sdk-cloudfront'
 gem 'aws-sdk-s3', require: false
 gem 'image_processing', '~> 1.8'
 gem 'marcel', '~> 0.3'
