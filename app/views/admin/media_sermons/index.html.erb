@@ -32,7 +32,7 @@
                   <h5 class="card-title">Published: <%= admin_media_sermon.published %></h5>
                   <h5 class="card-title">Video url: <%= admin_media_sermon.get_video_url %></h5>
                   <% if admin_media_sermon.video.present? %>
-                    <%= link_to 'Download', admin_media_sermon.video.url(response_content_disposition: ContentDisposition.attachment, host: ENV['CLOUDFRONT_ASSETS_ENDPOINT'], public: true), class: 'btn btn-primary', target: '_blank' %>
+                    <%= link_to 'Download', admin_media_sermon.video.url(response_content_disposition: ContentDisposition.attachment), class: 'btn btn-primary', target: '_blank' %>
                   <% end %>
                   <%= link_to 'Show', admin_media_sermon, class: 'btn btn-primary' %>
                   <%= link_to 'Edit', edit_admin_media_sermon_path(admin_media_sermon), class: 'btn btn-primary' %>
