@@ -4,8 +4,8 @@
 
       <div class="form-group">
         <%= form.label :image %>
-        <% if admin_media_image.image.attached? %>
-          <%= image_tag(url_for(admin_media_image.image.variant(resize: 100))) %>
+        <% if admin_media_image.image.present? %>
+          <%= image_tag(admin_media_image.image.url, height: 200) %>
         <% end %>
         <%= form.file_field :image, accept: 'image/*'  %>
       </div>

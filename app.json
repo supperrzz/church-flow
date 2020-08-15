@@ -21,11 +21,16 @@
   "formation": {
     "web": {
       "quantity": 1,
-      "size": "free"
+      "size": "hobby"
+    },
+    "sidekiq": {
+      "quantity": 1,
+      "size": "hobby"
     }
   },
   "addons": [
-    "heroku-postgresql"
+    "heroku-postgresql",
+    "rediscloud"
   ],
   "buildpacks": [
     {
@@ -33,6 +38,9 @@
     },
     {
       "url": "https://github.com/retailzipline/heroku-buildpack-imagemagick-heif.git"
+    },
+    {
+      "url": "https://github.com/brandoncc/heroku-buildpack-vips.git"
     }
   ]
 }

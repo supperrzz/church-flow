@@ -4,7 +4,7 @@ class Admin::MembersController < ApplicationController
 
   # GET /admin/members
   def index
-    @admin_members = current_user.church.members
+    @admin_members = User.where(role: :member, subdomain: current_user.subdomain)
   end
 
   # GET /admin/members/1
@@ -12,7 +12,7 @@ class Admin::MembersController < ApplicationController
 
   # GET /admin/members/new
   def new
-    @admin_member = current_user.church.members.new
+    @admin_member = User.new(role: :member)
   end
 
   # GET /admin/members/1/edit
@@ -20,11 +20,16 @@ class Admin::MembersController < ApplicationController
 
   # POST /admin/members
   def create
-    @admin_member = current_user.church.members.new(admin_member_params)
+    @admin_member = User.new(admin_member_params)
     @admin_member.password = SecureRandom.hex
-    if @admin_member.save
-      redirect_to @admin_member, notice: 'Member was successfully created.'
+    @admin_member.role = :member
+    @admin_member.subdomain = current_user.subdomain
+    @admin_member.skip_confirmation!
+    # @admin_member.invitation_completed = true
+    if @admin_member.save(validate: false)
+      redirect_to admin_member_path(@admin_member), notice: 'Member was successfully created.'
     else
+      flash.now[:notice] = @admin_member.errors.full_messages.first
       render :new
     end
   end
@@ -32,7 +37,7 @@ class Admin::MembersController < ApplicationController
   # PATCH/PUT /admin/members/1
   def update
     if @admin_member.update(admin_member_params)
-      redirect_to @admin_member, notice: 'Member was successfully updated.'
+      redirect_to admin_member_path(@admin_member), notice: 'Member was successfully updated.'
     else
       render :edit
     end
@@ -48,7 +53,7 @@ class Admin::MembersController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_admin_member
-    @admin_member = Admin::Member.find(params[:id])
+    @admin_member = User.find_by(id: params[:id], role: 'member', subdomain: current_user.subdomain)
   end
 
   # Only allow a list of trusted parameters through.

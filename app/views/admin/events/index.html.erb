@@ -27,8 +27,8 @@
         <% @admin_events.each do |admin_event| %>
           <tr>
             <td>
-              <% if admin_event.image.attached? %>
-                <%= image_tag(url_for(admin_event.image.variant(resize: 100))) %>
+              <% if admin_event.image.present? %>
+                <%= image_tag(admin_event.image.url, height: 100) %>
               <% end %>
             </td>
             <td><%= admin_event.name %></td>

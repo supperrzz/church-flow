@@ -7,6 +7,7 @@
 #  encrypted_password     :string           default(""), not null
 #  fname                  :string
 #  lname                  :string
+#  profile_picture_data   :text
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
@@ -31,7 +32,8 @@ class Admin::Member < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   belongs_to :church
-  has_one_attached :profile_picture
+  # has_one_attached :profile_picture
+  include ImageUploader::Attachment(:profile_picture)
 
   validates_presence_of :fname, :lname
 end

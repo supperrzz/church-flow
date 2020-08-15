@@ -3,8 +3,8 @@
     <%= form_with(model: admin_event, local: true, validate: true) do |form| %>
       <div class="form-group">
         <%= form.label :image %>
-        <% if admin_event.image.attached? %>
-          <%= image_tag(url_for(admin_event.image.variant(resize: 100))) %>
+        <% if admin_event.image.present? %>
+          <%= image_tag(admin_event.image.url, height: 200) %>
         <% end %>
         <%= form.file_field :image, class: 'form-control', accept: 'image/*'  %>
       </div>

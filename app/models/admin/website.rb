@@ -2,14 +2,15 @@
 #
 # Table name: admin_websites
 #
-#  id            :bigint           not null, primary key
-#  body_font     :string
-#  heading_font  :string
-#  primary_color :string
-#  youtube_live  :string
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  church_id     :bigint           not null
+#  id              :bigint           not null, primary key
+#  body_font       :string
+#  heading_font    :string
+#  hero_image_data :text
+#  primary_color   :string
+#  youtube_live    :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  church_id       :bigint           not null
 #
 # Indexes
 #
@@ -22,7 +23,8 @@
 class Admin::Website < ApplicationRecord
   belongs_to :church
 
-  has_one_attached :hero_image
+  # has_one_attached :hero_image
+  include ImageUploader::Attachment(:hero_image)
 
   validates_presence_of :body_font, :heading_font, :primary_color
 

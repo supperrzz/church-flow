@@ -1,7 +1,16 @@
 <p>
   <strong>Video:</strong>
-  <% if @admin_media_sermon.video.attached? %>
-    <%= video_tag(url_for(@admin_media_sermon.video), height: 300, controls: true) %>
+  <% if @admin_media_sermon.get_video_url.present? %>
+    <div id="hls-player"></div>
+    <script>
+        playerInstance = jwplayer('hls-player');
+        playerInstance.setup({
+            file: '<%= raw(@admin_media_sermon.get_video_url) %>',
+            image: '<%= raw(@admin_media_sermon.get_thumbnail_url) %>',
+            height: 300,
+            controls: true
+        })
+    </script>
   <% end %>
 </p>
 
@@ -21,9 +30,42 @@
 </p>
 
 <p>
-  <strong>Church:</strong>
-  <%= @admin_media_sermon.church_id %>
+  <strong>Published:</strong>
+  <%= @admin_media_sermon.published %>
 </p>
+
+<p>
+  <strong>Video url:</strong>
+  <%= @admin_media_sermon.get_video_url %>
+</p>
+
+<p>
+  <strong>Thumbnail url:</strong>
+  <%= @admin_media_sermon.get_thumbnail_url %>
+</p>
+<% if @admin_media_sermon.video.present? %>
+  <p>
+    <strong>Download url:</strong>
+    <%= link_to 'Download', @admin_media_sermon.video.url(response_content_disposition: ContentDisposition.attachment), class: 'btn btn-primary' %>
+  </p>
+<% end %>
 
 <%= link_to 'Edit', edit_admin_media_sermon_path(@admin_media_sermon) %> |
 <%= link_to 'Back', admin_media_sermons_path %>
+<!--<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<script>
+    document.addEventListener('turbolinks:load', function() {
+        let videos = document.getElementsByClassName('video');
+        length = videos.length
+        for (let i = 0; i < length; i++) {
+            let videoSrc = videos[i].src;
+            if (Hls.isSupported() && videoSrc.indexOf('.m3u8') !== -1) {
+                const hls = new Hls();
+                hls.loadSource(videoSrc);
+                hls.attachMedia(videos[i]);
+            } else if (videos[i].canPlayType('application/vnd.apple.mpegurl')) {
+                videos[i].src = videoSrc;
+            }
+        }
+    });
+</script>-->

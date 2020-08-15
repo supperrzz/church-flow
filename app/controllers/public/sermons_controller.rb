@@ -2,6 +2,6 @@
 
 class Public::SermonsController < PublicController
   def index
-    @sermons = @church.media_sermons
+    @sermons = @church.media_sermons.published
   end
 end

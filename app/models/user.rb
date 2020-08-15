@@ -13,6 +13,7 @@
 #  invite_sent_at         :datetime
 #  invite_token           :string
 #  lname                  :string
+#  profile_picture_data   :text
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
@@ -35,18 +36,19 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :validatable, request_keys: [:subdomain]
 
-  enum role: { admin: 1, super_admin: 2 }
+  enum role: { member: 0, admin: 1, super_admin: 2 }
 
   has_one :church, dependent: :destroy
   has_one :website, through: :church
-  has_one_attached :profile_picture
+  # has_one_attached :profile_picture
+  include ImageUploader::Attachment(:profile_picture)
 
   accepts_nested_attributes_for :church
 
   validates_presence_of :fname, :lname
   validates_inclusion_of :time_zone, in: ActiveSupport::TimeZone.all.map(&:name)
-  validates_uniqueness_of :subdomain
-  validates_format_of :subdomain, with: /\A^[A-Za-z0-9]+\Z/i
+  validates_uniqueness_of :subdomain, if: :admin?
+  validates_format_of :subdomain, with: /\A^[A-Za-z0-9]+\Z/i, if: :admin?
 
   after_create :create_church, if: :admin?
 

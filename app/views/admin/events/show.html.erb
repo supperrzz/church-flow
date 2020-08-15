@@ -1,5 +1,5 @@
-<% if @admin_event.image.attached? %>
-  <%= image_tag(url_for(@admin_event.image.variant(resize: 100))) %>
+<% if @admin_event.image.present? %>
+  <%= image_tag(@admin_event.image.url, height: 200) %>
 <% end %>
 <p>
   <strong>Name:</strong>

@@ -1,15 +1,31 @@
 <div class="row">
   <div class="col-12">
     <%= form_with(model: admin_media_sermon, local: true) do |form| %>
-
+      <% if admin_media_sermon.id.blank? %>
+        <div class="form-group">
+          <%= form.label :video %>
+          <% if admin_media_sermon.get_video_url.present? %>
+            <div id="hls-player"></div>
+            <script>
+                playerInstance = jwplayer('hls-player');
+                playerInstance.setup({
+                    file: '<%= raw(admin_media_sermon.get_video_url) %>',
+                    image: '<%= raw(admin_media_sermon.get_thumbnail_url) %>',
+                    height: 300,
+                    controls: true
+                })
+            </script>
+          <% end %>
+          <%= form.file_field :video, accept: 'video/mp4'  %>
+        </div>
+      <% end %>
       <div class="form-group">
-        <%= form.label :video %>
-        <% if admin_media_sermon.video.attached? %>
-          <%= video_tag(url_for(admin_media_sermon.video), height: 300) %>
+        <%= form.label :thumbnail %>
+        <% if admin_media_sermon.get_thumbnail_url.present? %>
+          <%= image_tag(admin_media_sermon.get_thumbnail_url, height: 100) %>
         <% end %>
-        <%= form.file_field :video, accept: 'video/*'  %>
+        <%= form.file_field :thumbnail, accept: 'image/*'  %>
       </div>
-
       <div class="form-group">
         <%= form.label :title %>
         <%= form.text_field :title, class: 'form-control' %>
@@ -25,9 +41,31 @@
         <%= form.text_field :scripture, class: 'form-control' %>
       </div>
 
+      <div class="form-group">
+        <%= form.check_box :published %>
+        <%= form.label :published %>
+      </div>
+
       <div class="actions">
         <%= form.submit 'Save', class: 'btn btn-primary' %>
       </div>
     <% end %>
   </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<script>
+    document.addEventListener('turbolinks:load', function() {
+        let videos = document.getElementsByClassName('video');
+        length = videos.length
+        for (let i = 0; i < length; i++) {
+            let videoSrc = videos[i].src;
+            if (Hls.isSupported() && videoSrc.indexOf('.m3u8') !== -1) {
+                const hls = new Hls();
+                hls.loadSource(videoSrc);
+                hls.attachMedia(videos[i]);
+            } else if (videos[i].canPlayType('application/vnd.apple.mpegurl')) {
+                videos[i].src = videoSrc;
+            }
+        }
+    });
+</script>

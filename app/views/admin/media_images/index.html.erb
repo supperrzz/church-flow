@@ -14,8 +14,8 @@
           <% if admin_media_image.present? %>
             <div class="col-4">
               <div class="card">
-                <% if admin_media_image.image.attached? %>
-                  <%= image_tag(url_for(admin_media_image.image.variant(resize: 300))) %>
+                <% if admin_media_image.image.present? %>
+                  <%= image_tag(admin_media_image.image.url, height: 100) %>
                 <% end %>
                 <div class="card-body">
                   <h5 class="card-title"><%= admin_media_image.caption %></h5>

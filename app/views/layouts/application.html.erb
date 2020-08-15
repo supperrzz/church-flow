@@ -7,12 +7,13 @@
 
     <%= stylesheet_link_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://cdn.jwplayer.com/libraries/0XxkAVzL.js"></script>
   </head>
 
   <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <% if current_user && current_user.admin? %>
-      <%= link_to('SDA Live', admin_dashboard_path, class: 'navbar-brand') %>
+      <%= link_to('SDA Live', root_path, class: 'navbar-brand') %>
     <% else %>
       <%= link_to('SDA Live', root_path, class: 'navbar-brand') %>
     <% end %>
@@ -60,17 +61,20 @@
                 <li class="nav-item">
                   <%= link_to('Members', admin_members_path, class: 'nav-link') %>
                 </li>
-                <li class="nav-item">
-                  <%= link_to('Website', root_path, class: 'nav-link') %>
+                <!--<li class="nav-item">
+                  <%#= link_to('Website', root_path, class: 'nav-link') %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to('Church', admin_my_church_path, class: 'nav-link') %>
-                </li>
+                  <%#= link_to('Church', admin_my_church_path, class: 'nav-link') %>
+                </li>-->
                 <!--<li class="nav-item">
                   <%#= link_to('Media Images', admin_media_images_path, class: 'nav-link') %>
                 </li>-->
                 <li class="nav-item">
-                  <%= link_to('Media Sermons', admin_media_sermons_path, class: 'nav-link') %>
+                  <%= link_to('Sermons', admin_media_sermons_path, class: 'nav-link') %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to('Live Stream', admin_live_streams_path, class: 'nav-link') %>
                 </li>
               </ul>
             </div>

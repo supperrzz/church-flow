@@ -1,0 +1,17 @@
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<video id="video" width="100%" controls></video>
+<% if @live_stream.present? %>
+  <script>
+      poster = "https://image.mux.com/<%= @live_stream.playback_id %>/thumbnail.jpg";
+      videoSrc = 'https://stream.mux.com/<%= @live_stream.playback_id %>.m3u8';
+      let playerInstance = jwplayer('video');
+      playerInstance.setup({
+          file: videoSrc,
+          image: poster,
+          controls: true
+      })
+  </script>
+  <h3 id="no-live-stream" hidden>No live streams currently.</h3>
+<% else %>
+  <h3 id="no-live-stream">No live streams currently.</h3>
+<% end %>

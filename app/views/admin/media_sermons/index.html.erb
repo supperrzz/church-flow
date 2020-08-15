@@ -14,13 +14,26 @@
           <% if admin_media_sermon.present? %>
             <div class="col-4">
               <div class="card">
-                <% if admin_media_sermon.video.attached? %>
-                  <%= video_tag(url_for(admin_media_sermon.video), height: 300, class: 'card-img-top', controls: true) %>
+                <% if admin_media_sermon.get_video_url.present? %>
+                  <div id="hls-player-<%= admin_media_sermon.id %>"></div>
+                  <script>
+                      playerInstance = jwplayer('hls-player-<%= admin_media_sermon.id %>');
+                      playerInstance.setup({
+                          file: '<%= raw(admin_media_sermon.get_video_url) %>',
+                          image: '<%= raw(admin_media_sermon.get_thumbnail_url) %>',
+                          controls: true
+                      })
+                  </script>
                 <% end %>
                 <div class="card-body">
                   <h5 class="card-title">Title: <%= admin_media_sermon.title %></h5>
                   <h5 class="card-title">Speaker: <%= admin_media_sermon.speaker %></h5>
                   <h5 class="card-title">Scripture: <%= admin_media_sermon.scripture %></h5>
+                  <h5 class="card-title">Published: <%= admin_media_sermon.published %></h5>
+                  <h5 class="card-title">Video url: <%= admin_media_sermon.get_video_url %></h5>
+                  <% if admin_media_sermon.video.present? %>
+                    <%= link_to 'Download', admin_media_sermon.video.url(response_content_disposition: ContentDisposition.attachment), class: 'btn btn-primary', target: '_blank' %>
+                  <% end %>
                   <%= link_to 'Show', admin_media_sermon, class: 'btn btn-primary' %>
                   <%= link_to 'Edit', edit_admin_media_sermon_path(admin_media_sermon), class: 'btn btn-primary' %>
                   <%= link_to 'Destroy', admin_media_sermon, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure ?' } %>
@@ -33,3 +46,20 @@
     <%  end %>
   </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<script>
+    document.addEventListener('turbolinks:load', function() {
+        let videos = document.getElementsByClassName('video');
+        length = videos.length
+        for (let i = 0; i < length; i++) {
+            let videoSrc = videos[i].src;
+            if (Hls.isSupported() && videoSrc.indexOf('.m3u8') !== -1) {
+                const hls = new Hls();
+                hls.loadSource(videoSrc);
+                hls.attachMedia(videos[i]);
+            } else if (videos[i].canPlayType('application/vnd.apple.mpegurl')) {
+                videos[i].src = videoSrc;
+            }
+        }
+    });
+</script>

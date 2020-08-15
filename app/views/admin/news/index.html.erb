@@ -22,8 +22,8 @@
         <% @admin_news.each do |admin_news| %>
           <tr>
             <td>
-              <% if admin_news.image.attached? %>
-                <%= image_tag(url_for(admin_news.image.variant(resize: 100))) %>
+              <% if admin_news.image.present? %>
+                <%= image_tag(admin_news.image.url, height: 100) %>
               <% end %>
             </td>
             <td><%= admin_news.title %></td>
