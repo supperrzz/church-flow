@@ -15,34 +15,7 @@
       <div class="section dashboard">
         <div class="container-fluid fill">
           <div class="row fill">
-            <nav class="col-2 pt-4 bg-light sidebar">
-              <ul class="nav flex-column">
-                <li class="nav-item">
-                  <%= link_to('News', admin_news_index_path, class: 'nav-link') %>
-                </li>
-                <li class="nav-item">
-                  <%= link_to('Events', admin_events_path, class: 'nav-link') %>
-                </li>
-                <li class="nav-item">
-                  <%= link_to('Members', admin_members_path, class: 'nav-link') %>
-                </li>
-                <li class="nav-item">
-                  <%= link_to('Website', root_path, class: 'nav-link') %>
-                </li>
-                <%# <li class="nav-item">
-                  <%= link_to('Church', admin_my_church_path, class: 'nav-link') %>
-                <%# </li> %>
-                <%# <li class="nav-item"> %>
-                  <%# <%= link_to('Media Images', admin_media_images_path, class: 'nav-link') %> 
-                <%# </li> %> 
-                <li class="nav-item">
-                  <%= link_to('Sermons', admin_media_sermons_path, class: 'nav-link') %>
-                </li>
-                <li class="nav-item">
-                  <%= link_to('Live Stream', admin_live_streams_path, class: 'nav-link') %>
-                </li>
-              </ul>
-            </nav>
+            <%= render 'shared/sidebar' %>
             <main role="main" class="col px-4">
               <div class="row no-gutters">
                 <div class="col">

@@ -14,10 +14,10 @@ Rails.application.routes.draw do
     namespace :admin, path: '/' do
 
       root to: 'dashboard#index', as: :root
-      # get '/dashboard' => 'dashboard#index', as: :dashboard
-      # get 'website/edit'
-      # post 'website/update'
-      # patch 'website/update'
+      get '/dashboard' => 'dashboard#index', as: :dashboard
+      get 'website/edit'
+      post 'website/update'
+      patch 'website/update'
 
       resources :live_streams, only: %i[index create], path: 'streams'
       resources :live_streams, only: %i[destroy show new], path: 'stream'
@@ -28,7 +28,7 @@ Rails.application.routes.draw do
       resources :media_sermons, only: %i[index create], path: 'sermons'
       resources :media_sermons, except: %i[index create], path: 'sermon'
 
-      # resources :media_images, path: 'gallery'
+      resources :media_images, path: 'gallery'
 
       resources :events, only: %i[index create], path: 'events'
       resources :events, except: %i[index create], path: 'event'
@@ -39,11 +39,11 @@ Rails.application.routes.draw do
       resources :members, only: %i[index create], path: 'members'
       resources :members, except: %i[index create], path: 'member'
 
-      # get '/church' => 'church#show', as: :my_church
-      # get 'church/edit', as: :edit_church
+      get '/church' => 'church#show', as: :my_church
+      get 'church/edit', as: :edit_church
       patch 'settings/church_update', as: :update_my_church
       patch 'settings/subdomain_update', as: :update_my_subdomain
-    end
+    end 
   end
 
   get 'settings/profile'
