@@ -1,18 +1,32 @@
 .sidebar {
-  padding-top: 1rem;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: $spacing-sm;
   box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
-  height: 100%;
+  .nav {
+    flex: 1;
+    font-size: 18px;
+  }
+  .logo {
+    margin-bottom: $spacing-sm;
+    padding: $spacing-xs;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    border: 3px solid;
+    border-radius: 4px;
+  }
+  .settings-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
   .nav-link {
+    display: inline-block;
+    white-space: nowrap;
     padding: $spacing-sm;
-    &.logo {
-      margin-bottom: 1rem;
-      padding: $spacing-xs;
-      font-size: 20px;
-      font-weight: bold;
-      text-align: center;
-      border: 3px solid;
-      border-radius: 4px;
-    }
   }
   .nav-icon {
     margin-right: $spacing-sm;

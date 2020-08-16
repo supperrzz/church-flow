@@ -16,7 +16,7 @@
         <div class="container-fluid fill">
           <div class="row fill">
             <%= render 'shared/sidebar' %>
-            <main role="main" class="col px-4">
+            <main role="main" class="col-10 ml-auto px-4">
               <div class="row no-gutters">
                 <div class="col">
                   <h3 class="page-heading pt-4 mb-0 text-capitalize">
@@ -27,19 +27,11 @@
               <%= render partial: 'layouts/flash' %>
               <%= yield %>
             </main>
-            <div class="context-menu col-3 p-4 bg-light">
-              <div class="settings-menu d-flex justify-content-between">
-                <h6>
-                  <%= link_to('Sign Out', destroy_user_session_path, method: :delete, class: '', data: { confirm: 'Are you sure ?' }) %>
-                </h6>
-                <%= link_to settings_profile_path, class: '' do %>
-                  <i class="fas fa-cog"></i> 
-                <% end %>
-              </div>
+            <%# <div class="context-menu col-3 p-4 bg-light">
               <div class="context-menu__content">
                 <%= yield :context_content %>
               </div>
-            </div>
+            </div> %>
           </div>
         </div>
       </div>
