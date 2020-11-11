@@ -7,7 +7,7 @@
   <div class="row">
     <div class="col-12">
       <% if @admin_media_sermons.length > 0 %>
-        <% @admin_media_sermons.in_groups_of(2).each do |group| %>
+        <% @admin_media_sermons.in_groups_of(3).each do |group| %>
           <div class="row">
             <% group.each do |admin_media_sermon| %>
               <% if admin_media_sermon.present? %>
