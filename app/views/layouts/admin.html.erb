@@ -17,7 +17,9 @@
             <%= render 'shared/sidebar_nav' %>
           </div>
           <main role="main" id="main" class="col h-100 pl-md-6">
-            <%= render partial: 'layouts/flash' %>
+            <div class="container-fluid mt-4">
+              <%= render partial: 'layouts/flash' %>
+            </div>
             <%= yield %>
           </main>
         </div>
