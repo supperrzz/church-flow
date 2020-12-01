@@ -1,4 +1,10 @@
-<div class="container-fluid">  
+<%= render partial: 'shared/header', locals: { 
+    title: 'Add LiveStream',
+    btn_text: 'Add LiveStream',
+    link: new_admin_live_stream_path,
+    icon: 'fa-video' } %>
+
+<div class="container mt-n20">  
   <%= render 'form', admin_live_stream: @admin_live_stream %>
-  <%= link_to 'Back', admin_live_streams_path, class: 'ml-4' %>
+  <!-- <#%= link_to 'Back', admin_live_streams_path, class: 'ml-4' %> -->
 </div>

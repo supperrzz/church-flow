@@ -7,11 +7,11 @@
     <div class="row">
       <div class=" item col-md-6 col-lg-4 mb-4">  
         <div class="card card-header-actions">
-          <div class="card-header text-dark">
+          <div class="card-header indigo-text">
             <%= sermon.title %>
             <div class="dropdown no-caret">
-              <button class="btn btn-transparent-dark btn-icon dropdown-toggle" id="dropdownMenuButton" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i data-feather="more-vertical"></i>
+              <button class="actions-dd border-0 dropdown-toggle py-1 px-2 rounded" id="dropdownMenuButton" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Actions <i class="fa fa-caret-down ml-2" aria-hidden="true"></i>
               </button>
               <div class="dropdown-menu dropdown-menu-right animated--fade-in-up">
                 <%= link_to edit_admin_media_sermon_path(sermon), class: 'dropdown-item' do %>
@@ -59,10 +59,10 @@
             <%= form_with(class: 'form', model: sermon, local: true) do |form| %>
               <div class="custom-control custom-switch">
                 <%= form.check_box :published, { id: sermon.id, class: 'custom-control-input', onchange: 'this.form.submit()' } %>
-                <label class="custom-control-label" for="<%= sermon.id %>">Published</label>
+                <label class="custom-control-label blue-text font-weight-500" for="<%= sermon.id %>">Publish</label>
               </div>
             <% end %>
-            <small class="m-0 text-muted">Upload Date: <%= sermon.created_at.strftime("%m/%d/%Y") %></small>
+            <small class="m-0 indigo-text font-weight-500">Upload Date: <%= sermon.created_at.strftime("%m/%d/%Y") %></small>
           </div>
         </div>
       </div>
