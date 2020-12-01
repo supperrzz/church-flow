@@ -93,3 +93,6 @@ gem "honeybadger", "~> 4.0"
 
 # Stripe payment
 gem 'stripe'
+
+# Maintain environment variables
+gem 'dotenv-rails', groups: %i[development test]
