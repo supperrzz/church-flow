@@ -8,13 +8,44 @@
 
 
 <% if @admin_media_sermons.length > 0 %>
-  <% @admin_media_sermons.in_groups_of(3).each do |group| %>
-    <% group.each do |admin_media_sermon| %>
-      <% if admin_media_sermon.present? %>
-        <%= render 'sermon', sermon: admin_media_sermon %>
+  <div class="container-fluid mt-n20">
+    <div class="card pl-4 pr-4 pt-4 mb-5">
+      <div class="col-md-12 text-right">
+        <a href="<%= admin_media_sermons_path(view: 'grid') %>" class="<%= params[:view] == 'grid' ? 'text-dark' : 'text-muted' %> mr-2"><i class="fas fa-th-large"></i></a>
+        <a href="<%= admin_media_sermons_path(view: 'table') %>" class="<%= params[:view] != 'grid' ? 'text-dark' : 'text-muted' %>"><i class="fas fa-list-ul"></i></a>
+      </div>
+      <% if params[:view] == 'grid' %>
+        <% @admin_media_sermons.in_groups_of(3).each do |group| %>
+          <div class="row">
+            <% group.each do |admin_media_sermon| %>
+              <% if admin_media_sermon.present? %>
+                <%= render 'sermon', sermon: admin_media_sermon, view: params[:view] %>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="table-responsive mb-4">
+          <table class="table table-striped table-borderless mb-0">
+            <thead>
+            <tr>
+              <th class="text-black font-weight-500">Video Thumbnail</th>
+              <th class="text-black font-weight-500">Video Name</th>
+              <th class="text-black font-weight-500">Publish Status</th>
+              <th class="text-black font-weight-500">Upload Date</th>
+              <th>&nbsp;</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @admin_media_sermons.each do |admin_media_sermon| %>
+              <%= render 'sermon', sermon: admin_media_sermon, view: params[:view] %>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
       <% end %>
-    <% end %>
-  <% end %>
+    </div>
+  </div>
 <% else %>
   <div class="alert alert-info" role="alert">
     You don't have any sermons yet. Click <span class="alert-link">New Sermon</span> or start a live stream to add your first one. 

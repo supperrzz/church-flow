@@ -7,6 +7,7 @@ class Admin::MediaSermonsController < ApplicationController
   # GET /admin/media_sermons
   # GET /admin/media_sermons.json
   def index
+    params[:view] ||= 'grid'
     @admin_media_sermons = current_user.church.media_sermons
   end
 
@@ -41,7 +42,7 @@ class Admin::MediaSermonsController < ApplicationController
   def update
     if @admin_media_sermon.update(update_admin_media_sermon_params)
       # @admin_media_sermon.generate_hls_video if update_admin_media_sermon_params[:video].present?
-      redirect_to admin_media_sermons_url, notice: 'Media sermon was successfully updated.'
+      redirect_to admin_media_sermons_url(view: params[:view] || 'grid'), notice: 'Media sermon was successfully updated.'
     else
       render :edit
     end

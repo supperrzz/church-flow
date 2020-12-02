@@ -1,7 +1,8 @@
 class ThumbnailGenerate
 
   def create(media_sermon)
-    return if media_sermon.thumbnail.present? && media_sermon.video.present?
+    return if media_sermon.thumbnail.present? || media_sermon.video.blank?
+
     thumbnail = "media_sermon#{media_sermon.id}.jpeg"
     resp = system "ffmpeg -ss 00:00:05 -i '#{media_sermon.video.url}' -f image2 -vframes 1 '#{thumbnail}'"
     if resp
