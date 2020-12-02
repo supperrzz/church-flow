@@ -60,18 +60,24 @@ button:focus{
 }
 .card.card-header-actions{
 	& .card-header{
-		padding: 1rem 0.9rem;
+			padding: 1rem 0.9rem;
 	}
 	& .card-footer{
-		padding: 1rem 0.9rem;
+			padding: 1rem 0.9rem;
 	}
 	& .actions-dd{
-		background: $zircon;
-		color: $indigo;
+			background: $zircon;
+			color: $indigo;
+	}
+	&	.dropdown-item:active{
+			background-color:transparent;
 	}
 }
 .dropdown-divider{
 	margin:0.1rem 0;
+}
+.rounded20{
+	border-radius:20px;
 }
 
 
