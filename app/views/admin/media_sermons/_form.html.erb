@@ -1,91 +1,90 @@
 <%= form_with(class: 'form', model: admin_media_sermon, local: true) do |form| %>
-<div class="card mb-5">
-  <div class="card-body">
-      <div class="row">
-        <% if admin_media_sermon.id.blank? %>
+  <div class="card mb-5">
+    <div class="card-body">
+        <div class="row">
+          <% if admin_media_sermon.id.blank? %>
+            <div class="col-md-4">
+              <div class="form-group position-relative">
+                <%= form.label :video, class: 'text-black font-weight-500' %>
+                <br/>
+                <% if admin_media_sermon.get_video_url.present? %>
+
+                  <div id="video-player"></div>
+                  <script>
+                      playerInstance = jwplayer('video-player');
+                      playerInstance.setup({
+                          file: '<%= raw(admin_media_sermon.get_video_url) %>',
+                          image: '<%= raw(admin_media_sermon.get_thumbnail_url) %>',
+                          height: 300,
+                          controls: true
+                      })
+                  </script>
+                <% end %>
+<!--                <iframe width="100%" height="250" src="https://www.youtube.com/embed/9xwazD5SyVg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>-->
+                <div class="btn btn-primary mt-2">Choose File</div>
+                <%= form.file_field :video, accept: 'video/mp4', class: 'mt-2'  %>
+              </div>
+            </div>
+          <% end %>
+          <a href="#" class="close position-absolute"><img src="/assets/img/icon_close.png"></a>
           <div class="col-md-4">
             <div class="form-group position-relative">
-
-              <%= form.label :video, class: 'text-black font-weight-500' %>
-              <iframe width="100%" height="250" src="https://www.youtube.com/embed/9xwazD5SyVg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-              <div class="btn btn-primary mt-2">Choose File</div>
-              <% if admin_media_sermon.get_video_url.present? %>
-
-                <div id="video-player"></div>
-                <script>
-                    playerInstance = jwplayer('video-player');
-                    playerInstance.setup({
-                        file: '<%= raw(admin_media_sermon.get_video_url) %>',
-                        image: '<%= raw(admin_media_sermon.get_thumbnail_url) %>',
-                        height: 300,
-                        controls: true
-                    })
-                </script>
+              <%= form.label :thumbnail, class: 'text-black font-weight-500' %>
+              <br/>
+<!--              <iframe width="100%" height="250" src="https://www.youtube.com/embed/9xwazD5SyVg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>-->
+              <% if admin_media_sermon.get_thumbnail_url.present? %>
+                <%= image_tag(admin_media_sermon.get_thumbnail_url, height: 100) %>
+                <br/>
               <% end %>
-              <%= form.file_field :video, accept: 'video/mp4'  %>
+              <div class="btn btn-primary mt-2">Choose File</div>
+              <%= form.file_field :thumbnail, accept: 'image/*', class: 'mt-2'  %>
+              <br/>
             </div>
           </div>
-        <% end %>
-        <a href="#" class="close position-absolute"><img src="/assets/img/icon_close.png"></a>
-        <div class="col-md-4">
-          <div class="form-group position-relative">
-            <%= form.label :thumbnail, class: 'text-black font-weight-500' %>
-            <iframe width="100%" height="250" src="https://www.youtube.com/embed/9xwazD5SyVg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            <div class="btn btn-primary mt-2">Choose File</div>
-            <% if admin_media_sermon.get_thumbnail_url.present? %>
-              <%= image_tag(admin_media_sermon.get_thumbnail_url, height: 100) %>
-            <br/>
-            <br/>
-            <% end %>
-            <%= form.file_field :thumbnail, accept: 'image/*'  %>
-            <br/>
-          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <%= form.label :title, class: 'text-black font-weight-500' %>
-        <%= form.text_field :title, class: 'form-control' %>
-      </div>
+        <div class="form-group">
+          <%= form.label :title, class: 'text-black font-weight-500' %>
+          <%= form.text_field :title, class: 'form-control' %>
+        </div>
 
-      <div class="form-group">
-        <%= form.label :speaker, class: 'text-black font-weight-500' %>
-        <%= form.text_field :speaker, class: 'form-control' %>
-      </div>
+        <div class="form-group">
+          <%= form.label :speaker, class: 'text-black font-weight-500' %>
+          <%= form.text_field :speaker, class: 'form-control' %>
+        </div>
 
-      <div class="form-group">
-        <%= form.label :scripture, class: 'text-black font-weight-500' %>
-        <%= form.text_field :scripture, class: 'form-control' %>
-      </div>
+        <div class="form-group">
+          <%= form.label :scripture, class: 'text-black font-weight-500' %>
+          <%= form.text_field :scripture, class: 'form-control' %>
+        </div>
 
-      <div class="form-group mb-0">
-        <%= form.check_box :published %>
-        <%= form.label :published %>
+        <div class="form-group mb-0">
+          <%= form.check_box :published %>
+          <%= form.label :published %>
+        </div>
+
+        <!-- Disable HLS
+        <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+        <script>
+            document.addEventListener('turbolinks:load', function() {
+                let videos = document.getElementsByClassName('video');
+                length = videos.length
+                for (let i = 0; i < length; i++) {
+                    let videoSrc = videos[i].src;
+                    if (Hls.isSupported() && videoSrc.indexOf('.m3u8') !== -1) {
+                        const hls = new Hls();
+                        hls.loadSource(videoSrc);
+                        hls.attachMedia(videos[i]);
+                    } else if (videos[i].canPlayType('application/vnd.apple.mpegurl')) {
+                        videos[i].src = videoSrc;
+                    }
+                }
+            });
+        </script>
+        -->
+      <div class="actions">
+        <%= form.submit 'Save', class: 'btn btn-primary px-4' %>
+        <%= link_to 'Cancel', admin_media_sermons_path, class: 'btn btn-outline-primary px-4 ml-md-4' %>
       </div>
-      
-      <!-- Disable HLS   
-      <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-      <script>
-          document.addEventListener('turbolinks:load', function() {
-              let videos = document.getElementsByClassName('video');
-              length = videos.length
-              for (let i = 0; i < length; i++) {
-                  let videoSrc = videos[i].src;
-                  if (Hls.isSupported() && videoSrc.indexOf('.m3u8') !== -1) {
-                      const hls = new Hls();
-                      hls.loadSource(videoSrc);
-                      hls.attachMedia(videos[i]);
-                  } else if (videos[i].canPlayType('application/vnd.apple.mpegurl')) {
-                      videos[i].src = videoSrc;
-                  }
-              }
-          });
-      </script>
-      -->
-    <div class="actions">
-      <%= form.submit 'Save', class: 'btn btn-primary px-4' %>
-      <%= link_to 'Cancel', admin_media_sermons_path, class: 'btn btn-outline-primary px-4 ml-md-4' %>
     </div>
   </div>
-  
-  <% end %>
-</div>
+<% end %>
