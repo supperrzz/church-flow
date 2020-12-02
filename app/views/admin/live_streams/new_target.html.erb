@@ -2,29 +2,31 @@
   title: 'Add Target to Dev Stream',
   icon: '' } %>
 
-<div class="container mt-n20">
+<div class="container-fluid mt-n20">
   <div class="card p-4 mb-5">
-    <a href="#" class="close position-absolute"><img src="/assets/img/icon_close.png"></a>
-    <%= form_for @target, url: admin_create_target_path, validate: true, method: :post do |f| %>
-      <div class="col-lg-12">
-        <!-- <h4>Add Target to <%= @admin_live_stream.name %></h4> -->
-        <div class="form-group">
-          <%= f.label :platform, class: 'text-black font-weight-500' %>
-          <%= f.text_field :platform, class: 'form-control' %>
+    <div class="mt-4">
+      <a href="#" class="close position-absolute"><img src="/assets/img/icon_close.png"></a>
+      <%= form_for @target, url: admin_create_target_path, validate: true, method: :post do |f| %>
+        <div class="col-lg-12">
+          <!-- <h4>Add Target to <%= @admin_live_stream.name %></h4> -->
+          <div class="form-group">
+            <%= f.label :platform, class: 'text-black font-weight-500' %>
+            <%= f.text_field :platform, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= f.label :url, class: 'text-black font-weight-500' %>
+            <%= f.text_field :url, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= f.label :stream_key, class: 'text-black font-weight-500' %>
+            <%= f.text_field :stream_key, class: 'form-control' %>
+          </div>
+          <div class="mt-4">
+            <%= submit_tag 'Add Target', class: 'btn btn-primary' %>
+            <%= link_to 'Cancel', admin_create_target_path, class: 'btn btn-outline-primary px-4 ml-md-4' %>
+          </div>
         </div>
-        <div class="form-group">
-          <%= f.label :url, class: 'text-black font-weight-500' %>
-          <%= f.text_field :url, class: 'form-control' %>
-        </div>
-        <div class="form-group">
-          <%= f.label :stream_key, class: 'text-black font-weight-500' %>
-          <%= f.text_field :stream_key, class: 'form-control' %>
-        </div>
-        <div class="mt-4">
-          <%= submit_tag 'Add Target', class: 'btn btn-primary' %>
-          <%= link_to 'Cancel', admin_create_target_path, class: 'btn btn-outline-primary px-4 ml-md-4' %>
-        </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
 </div>
