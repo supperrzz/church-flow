@@ -1,0 +1,84 @@
+.header-bg{
+	background:$blue url(/assets/img/bg_header.png)no-repeat;
+	background-position: 117% -142px;
+		background-size: 560px;
+	&.pb-20{
+		padding-bottom:10rem;
+	}
+}
+.mt-n20{
+	margin-top:-10rem;
+}
+.bg-indigo{
+	background:$indigo;
+}
+.upload-video{
+	background:$cyan;
+	color:$green;
+}
+.table-striped tbody tr:nth-of-type(odd){
+	background:$link-water;
+}
+.table td{
+	vertical-align:middle;		
+}
+#user_profile_picture, #admin_media_sermon_video{
+	position: absolute;
+  opacity: 0;
+  width: 117px;
+  height: 42px;	
+}
+#admin_media_sermon_video, #admin_media_sermon_thumbnail{
+	position: absolute;
+  opacity: 0;
+  width: 117px;
+  height: 42px;
+  left:0;	
+}
+button:focus{
+	outline:none;	
+}
+.form-control{
+	background-color: $grey;
+	border-color: $dark-border;	
+}
+.close{
+	right:15px;
+	top:15px;
+}
+.btn-primary{
+	background: $blue;
+}
+.blue-text{
+	color: $blue;
+}
+.indigo-text{
+	color: $indigo;
+}
+.bg-zircon{
+	background: $zircon;
+}
+.card.card-header-actions{
+	& .card-header{
+			padding: 1rem 0.9rem;
+	}
+	& .card-footer{
+			padding: 1rem 0.9rem;
+	}
+	& .actions-dd{
+			background: $zircon;
+			color: $indigo;
+	}
+	&	.dropdown-item:active{
+			background-color:transparent;
+	}
+}
+.dropdown-divider{
+	margin:0.1rem 0;
+}
+.rounded20{
+	border-radius:20px;
+}
+
+
+
