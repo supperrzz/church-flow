@@ -1,11 +1,15 @@
-<%= render partial: 'shared/header', locals: { 
+<%= render partial: 'shared/simple_page_header', locals: { 
   title: 'Stream',
+  btn_text: 'Add LiveStream',
+  link: new_admin_live_stream_path,
   icon: 'fa-video' } %>
 
-<div class="container mt-n20">
+<div class="container-fluid mt-n20">
  <div class="card p-4 mb-5">
-  <div class="row">
+  <a href="#" class="close position-absolute"><img src="/assets/img/icon_close.png"></a>
+  <div class="row mt-4">
     <div class="col-md-6">
+      <h3 class="indigo-text mb-3">Video Feed</h3>
       <video id="video" width="100%" controls></video>
       <% if @admin_live_stream.status == 'active' %>
         <script>
@@ -18,7 +22,7 @@
                 controls: true
             })
         </script>
-        <h3 id="no-live-stream" hidden>Stream is offline.</h3>
+        <h4 id="no-live-stream" hidden>Stream is offline.</h4>
       <% else %>
         <h3 id="no-live-stream">Stream is offline.</h3>
       <% end %>
@@ -28,6 +32,7 @@
     </div>
 
     <div class="col-md-6">
+      <h3 class="indigo-text mb-3">Stream Detail</h3>
       <p>
         <strong>Name:</strong>
         <%= @admin_live_stream.name %>
@@ -56,14 +61,61 @@
 
       <div class="row">
         <div class="col-6">
-          <h3>Other Targets</h3>
+          <h3 class="indigo-text mb-3">Targets</h3>
         </div>
         <div class="col-6">
-          <%= link_to 'Add Target', admin_new_target_path, class: 'btn btn-primary float-right' %>
+          
         </div>
       </div>
       <br/>
-      <table class="table">
+
+      <div class="row">
+        <div class="col-md-4">
+          <div class="shadow rounded p-3">
+            <div class="form-group">
+              <label class="text-black font-weight-500">Youtube</label>
+            </div>
+            <div class="form-group">
+              <label class="text-black font-weight-500">Platform</label>
+              <input class="form-control" type="text" value="">
+            </div>
+            <div class="form-group">
+              <label class="text-black font-weight-500">Url</label>
+              <textarea class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+              <label class="text-black font-weight-500">Stream Key</label>
+              <input class="form-control" type="text" value="">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="shadow rounded p-3">
+            <div class="form-group">
+              <label class="text-black font-weight-500">Facebook</label>
+            </div>
+            <div class="form-group">
+              <label class="text-black font-weight-500">Platform</label>
+              <input class="form-control" type="text" value="">
+            </div>
+            <div class="form-group">
+              <label class="text-black font-weight-500">Url</label>
+              <textarea class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+              <label class="text-black font-weight-500">Stream Key</label>
+              <input class="form-control" type="text" value="">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="shadow rounded p-3 h-100">
+            <%= link_to 'Add Target', admin_new_target_path, class: 'd-flex align-items-center justify-content-center h-100 text-decoration-none' %>
+          </div>
+        </div>
+      </div>
+
+      <!-- <table class="table">
         <thead>
         <tr>
           <th>Platform</th>
@@ -86,14 +138,12 @@
           </tr>
         <% end %>
         </tbody>
-      </table>
+      </table> -->
     </div>
   </div>
-
-
-    
-    
-    
-    <%= link_to 'Back', admin_live_streams_path %>
+    <div class="actions">
+      <input type="submit" value="Save" class="btn btn-primary px-4">
+      <input type="submit" value="Cancel" class="btn btn-outline-primary px-4 ml-md-4">
+    </div>
   </div>
 </div>
