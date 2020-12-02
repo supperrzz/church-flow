@@ -91,8 +91,8 @@ class Admin::LiveStreamsController < ApplicationController
   def destroy_target
     @target = @admin_live_stream.admin_simulcast_targets.find_by(id: params[:target_id])
     if @target.present?
-      live_stream = MuxLiveStream.new
-      live_stream.delete_simulcast_target(@admin_live_stream.mux_stream_id, @target.mux_simulcast_id)
+      # live_stream = MuxLiveStream.new
+      # live_stream.delete_simulcast_target(@admin_live_stream.mux_stream_id, @target.mux_simulcast_id)
       @target.destroy
       flash.now[:success] = 'Target deleted'
     else

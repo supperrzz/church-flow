@@ -80,10 +80,19 @@ gem 'shrine', '~> 3.0'
 gem 'cocoon'
 
 # MUX integration
-gem 'mux_ruby', :git => 'git://github.com/muxinc/mux-ruby.git'
+gem 'mux_ruby', '~> 1.7.0'
 
 # Sidekiq background processing
 gem 'sidekiq'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+# gem
+gem "honeybadger", "~> 4.0"
+
+# Stripe payment
+gem 'stripe'
+
+# Maintain environment variables
+gem 'dotenv-rails', groups: %i[development test]

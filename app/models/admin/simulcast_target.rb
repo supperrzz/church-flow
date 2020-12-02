@@ -31,5 +31,7 @@ class Admin::SimulcastTarget < ApplicationRecord
 
     live_api = MuxRuby::LiveStreamsApi.new
     live_api.delete_live_stream_simulcast_target(admin_live_stream.mux_stream_id, mux_simulcast_id)
+  rescue MuxRuby::NotFoundError => _
+    puts 'Already deleted.'
   end
 end

@@ -28,6 +28,8 @@ class Admin::MediaSermonsController < ApplicationController
     @admin_media_sermon = current_user.church.media_sermons.new(create_admin_media_sermon_params)
 
     if @admin_media_sermon.save
+      obj = ThumbnailGenerate.new
+      obj.create(@admin_media_sermon)
       # @admin_media_sermon.generate_hls_video if create_admin_media_sermon_params[:video].present?
       redirect_to @admin_media_sermon, notice: 'Media sermon was successfully created.'
     else
