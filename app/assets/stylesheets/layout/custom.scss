@@ -22,11 +22,18 @@
 .table td{
 	vertical-align:middle;		
 }
-#user_profile_picture{
+#user_profile_picture, #admin_media_sermon_video{
 	position: absolute;
   opacity: 0;
   width: 117px;
   height: 42px;	
+}
+#admin_media_sermon_video, #admin_media_sermon_thumbnail{
+	position: absolute;
+  opacity: 0;
+  width: 117px;
+  height: 42px;
+  left:0;	
 }
 button:focus{
 	outline:none;	
@@ -48,6 +55,9 @@ button:focus{
 .indigo-text{
 	color: $indigo;
 }
+.bg-zircon{
+	background: $zircon;
+}
 .card.card-header-actions{
 	& .card-header{
 		padding: 1rem 0.9rem;
@@ -60,7 +70,9 @@ button:focus{
 		color: $indigo;
 	}
 }
-
+.dropdown-divider{
+	margin:0.1rem 0;
+}
 
 
 

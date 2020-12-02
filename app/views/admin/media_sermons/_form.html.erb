@@ -1,48 +1,57 @@
 <%= form_with(class: 'form', model: admin_media_sermon, local: true) do |form| %>
-<div class="card mt-4 mb-3">
+<div class="card mb-5">
   <div class="card-body">
-      <% if admin_media_sermon.id.blank? %>
-        <div class="form-group">
-          <%= form.label :video %>
-          <br/>
-          <% if admin_media_sermon.get_video_url.present? %>
-            <div id="video-player"></div>
-            <script>
-                playerInstance = jwplayer('video-player');
-                playerInstance.setup({
-                    file: '<%= raw(admin_media_sermon.get_video_url) %>',
-                    image: '<%= raw(admin_media_sermon.get_thumbnail_url) %>',
-                    height: 300,
-                    controls: true
-                })
-            </script>
-          <% end %>
-          <%= form.file_field :video, accept: 'video/mp4'  %>
-        </div>
-      <% end %>
-      <div class="form-group">
-        <%= form.label :thumbnail %>
-        <br/>
-        <% if admin_media_sermon.get_thumbnail_url.present? %>
-          <%= image_tag(admin_media_sermon.get_thumbnail_url, height: 100) %>
-        <br/>
-        <br/>
+      <div class="row">
+        <% if admin_media_sermon.id.blank? %>
+          <div class="col-md-4">
+            <div class="form-group position-relative">
+              <%= form.label :video, class: 'text-black font-weight-500' %>
+               <br/>
+              <div class="btn btn-primary">Choose File</div>
+              <% if admin_media_sermon.get_video_url.present? %>
+
+                <div id="video-player"></div>
+                <script>
+                    playerInstance = jwplayer('video-player');
+                    playerInstance.setup({
+                        file: '<%= raw(admin_media_sermon.get_video_url) %>',
+                        image: '<%= raw(admin_media_sermon.get_thumbnail_url) %>',
+                        height: 300,
+                        controls: true
+                    })
+                </script>
+              <% end %>
+              <%= form.file_field :video, accept: 'video/mp4'  %>
+            </div>
+          </div>
         <% end %>
-        <%= form.file_field :thumbnail, accept: 'image/*'  %>
-        <br/>
+        <div class="col-md-4">
+          <div class="form-group position-relative">
+            <%= form.label :thumbnail, class: 'text-black font-weight-500' %>
+            <br/>
+            <div class="btn btn-primary">Choose File</div>
+            <% if admin_media_sermon.get_thumbnail_url.present? %>
+              <%= image_tag(admin_media_sermon.get_thumbnail_url, height: 100) %>
+            <br/>
+            <br/>
+            <% end %>
+            <%= form.file_field :thumbnail, accept: 'image/*'  %>
+            <br/>
+          </div>
+        </div>
       </div>
       <div class="form-group">
-        <%= form.label :title %>
+        <%= form.label :title, class: 'text-black font-weight-500' %>
         <%= form.text_field :title, class: 'form-control' %>
       </div>
 
       <div class="form-group">
-        <%= form.label :speaker %>
+        <%= form.label :speaker, class: 'text-black font-weight-500' %>
         <%= form.text_field :speaker, class: 'form-control' %>
       </div>
 
       <div class="form-group">
-        <%= form.label :scripture %>
+        <%= form.label :scripture, class: 'text-black font-weight-500' %>
         <%= form.text_field :scripture, class: 'form-control' %>
       </div>
 
@@ -70,11 +79,11 @@
           });
       </script>
       -->
-  </div>
-  <div class="card-footer text-muted">
     <div class="actions">
-      <%= form.submit 'Save', class: 'btn btn-primary' %>
+      <%= form.submit 'Save', class: 'btn btn-primary px-4' %>
+      <%= link_to 'Cancel', admin_media_sermons_path, class: 'btn btn-outline-primary px-4 ml-md-4' %>
     </div>
   </div>
+  
   <% end %>
 </div>

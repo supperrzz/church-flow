@@ -13,33 +13,36 @@
               <button class="actions-dd border-0 dropdown-toggle py-1 px-2 rounded" id="dropdownMenuButton" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Actions <i class="fa fa-caret-down ml-2" aria-hidden="true"></i>
               </button>
-              <div class="dropdown-menu dropdown-menu-right animated--fade-in-up">
+              <div class="dropdown-menu dropdown-menu-right animated--fade-in-up bg-zircon">
                 <%= link_to edit_admin_media_sermon_path(sermon), class: 'dropdown-item' do %>
+                  <div class="indigo-text w-100">Edit</div>
                   <div class="dropdown-item-icon">
-                    <i data-feather="edit"></i>
+                    <i class="fa fa-edit indigo-text"></i>
                   </div>
-                  Edit
                 <% end %>
+                <div class="dropdown-divider"></div>
                 <button class="dropdown-item" data-copy data-url="<%= sermon.get_video_url %>">
+                  <div class="indigo-text w-100">Copy Url</div>
                   <div class="dropdown-item-icon">
-                    <i data-feather="copy"></i>
+                    <i class="fa fa-clone indigo-text"></i>
                   </div>
-                  Copy Url
                 </button>
+                <div class="dropdown-divider"></div>
                 <% if sermon.video.present? %>
                   <%= link_to sermon.video.url(response_content_disposition: ContentDisposition.attachment), class: 'dropdown-item', target: '_blank' do %>
+
+                    <div class="indigo-text w-100">Download</div>
                     <div class="dropdown-item-icon">
-                      <i data-feather="download"></i>
+                      <i class="fa fa-download indigo-text"></i>
                     </div>
-                    Download
                   <% end %>
                 <% end %>
                 <div class="dropdown-divider"></div>
                 <%= link_to sermon, method: :delete, class: 'dropdown-item', data: { confirm: 'Are you sure ?' }  do %>
+                  <div class="indigo-text w-100">Delete</div>
                   <div class="dropdown-item-icon">
-                    <i data-feather="trash-2"></i>
+                    <i class="fa fa-trash-alt indigo-text"></i>
                   </div>
-                  Delete
                 <% end %>
               </div>
             </div>

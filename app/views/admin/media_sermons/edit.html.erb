@@ -1,6 +1,10 @@
-<div class="container-fluid">
+<%= render partial: 'shared/header', locals: { 
+  title: 'Edit Video',
+  icon: 'fa-edit' } %>
+
+<div class="container mt-n20">
   <%= render 'form', admin_media_sermon: @admin_media_sermon %>
-  <%= link_to 'Cancel', admin_media_sermons_path, class: 'ml-4' %>
+  <!-- <#%= link_to 'Cancel', admin_media_sermons_path, class: 'ml-4' %> -->
 </div>
 
 <!-- Disables Hls Player
