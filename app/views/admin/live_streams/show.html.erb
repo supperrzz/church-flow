@@ -6,7 +6,9 @@
 
 <div class="container-fluid mt-n20">
  <div class="card p-4 mb-5">
-  <a href="#" class="close position-absolute"><img src="/assets/img/icon_close.png"></a>
+   <%= link_to(admin_live_streams_path, class: 'close position-absolute') do %>
+     <%= image_tag('img/icon_close.png') %>
+   <% end %>
   <div class="row mt-4">
     <div class="col-md-6">
       <h3 class="indigo-text mb-3">Video Feed</h3>
@@ -46,11 +48,11 @@
       <p>
         <strong>Endpoint to Broadcast:</strong>
         <div><span class="badge badge-secondary p-2 rounded20">rtmp://global-live.mux.com:5222/app</span>
-          <a href="#" title="Copy"><i class="fa fa-copy mr-2"></i></a>
+          <a title="Copy" class="clipboard-copy-btn" data-clipboard-text="rtmp://global-live.mux.com:5222/app"><i class="fa fa-copy mr-2"></i></a>
          (Standard RTMP entry point. Compatible with the majority of streaming applications and services.)</div>
         <div><span class="badge badge-secondary p-2 rounded20">
         rtmps://global-live.mux.com:443/app</span>
-        <a href="#" title="Copy"><i class="fa fa-copy mr-2"></i></a> 
+        <a title="Copy" class="clipboard-copy-btn" data-clipboard-text="rtmps://global-live.mux.com:443/app"><i class="fa fa-copy mr-2"></i></a>
         (Secure RTMPS entry point. Compatible with less streaming applications, but offers a higher level of security.)</div>
       </p>
 

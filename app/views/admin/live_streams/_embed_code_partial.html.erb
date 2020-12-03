@@ -2,8 +2,10 @@
 <h5 class="text-blue mt-4">Embed Code</h5>
 <div>
 	<p id="embed-code" class="mb-0">
-	  <%= "<iframe width='100%' height='315' src='#{request.protocol}#{request.host}/embed/#{embed_code}' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>" %>
+    <%= text_area_tag :embed_code, "<iframe width='100%' height='315' src='#{request.protocol}#{request.host}/embed/#{embed_code}' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>",
+                      readonly: true, class: 'form-control', rows: '4', style: 'resize: none' %>
+	  <%=  %>
 	</p>
 </div>
-<a href="#" class="text-sm text-underline"><u>Copy Code <i class="fa fa-code"></i></u></a>
+<a class="text-sm text-underline clipboard-copy-btn" data-clipboard-target="#embed_code"><u>Copy Code <i class="fa fa-code"></i></u></a>
  

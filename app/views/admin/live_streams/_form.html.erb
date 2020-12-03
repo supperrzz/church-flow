@@ -2,7 +2,9 @@
   <div class="col-12">
     <div class="card mb-5">
       <div class="card-body mt-4">
-        <a href="#" class="close position-absolute"><img src="/assets/img/icon_close.png"></a>
+        <%= link_to(admin_live_streams_path, class: 'close position-absolute') do %>
+          <%= image_tag('img/icon_close.png') %>
+        <% end %>
         <%= form_with(model: admin_live_stream, local: true, validate: true) do |form| %>
 
           <div class="form-group">
