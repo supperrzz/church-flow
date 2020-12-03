@@ -66,6 +66,10 @@ Rails.application.routes.draw do
   authenticated :user, lambda { |u| u.super_admin? } do
     root to: 'home#index', as: :super_admin_root
     resources :admins
+
+    namespace :super_admin, path: '/' do
+      resources :subscriptions
+    end
   end
 
   # Member Routes

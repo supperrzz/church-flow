@@ -1,0 +1,39 @@
+<div class="container-fluid">
+  <br/>
+  <div class="row">
+    <div class="col-12">
+      <%= form_for @subscription, url: super_admin_subscription_path(@subscription), validate: true do |f| %>
+        <h3>Update Subscription</h3>
+        <div class="form-group">
+          <%= f.label :name %>
+          <%= f.text_field :name, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :price, 'Price ($)' %>
+          <%= f.text_field :price, class: 'form-control', disabled: true %>
+        </div>
+        <div class="form-group">
+          <%= f.label :stream_size %>
+          <%= f.number_field :stream_size, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :targets %>
+          <%= f.number_field :targets, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :video_storage, 'Video Storage (in GBs)' %>
+          <%= f.number_field :video_storage, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :viewer_count %>
+          <%= f.number_field :viewer_count, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :active %>
+          <%= f.check_box :active %>
+        </div>
+        <%= f.submit 'Update Subscription', class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+</div>

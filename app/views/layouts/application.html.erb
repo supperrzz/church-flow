@@ -15,7 +15,7 @@
     <% if current_user && current_user.admin? %>
       <%= link_to('SDA Live', root_path, class: 'navbar-brand') %>
     <% else %>
-      <%= link_to('SDA Live', root_path, class: 'navbar-brand') %>
+      <%= link_to('SDA Live', super_admin_root_path, class: 'navbar-brand') %>
     <% end %>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,6 +28,9 @@
           <% if current_user.super_admin? %>
             <li class="nav-item">
               <%= link_to('Admins', admins_path, class: 'nav-link') %>
+            </li>
+            <li class="nav-item">
+              <%= link_to('Subscriptions', super_admin_subscriptions_path, class: 'nav-link') %>
             </li>
           <% end %>
           <li class="nav-item">
