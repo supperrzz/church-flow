@@ -2,6 +2,9 @@
   <div class="card mb-5">
     <div class="card-body">
         <div class="row">
+          <%= link_to(admin_media_sermons_path, class: 'close position-absolute') do %>
+            <%= image_tag('img/icon_close.png') %>
+          <% end %>
           <% if admin_media_sermon.id.blank? %>
             <div class="col-md-4">
               <div class="form-group position-relative">
@@ -26,7 +29,6 @@
               </div>
             </div>
           <% end %>
-          <a href="#" class="close position-absolute"><img src="/assets/img/icon_close.png"></a>
           <div class="col-md-4">
             <div class="form-group position-relative">
               <%= form.label :thumbnail, class: 'text-black font-weight-500' %>

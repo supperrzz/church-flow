@@ -15,14 +15,14 @@
               </div>
             <% end %>
             <div class="dropdown-divider"></div>
-            <button class="dropdown-item" data-copy data-url="<%= sermon.get_video_url %>">
-              <div class="indigo-text w-100">Copy Url</div>
-              <div class="dropdown-item-icon">
-                <i class="fa fa-clone indigo-text"></i>
-              </div>
-            </button>
-            <div class="dropdown-divider"></div>
             <% if sermon.video.present? %>
+              <button class="dropdown-item clipboard-copy-btn" data-clipboard-text="<%= sermon.get_video_url %>">
+                <div class="indigo-text w-100">Copy Url</div>
+                <div class="dropdown-item-icon">
+                  <i class="fa fa-clone indigo-text"></i>
+                </div>
+              </button>
+              <div class="dropdown-divider"></div>
               <%= link_to sermon.video.url(response_content_disposition: ContentDisposition.attachment), class: 'dropdown-item', target: '_blank' do %>
 
                 <div class="indigo-text w-100">Download</div>
@@ -91,11 +91,19 @@
     </td>
     <td class="text-black">Dec 3, 2020</td>
     <td>
+      <% if sermon.video.present? %>
+        <a class="mr-3 clipboard-copy-btn" data-clipboard-text="<%= sermon.get_video_url %>">
+          <i class="fa fa-clone indigo-text"></i>
+        </a>
+        <%= link_to sermon.video.url(response_content_disposition: ContentDisposition.attachment), class: 'mr-3', target: '_blank' do %>
+          <i class="fa fa-download indigo-text"></i>
+        <% end %>
+      <% end %>
       <%= link_to edit_admin_media_sermon_path(sermon), class: 'mr-3' do %>
-        <i class="fas fa-edit"></i>
+        <i class="fas fa-edit indigo-text"></i>
       <% end %>
       <%= link_to sermon, method: :delete, data: { confirm: 'Are you sure ?' }  do %>
-        <i class="fas fa-trash-alt"></i>
+        <i class="fas fa-trash-alt indigo-text"></i>
       <% end %>
     </td>
   </tr>
