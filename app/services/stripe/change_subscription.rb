@@ -7,6 +7,7 @@ class Stripe::ChangeSubscription
     subscription = Stripe::Subscription.update(
       context.stripe_subscription_id,
       {
+        cancel_at_period_end: false,
         items: [
           {
             id: context.stripe_item_id,

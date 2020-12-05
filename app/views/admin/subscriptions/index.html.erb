@@ -20,7 +20,7 @@
                 <a href="#" class="btn btn-primary">Current</a>
               <% else %>
                 <%= link_to(get_upgrade_or_downgrade(subscription, @subscription_profile),
-                            admin_choose_subscription_path(subscription), class: 'btn btn-primary', method: :post) %>
+                            admin_change_subscription_path(subscription), class: 'btn btn-primary', method: :post) %>
               <% end %>
             <% else %>
               <%= link_to 'Choose', admin_choose_subscription_path(subscription), class: 'btn btn-primary', method: :post  %>

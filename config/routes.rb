@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     get 'home/index'
   end
   post 'notify/mux'
+  post 'notify/stripe'
   post 'sns/notify' => 'sns_hls_notify#notify'
 
   get 'embed/:embed_code' => 'embed#index'
@@ -53,8 +54,10 @@ Rails.application.routes.draw do
 
       # Subscriptions
       get '/subscriptions' => 'subscriptions#index', as: :subscriptions
-      post '/subscriptions/:id' => 'subscriptions#choose', as: :choose_subscription
       delete '/subscriptions/cancel' => 'subscriptions#cancel', as: :cancel_subscription
+      post '/subscriptions/restart' => 'subscriptions#restart', as: :restart_subscription
+      post '/subscriptions/:id/choose' => 'subscriptions#choose', as: :choose_subscription
+      post '/subscriptions/:id/change' => 'subscriptions#change', as: :change_subscription
     end
   end
 
