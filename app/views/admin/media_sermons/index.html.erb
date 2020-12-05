@@ -16,12 +16,14 @@
       </div>
       <% if params[:view] == 'grid' %>
         <% @admin_media_sermons.in_groups_of(3).each do |group| %>
-          <div class="row">
-            <% group.each do |admin_media_sermon| %>
-              <% if admin_media_sermon.present? %>
-                <%= render 'sermon', sermon: admin_media_sermon, view: params[:view] %>
+          <div class="video-library-list mt-3">
+            <div class="row">
+              <% group.each do |admin_media_sermon| %>
+                <% if admin_media_sermon.present? %>
+                  <%= render 'sermon', sermon: admin_media_sermon, view: params[:view] %>
+                <% end %>
               <% end %>
-            <% end %>
+            </div>
           </div>
         <% end %>
       <% else %>

@@ -79,6 +79,11 @@ button:focus{
 .rounded20{
 	border-radius:20px;
 }
+.video-library-list{
+	max-height:640px;
+	overflow-y:auto;
+	overflow-x:hidden;
+}
 
 
 
