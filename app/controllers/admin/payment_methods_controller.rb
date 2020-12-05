@@ -41,7 +41,7 @@ class Admin::PaymentMethodsController < ApplicationController
         end
       end
     end
-    redirect_back(fallback_location: admin_payment_methods_path)
+    redirect_to admin_payment_methods_path
   end
 
   def delete
