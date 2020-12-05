@@ -48,7 +48,13 @@ Rails.application.routes.draw do
       patch 'settings/subdomain_update', as: :update_my_subdomain
 
       # Payment methods APIs
-      resources :payment_methods
+      resources :payment_methods, only: %i[index create destroy new]
+      post '/payment_methods/:id/default' => 'payment_methods#default', as: :set_default_payment_method
+
+      # Subscriptions
+      get '/subscriptions' => 'subscriptions#index', as: :subscriptions
+      post '/subscriptions/:id' => 'subscriptions#choose', as: :choose_subscription
+      delete '/subscriptions/cancel' => 'subscriptions#cancel', as: :cancel_subscription
     end
   end
 

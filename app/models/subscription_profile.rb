@@ -12,6 +12,7 @@
 #  updated_at             :datetime         not null
 #  stripe_card_id         :string
 #  stripe_customer_id     :string
+#  stripe_item_id         :string
 #  stripe_subscription_id :string
 #  subscription_id        :bigint
 #  user_id                :bigint           not null

@@ -21,6 +21,8 @@ import '@fortawesome/fontawesome-free/js/all';
 require('../src/javascripts/cocoon');
 require('../src/javascripts/sb_admin');
 require('../src/javascripts/stripe');
+import LocalTime from 'local-time'
+LocalTime.start()
 
 // Activate Feather icons
 const feather = require('feather-icons');

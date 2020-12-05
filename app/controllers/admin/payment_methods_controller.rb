@@ -11,15 +11,23 @@ class Admin::PaymentMethodsController < ApplicationController
              else
                []
              end
+    @subscription = if @subscription_profile.present? && @subscription_profile.stripe_subscription_id.present?
+                      response = Stripe::GetSubscription.call(stripe_subscription_id: @subscription_profile.stripe_subscription_id)
+                      response.subscription
+                    else
+                      []
+                    end
   end
 
   def create
+    @card_id = nil
     if @subscription_profile.present? && @subscription_profile.stripe_customer_id.present?
       response = Stripe::CreateCard.call(stripe_customer_id: @subscription_profile.stripe_customer_id,
                                          token: params[:token])
       if response.error
         flash[:error] = response.error.message || 'Card add failed.'
       else
+        @card_id = response.card.id
         flash[:success] = 'Added card.'
       end
     else
@@ -37,17 +45,26 @@ class Admin::PaymentMethodsController < ApplicationController
         if response_card.error
           flash[:error] = response_card.error.message || 'Card add failed.'
         else
+          @card_id = response_card.card.id
           flash[:success] = 'Added card.'
         end
       end
     end
+    if @subscription_profile.stripe_card_id.blank? && @card_id.present?
+      @subscription_profile.update(stripe_card_id: @card_id)
+    end
     redirect_to admin_payment_methods_path
   end
 
-  def delete
-    if @subscription_profile.stripe_card_id != params[:card_id]
+  def default
+    @subscription_profile.update stripe_card_id: params[:id]
+    redirect_back(fallback_location: admin_payment_methods_path)
+  end
+
+  def destroy
+    if @subscription_profile.stripe_card_id != params[:id]
       response = Stripe::DeleteCard.call(stripe_customer_id: @subscription_profile.stripe_customer_id,
-                                         card_id: params[:card_id])
+                                         card_id: params[:id])
       if response.error
         flash[:error] = response.error.message || 'Deletion failed.'
       else
@@ -56,7 +73,7 @@ class Admin::PaymentMethodsController < ApplicationController
     else
       flash[:error] = 'Your card is being used in subscription.'
     end
-    redirect_back(fallback_location: client_project_status_path)
+    redirect_back(fallback_location: admin_payment_methods_path)
   end
 
   private

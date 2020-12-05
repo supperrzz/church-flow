@@ -1,13 +1,10 @@
 # frozen_string_literal: true
 
-class Stripe::DeleteCard
+class Stripe::GetSubscription
   include Interactor
 
   def call
-    Stripe::Customer.delete_source(
-      context.stripe_customer_id,
-      context.card_id,
-    )
+    context.subscription = Stripe::Subscription.retrieve(context.stripe_subscription_id)
   rescue StandardError => e
     context.fail!(error: e)
   end

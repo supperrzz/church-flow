@@ -1,10 +1,28 @@
 <%= render partial: 'shared/header', locals: {
-  title: 'Payment Methods',
+  title: 'Billing Settings',
   icon: 'fa-dollar-sign' } %>
 
 <div class="container-fluid mt-n20">
   <div class="card pl-4 pr-4 pt-4 mb-5">
+    <% if @subscription_profile.active %>
+      <div class="col-md-12">
+        <h2>Subscription Settings</h2>
+        <h3><%= @subscription_profile.subscription.name %></h3>
+        <div>Next Billing Date: <%= local_time(DateTime.strptime(@subscription.current_period_end.to_s,'%s')) %></div>
+        <%= link_to 'Cancel Subscription', admin_cancel_subscription_path, class: 'btn btn-danger', method: :delete %>
+        <%= link_to 'Change Subscription', admin_subscriptions_path, class: 'btn btn-primary' %>
+      </div>
+    <% else %>
+      <div class="col-md-12">
+        <%= link_to 'Select Subscription', admin_subscriptions_path, class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+    <br/>
+    <br/>
+  </div>
+  <div class="card pl-4 pr-4 pt-4 mb-5">
     <div class="col-md-12">
+      <h2>Payment Settings</h2>
       <%= link_to 'Add New Card', new_admin_payment_method_path, class: 'btn btn-primary' %>
     </div>
     <br/>
@@ -16,7 +34,12 @@
             <div class="card-body">
               <h5 class="card-title"><%= card.brand %> ending with <%= card.last4 %></h5>
               <p class="card-text">Expiring on <%= card.exp_month %>/<%= card.exp_year %></p>
-              <%= link_to('Delete Card', admin_payment_method_path(id: card.id), class: 'btn btn-danger') %>
+              <% if @subscription_profile.stripe_card_id == card.id %>
+                <p class="card-text">Default</p>
+              <% else %>
+                <%= link_to('Set as default', admin_set_default_payment_method_path(id: card.id), method: :post, class: 'btn btn-primary') %>
+              <% end %>
+              <%= link_to('Delete Card', admin_payment_method_path(id: card.id), method: :delete, data: { confirm: 'Are you sure ?' }, class: 'btn btn-danger') %>
             </div>
           </div>
         <% end %>

@@ -58,11 +58,11 @@ class SuperAdmin::SubscriptionsController < ApplicationController
 
   def subscription_params
     params.require(:subscription).permit(:name, :price, :live_streams, :stream_size, :targets, :video_storage,
-                                         :viewer_count, :active)
+                                         :viewer_count, :rank, :active)
   end
 
   def subscription_update_params
     params.require(:subscription).permit(:name, :live_streams, :stream_size, :targets, :video_storage,
-                                         :viewer_count, :active)
+                                         :viewer_count, :rank, :active)
   end
 end

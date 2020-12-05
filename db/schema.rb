@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_04_050524) do
+ActiveRecord::Schema.define(version: 2020_12_05_090553) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -168,6 +168,7 @@ ActiveRecord::Schema.define(version: 2020_12_04_050524) do
     t.boolean "active"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "stripe_item_id"
     t.index ["subscription_id"], name: "index_subscription_profiles_on_subscription_id"
     t.index ["user_id"], name: "index_subscription_profiles_on_user_id"
   end
@@ -185,6 +186,7 @@ ActiveRecord::Schema.define(version: 2020_12_04_050524) do
     t.float "price"
     t.string "stripe_product_id"
     t.string "stripe_price_id"
+    t.integer "rank"
   end
 
   create_table "users", force: :cascade do |t|

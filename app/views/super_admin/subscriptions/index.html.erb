@@ -19,6 +19,7 @@
           <th scope="col">Viewer Count()</th>
           <th scope="col">Targets per Live Streams</th>
           <th scope="col">Video Storage (in GBs)</th>
+          <th scope="col">RANK</th>
           <th scope="col">Active</th>
           <th colspan="3"></th>
         </tr>
@@ -34,6 +35,7 @@
             <td><%= subscription.viewer_count %></td>
             <td><%= subscription.targets %></td>
             <td><%= subscription.video_storage %></td>
+            <td><%= subscription.rank %></td>
             <td><%= subscription.active %></td>
             <td><%= link_to 'Edit', edit_super_admin_subscription_path(subscription) %></td>
           </tr>

@@ -33,13 +33,50 @@ class NotifyController < ApplicationController
     when 'video.asset.static_renditions.ready'
       get_mp4_and_store_in_s3
     end
-     # contains type of webhooks event https://docs.mux.com/docs/webhooks
+    # contains type of webhooks event https://docs.mux.com/docs/webhooks
     params[:id] # id of webhook event
     params[:created_at] # created at
     params[:environment] # environment contains name and id
     params[:object] # object info contains type and id
     params[:data] # The details of the specific object that triggered the event.
     render json: { success: 'Received Webhook' }
+  end
+
+  def stripe
+    payload = request.body.read
+    sig_header = request.env['HTTP_STRIPE_SIGNATURE']
+    @event = nil
+
+    begin
+      @event = Stripe::Webhook.construct_event(
+        payload, sig_header, ENV['STRIPE_SIGNING_SECRET']
+      )
+    rescue JSON::ParserError => _e
+      # Invalid payload
+      render json: { error: "Failed Webhook" }
+      return
+    rescue Stripe::SignatureVerificationError => _e
+      # Invalid signature
+      status 400
+      return
+    end
+
+    # Handle the event
+    case @event.type
+    when 'customer.subscription.updated'
+      @subscription = event.data.object # contains a Stripe::PaymentIntent
+      puts 'Updated subscription!'
+    when 'customer.subscription.deleted'
+      @subscription = event.data.object # contains a Stripe::PaymentMethod
+      puts 'Deleted Subscription!'
+    when 'customer.subscription.created'
+      @subscription = event.data.object # contains a Stripe::PaymentMethod
+      puts 'Created Subscription!'
+    else
+      puts "Unhandled event type: #{event.type} for #{@subscription}"
+    end
+
+    render json: { success: "Received Webhook #{event.type}" }
   end
 
   private
