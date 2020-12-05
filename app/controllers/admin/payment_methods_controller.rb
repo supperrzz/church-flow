@@ -58,6 +58,12 @@ class Admin::PaymentMethodsController < ApplicationController
 
   def default
     @subscription_profile.update stripe_card_id: params[:id]
+    if @subscription_profile.active
+      Stripe::ChangeSubscriptionCard.call(
+        stripe_subscription_id: @subscription_profile.stripe_subscription_id,
+        stripe_card_id: @subscription_profile.stripe_card_id
+      )
+    end
     redirect_back(fallback_location: admin_payment_methods_path)
   end
 
