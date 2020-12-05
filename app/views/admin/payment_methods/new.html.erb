@@ -1,0 +1,87 @@
+<%= render partial: 'shared/header', locals: {
+  title: 'Payment Methods',
+  icon: 'fa-dollar-sign' } %>
+
+<div class="container-fluid mt-n20">
+  <div class="card pl-4 pr-4 pt-4 mb-5">
+    <div class="col-md-12">
+      <%= link_to '< Back', admin_payment_methods_path, class: 'btn btn-primary' %>
+    </div>
+    <br/>
+    <br/>
+<!--    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>-->
+<!--    <script type="text/javascript">-->
+<!--        Stripe.setPublishableKey('<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>');-->
+<!--            $(document).ready(() => {-->
+<!--                $('#payment-form').submit(function(event) {-->
+<!--                    var $form;-->
+<!--                    $form = $(this);-->
+<!--                    $form.find('button').prop('disabled', true);-->
+<!--                    Stripe.card.createToken($form, stripeResponseHandler);-->
+<!--                    return false;-->
+<!--                });-->
+<!--            })-->
+
+<!--            stripeResponseHandler = function(status, response) {-->
+<!--                var $form, token;-->
+<!--                $form = $('#payment-form');-->
+<!--                if (response.error) {-->
+<!--                    $form.find('.payment-errors').text(response.error.message);-->
+<!--                    $form.find('button').prop('disabled', false);-->
+<!--                } else {-->
+<!--                    token = response.id;-->
+<!--                    $form.append($('<input type="hidden" name="token" />').val(token));-->
+<!--                    $form.get(0).submit();-->
+<!--                }-->
+<!--            };-->
+<!--    </script>-->
+    <div class="col-md-12">
+      <%= form_tag admin_payment_methods_path, method: 'post', id: 'payment-form' do %>
+        <div id="card-element">
+          <!-- A Stripe Element will be inserted here. -->
+        </div>
+
+        <!-- Used to display form errors. -->
+        <div id="card-errors" role="alert"></div>
+<!--        <span class="payment-errors"></span>-->
+<!--        <div class="row">-->
+<!--          <div class="col-md-6">-->
+<!--            <label>-->
+<!--              <span>Card Number</span>-->
+<!--            </label>-->
+<!--            <input type="text" size="20" data-stripe="number" class="form-control" />-->
+<!--          </div>-->
+<!--          <div class="col-md-3">-->
+<!--            <label>-->
+<!--              <span>CVC</span>-->
+<!--            </label>-->
+<!--            <input type="text" size="4" data-stripe="cvc" class="form-control" />-->
+<!--          </div>-->
+<!--          <div class="col-md-3">-->
+<!--            <label>-->
+<!--              <span>Expiration (MM/YYYY)</span>-->
+<!--            </label>-->
+<!--            <div class="row">-->
+<!--              <div class="col-4">-->
+<!--                <input type="text" size="2" data-stripe="exp-month" class="form-control" />-->
+<!--              </div>-->
+<!--              <div class="col-1">-->
+<!--                <span> / </span>-->
+<!--              </div>-->
+<!--              <div class="col-6">-->
+<!--                <input type="text" size="4" data-stripe="exp-year"  class="form-control" />-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+        <br/>
+        <br/>
+        <button type="submit" class="btn btn-primary">Add Card</button>
+        <br/>
+        <br/>
+        <br/>
+      <% end %>
+    </div>
+
+  </div>
+</div>

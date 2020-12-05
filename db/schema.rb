@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_03_182251) do
+ActiveRecord::Schema.define(version: 2020_12_04_050524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -155,6 +155,23 @@ ActiveRecord::Schema.define(version: 2020_12_03_182251) do
     t.index ["user_id"], name: "index_churches_on_user_id"
   end
 
+  create_table "subscription_profiles", force: :cascade do |t|
+    t.bigint "subscription_id"
+    t.bigint "user_id", null: false
+    t.string "stripe_customer_id"
+    t.string "stripe_card_id"
+    t.string "stripe_subscription_id"
+    t.integer "consumed_stream_size"
+    t.integer "consumed_targets"
+    t.integer "consumed_video_storage"
+    t.integer "consumed_viewer_count"
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["subscription_id"], name: "index_subscription_profiles_on_subscription_id"
+    t.index ["user_id"], name: "index_subscription_profiles_on_user_id"
+  end
+
   create_table "subscriptions", force: :cascade do |t|
     t.string "name"
     t.integer "targets"
@@ -204,4 +221,6 @@ ActiveRecord::Schema.define(version: 2020_12_03_182251) do
   add_foreign_key "admin_simulcast_targets", "admin_live_streams"
   add_foreign_key "admin_websites", "churches"
   add_foreign_key "churches", "users"
+  add_foreign_key "subscription_profiles", "subscriptions"
+  add_foreign_key "subscription_profiles", "users"
 end

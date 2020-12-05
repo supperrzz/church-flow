@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   get 'embed/:embed_code' => 'embed#index'
 
   authenticated :user, lambda { |u| u.admin? } do
+    # Only allow admin to delete it's profile
+    delete 'settings/profile' => 'settings#destroy'
+
     namespace :admin, path: '/' do
 
       root to: 'dashboard#index', as: :root
@@ -43,16 +46,16 @@ Rails.application.routes.draw do
       get 'church/edit', as: :edit_church
       patch 'settings/church_update', as: :update_my_church
       patch 'settings/subdomain_update', as: :update_my_subdomain
-    end 
+
+      # Payment methods APIs
+      resources :payment_methods
+    end
   end
 
+  # User settings
   get 'settings/profile'
   patch 'settings/profile' => 'settings#save_profile'
 
-  # Only allow admin to delete it's profile
-  authenticated :user, lambda { |u| u.admin? } do
-    delete 'settings/profile' => 'settings#destroy'
-  end
 
   devise_for :users, controllers: {
     registrations: 'user/registrations'

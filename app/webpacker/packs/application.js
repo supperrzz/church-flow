@@ -6,6 +6,11 @@
 require('@rails/ujs').start();
 require('turbolinks').start();
 require('@rails/activestorage').start();
+
+// Exposing jquery to outside.
+import jquery from 'jquery';
+window.$ = window.jquery = jquery;
+
 require('../src/javascripts/channels');
 require('bootstrap');
 const clipboard = require('clipboard');
@@ -15,6 +20,7 @@ import '@fortawesome/fontawesome-free/js/all';
 // Added Cocoon
 require('../src/javascripts/cocoon');
 require('../src/javascripts/sb_admin');
+require('../src/javascripts/stripe');
 
 // Activate Feather icons
 const feather = require('feather-icons');

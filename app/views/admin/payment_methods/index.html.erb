@@ -1,0 +1,30 @@
+<%= render partial: 'shared/header', locals: {
+  title: 'Payment Methods',
+  icon: 'fa-dollar-sign' } %>
+
+<div class="container-fluid mt-n20">
+  <div class="card pl-4 pr-4 pt-4 mb-5">
+    <div class="col-md-12">
+      <%= link_to 'Add New Card', new_admin_payment_method_path, class: 'btn btn-primary' %>
+    </div>
+    <br/>
+    <br/>
+    <div class="col-md-12">
+      <% if @cards.length > 0 %>
+        <% @cards.each do |card| %>
+          <div class="card col-md-4" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title"><%= card.brand %> ending with <%= card.last4 %></h5>
+              <p class="card-text">Expiring on <%= card.exp_month %>/<%= card.exp_year %></p>
+              <%= link_to('Delete Card', admin_payment_method_path(id: card.id), class: 'btn btn-danger') %>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <p>No cards</p>
+      <% end %>
+    </div>
+    <br/>
+    <br/>
+  </div>
+</div>

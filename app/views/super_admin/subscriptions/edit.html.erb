@@ -13,6 +13,10 @@
           <%= f.text_field :price, class: 'form-control', disabled: true %>
         </div>
         <div class="form-group">
+          <%= f.label :live_streams %>
+          <%= f.number_field :live_streams, class: 'form-control' %>
+        </div>
+        <div class="form-group">
           <%= f.label :stream_size %>
           <%= f.number_field :stream_size, class: 'form-control' %>
         </div>

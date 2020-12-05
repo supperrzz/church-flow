@@ -2,7 +2,7 @@ class SuperAdmin::SubscriptionsController < ApplicationController
   before_action :fetch_subscription, only: %i[edit update]
 
   def index
-    @subscriptions = Subscription.all
+    @subscriptions = Subscription.order(:id)
   end
 
   def new

@@ -15,10 +15,10 @@
           <th scope="col">Name</th>
           <th scope="col">Cost</th>
           <th scope="col">Live Streams</th>
-          <th scope="col">Stream Sizes</th>
-          <th scope="col">Viewer Count</th>
+          <th scope="col">Stream Sizes (total hours/month)</th>
+          <th scope="col">Viewer Count()</th>
           <th scope="col">Targets per Live Streams</th>
-          <th scope="col">Video Storage</th>
+          <th scope="col">Video Storage (in GBs)</th>
           <th scope="col">Active</th>
           <th colspan="3"></th>
         </tr>
@@ -26,14 +26,13 @@
         <tbody>
         <% @subscriptions.each do |subscription| %>
           <tr>
-            <th scope="row"><%= subscription.id %></th>
+            <td><%= subscription.id %></td>
             <td><%= subscription.name %></td>
             <td><%= number_to_currency(subscription.price) %></td>
             <td><%= subscription.live_streams %></td>
             <td><%= subscription.stream_size %></td>
             <td><%= subscription.viewer_count %></td>
             <td><%= subscription.targets %></td>
-            <td><%= subscription.video_storage %></td>
             <td><%= subscription.video_storage %></td>
             <td><%= subscription.active %></td>
             <td><%= link_to 'Edit', edit_super_admin_subscription_path(subscription) %></td>
