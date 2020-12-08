@@ -29,7 +29,7 @@ class Admin::SubscriptionsController < ApplicationController
       end
       redirect_to admin_payment_methods_path
     else
-      flash[:error] = 'No cards added yet. Please'
+      flash[:error] = 'No cards added yet. Please add card.'
       redirect_to new_admin_payment_method_path
     end
   end

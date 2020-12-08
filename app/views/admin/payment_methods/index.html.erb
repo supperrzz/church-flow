@@ -4,7 +4,7 @@
 
 <div class="container-fluid mt-n20">
   <div class="card pl-4 pr-4 pt-4 mb-5">
-    <% if @subscription_profile.active %>
+    <% if @subscription_profile&.active %>
       <div class="col-md-12">
         <h2>Subscription Settings</h2>
         <h3><%= @subscription_profile.subscription.name %></h3>
