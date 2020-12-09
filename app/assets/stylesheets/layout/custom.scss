@@ -101,5 +101,11 @@ button:focus{
 	}
 }
 
+.save-cards{
+	&. card{
+		min-height:210px;
+	}
+}
+
 
 
