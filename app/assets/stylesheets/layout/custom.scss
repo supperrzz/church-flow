@@ -84,25 +84,27 @@ button:focus{
 	overflow-y:auto;
 	overflow-x:hidden;
 }
-.video-placeholder{
-	background:#f9f9f9;
-	padding-bottom:56.25%;
-	& .up-video{
-		position: absolute;
+.video-placeholder {
+  background: #f9f9f9;
+  padding-bottom: 56.25%;
+
+  & .up-video {
+    position: absolute;
     width: 100%;
     text-align: center;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-  & .fa-video{
-    	font-size:20px;
+
+    & .fa-video {
+      font-size: 20px;
     }
-	}
+  }
 }
 
 .save-cards{
-	&. card{
+	& .card{
 		min-height:210px;
 	}
 }
