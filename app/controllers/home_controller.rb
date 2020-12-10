@@ -28,7 +28,7 @@ class HomeController < ApplicationController
   def fetch_signed_url
     if current_user.present?
       timestamp = Time.now.to_i
-      key = "user/#{current_user.id}/mediasermon/#{timestamp}_#{params[:filename]}"
+      key = "user/#{current_user.id}/mediasermon/#{timestamp}"
       obj = s3_bucket.object(key)
       render json: { url: obj.presigned_url(:put), method: 'put' } # fields: params.permit(:filename) }
     else
