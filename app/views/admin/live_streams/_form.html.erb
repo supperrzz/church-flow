@@ -26,7 +26,7 @@
           </div>
           <div class="actions mt-4">
             <%= form.submit 'Create live Stream', class: 'btn btn-primary' %>
-            <%= form.submit 'Cancel', class: 'btn btn-outline-primary px-4 ml-md-4' %>
+            <%= link_to "Cancel", admin_live_streams_path, class: 'btn btn-outline-primary px-4 ml-md-4' %>
           </div>
         <% end %>
       </div>

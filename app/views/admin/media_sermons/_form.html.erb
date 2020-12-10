@@ -29,8 +29,7 @@
                   </script>
                 <% end %>
 <!--                <iframe width="100%" height="250" src="https://www.youtube.com/embed/9xwazD5SyVg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>-->
-                <div class="btn btn-primary mt-3">Choose File</div>
-                <%= form.file_field :video, accept: 'video/mp4', class: 'mt-2'  %>
+                <%= form.file_field :video, accept: 'video/mp4', class: 'custom-file-input-button mt-3 w-100'  %>
               </div>
             </div>
           <% end %>
@@ -40,7 +39,7 @@
               <br/>
               <div class="video-placeholder position-relative">
                   <div class="up-video">
-                    <i class="fa fa-video text-blue"></i>
+                    <i class="fa fa-image text-blue text-lg"></i>
                   </div>
               </div>
 <!--              <iframe width="100%" height="250" src="https://www.youtube.com/embed/9xwazD5SyVg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>-->
@@ -48,13 +47,11 @@
                 <%= image_tag(admin_media_sermon.get_thumbnail_url, height: 100) %>
                 <br/>
               <% end %>
-              <div class="btn btn-primary mt-3">Choose File</div>
-              <%= form.file_field :thumbnail, accept: 'image/*', class: 'mt-2'  %>
+              <%= form.file_field :thumbnail, accept: 'image/*', class: 'custom-file-input-button mt-3 w-100'  %>
               <br/>
             </div>
           </div>
         </div>
-        <a href="#" class="text-blue"><u>Video url</u></a>
         <div class="form-group">
           <%= form.label :title, class: 'text-black font-weight-500 mt-3' %>
           <%= form.text_field :title, class: 'form-control' %>
