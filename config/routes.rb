@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   get 'embed/:embed_code' => 'embed#index'
 
+  post 's3/fetch_signed_url' => 'home#fetch_signed_url'
+
   authenticated :user, lambda { |u| u.admin? } do
     # Only allow admin to delete it's profile
     delete 'settings/profile' => 'settings#destroy'

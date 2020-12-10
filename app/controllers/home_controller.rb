@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class HomeController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
   def index
     if current_user
       if current_user.super_admin?
@@ -21,5 +23,27 @@ class HomeController < ApplicationController
       # else
       # new_user_session_path
     end
+  end
+
+  def fetch_signed_url
+    if current_user.present?
+      timestamp = Time.now.to_i
+      key = "user/#{current_user.id}/mediasermon/#{timestamp}_#{params[:filename]}"
+      obj = s3_bucket.object(key)
+      render json: { url: obj.presigned_url(:put), method: 'put' } # fields: params.permit(:filename) }
+    else
+      render json: { error: 'No user found' }, status: 404
+    end
+  end
+
+  private
+
+  def s3_bucket
+    s3 = Aws::S3::Resource.new(
+      region: 'us-west-1',
+      access_key_id: ENV['access_key_id'],
+      secret_access_key: ENV['secret_access_key']
+    )
+    s3.bucket('sda-live')
   end
 end

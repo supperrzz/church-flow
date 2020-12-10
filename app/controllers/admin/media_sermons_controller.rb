@@ -29,9 +29,15 @@ class Admin::MediaSermonsController < ApplicationController
     @admin_media_sermon = current_user.church.media_sermons.new(create_admin_media_sermon_params)
 
     if @admin_media_sermon.save
-      obj = ThumbnailGenerate.new
-      obj.create(@admin_media_sermon)
-      # @admin_media_sermon.generate_hls_video if create_admin_media_sermon_params[:video].present?
+      video_json = JSON.parse(params[:video])
+      if video_json[0].present?
+        video_data = build_media_json(video_json[0])
+        if @admin_media_sermon.update video_data: video_data
+          obj = ThumbnailGenerate.new
+          obj.create(@admin_media_sermon)
+        end
+        # @admin_media_sermon.generate_hls_video if create_admin_media_sermon_params[:video].present?
+      end
       redirect_to @admin_media_sermon, notice: 'Media sermon was successfully created.'
     else
       render :new
@@ -41,6 +47,15 @@ class Admin::MediaSermonsController < ApplicationController
   # PATCH/PUT /admin/media_sermons/1
   def update
     if @admin_media_sermon.update(update_admin_media_sermon_params)
+      video_json = JSON.parse(params[:video])
+      if video_json[0].present?
+        video_data = build_media_json(video_json[0])
+        if @admin_media_sermon.update video_data: video_data
+          obj = ThumbnailGenerate.new
+          obj.create(@admin_media_sermon)
+        end
+        # @admin_media_sermon.generate_hls_video if create_admin_media_sermon_params[:video].present?
+      end
       # @admin_media_sermon.generate_hls_video if update_admin_media_sermon_params[:video].present?
       redirect_to admin_media_sermons_url(view: params[:view] || 'grid'), notice: 'Media sermon was successfully updated.'
     else
@@ -69,5 +84,17 @@ class Admin::MediaSermonsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def update_admin_media_sermon_params
     params.require(:admin_media_sermon).permit(:title, :speaker, :scripture, :church_id, :thumbnail, :published)
+  end
+
+  def build_media_json(file)
+    {
+      id: "#{file['successful'][0]['uploadURL'].split('amazonaws.com/')[1]}",
+      storage: 'store',
+      metadata: {
+        size: file['successful'][0]['size'],
+        filename: file['successful'][0]['name'],
+        mime_type: file['successful'][0]['meta']['type']
+      }
+    }.to_json
   end
 end

@@ -1,4 +1,4 @@
-<%= form_with(class: 'form', model: admin_media_sermon, local: true) do |form| %>
+<%= form_with(class: 'form', model: admin_media_sermon, id: 'video_library_form', local: true) do |form| %>
   <div class="card mb-5">
     <div class="card-body">
         <div class="row">
@@ -29,8 +29,11 @@
                   </script>
                 <% end %>
 <!--                <iframe width="100%" height="250" src="https://www.youtube.com/embed/9xwazD5SyVg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>-->
-                <div class="btn btn-primary mt-3">Choose File</div>
-                <%= form.file_field :video, accept: 'video/mp4', class: 'mt-2'  %>
+                <div class="UppyForm mt-3">
+                  <div class="btn btn-primary mt-3">Choose File</div>
+                  <%= form.file_field :video, accept: 'video/mp4', class: 'mt-2'  %>
+                </div>
+                <div class="uppy_progress_bar"></div>
               </div>
             </div>
           <% end %>
