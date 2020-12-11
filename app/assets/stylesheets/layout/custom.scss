@@ -69,6 +69,10 @@ button:focus {
 .bg-zircon {
   background: $zircon;
 }
+.card.ht{
+  height:82vh;
+  border-bottom:solid 10px #fff;
+}
 .card.card-header-actions {
   & .card-header {
     padding: 1rem 0.9rem;
@@ -91,7 +95,12 @@ button:focus {
   border-radius: 20px;
 }
 .video-library-list {
-  max-height: 640px;
+  max-height: 70vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.video-library-list-view{
+  max-height: 63vh;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -127,4 +136,10 @@ button:focus {
 	padding: 0.25rem 0.5rem;
   line-height: 1.5;
   border: 1px solid transparent;
+}
+.tbl-header th{
+  width:20%
+}
+.tbl-content td{
+  width:20%
 }
