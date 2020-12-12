@@ -40,7 +40,7 @@ class User < ApplicationRecord
 
   has_one :church, dependent: :destroy
   has_one :website, through: :church
-  has_many :admin_media_sermons, class_name: 'Admin::MediaSermon', through: :church
+  has_many :media_sermons, class_name: 'Admin::MediaSermon', through: :church
   has_one :subscription_profile, dependent: :destroy
 
   # has_one_attached :profile_picture
