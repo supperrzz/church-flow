@@ -28,9 +28,6 @@
       <% else %>
         <h3 id="no-live-stream">Stream is offline.</h3>
       <% end %>
-      <div id="embed-code-container">
-        <%= render partial: 'admin/live_streams/embed_code_partial', locals: { embed_code: @admin_live_stream.embed_code } %>
-      </div>
     </div>
 
     <div class="col-md-6">
@@ -60,64 +57,14 @@
         <strong>Stream Key:</strong>
         <%= @admin_live_stream.mux_stream_key %>
       </p>
-
-      <div class="row">
-        <div class="col-6">
-          <h3 class="indigo-text mb-3">Targets</h3>
-        </div>
-        <div class="col-6">
-          
-        </div>
+      <div id="embed-code-container">
+        <%= render partial: 'admin/live_streams/embed_code_partial', locals: { embed_code: @admin_live_stream.embed_code } %>
       </div>
-      <br/>
-
-      <div class="row">
-        <div class="col-md-4">
-          <div class="shadow rounded p-3">
-            <div class="form-group">
-              <label class="text-black font-weight-500">Youtube</label>
-            </div>
-            <div class="form-group">
-              <label class="text-black font-weight-500">Platform</label>
-              <input class="form-control" type="text" value="">
-            </div>
-            <div class="form-group">
-              <label class="text-black font-weight-500">Url</label>
-              <textarea class="form-control"></textarea>
-            </div>
-            <div class="form-group">
-              <label class="text-black font-weight-500">Stream Key</label>
-              <input class="form-control" type="text" value="">
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="shadow rounded p-3">
-            <div class="form-group">
-              <label class="text-black font-weight-500">Facebook</label>
-            </div>
-            <div class="form-group">
-              <label class="text-black font-weight-500">Platform</label>
-              <input class="form-control" type="text" value="">
-            </div>
-            <div class="form-group">
-              <label class="text-black font-weight-500">Url</label>
-              <textarea class="form-control"></textarea>
-            </div>
-            <div class="form-group">
-              <label class="text-black font-weight-500">Stream Key</label>
-              <input class="form-control" type="text" value="">
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="shadow rounded p-3 h-100">
-            <%= link_to 'Add Target', admin_new_target_path, class: 'd-flex align-items-center justify-content-center h-100 text-decoration-none' %>
-          </div>
-        </div>
-      </div>
-
-      <!-- <table class="table">
+    </div>
+  </div>
+   <div class="row mt-3">
+     <%= link_to 'New Target', admin_new_target_path, class: 'btn btn-primary' %>
+     <table class="table mt-3">
         <thead>
         <tr>
           <th>Platform</th>
@@ -135,17 +82,16 @@
             <td><%= simulcast_target.stream_key %></td>
             <td>
               <%= link_to 'Delete', admin_destroy_target_path(target_id: simulcast_target.id), class: 'btn btn-danger',
-              data: { confirm: 'Are you sure ?' }, method: :delete %>
+                          data: { confirm: 'Are you sure ?' }, method: :delete %>
             </td>
           </tr>
         <% end %>
         </tbody>
-      </table> -->
-    </div>
-  </div>
-    <div class="actions">
-      <input type="submit" value="Save" class="btn btn-primary px-4">
-      <input type="submit" value="Cancel" class="btn btn-outline-primary px-4 ml-md-4">
-    </div>
+      </table>
+   </div>
+<!--    <div class="actions">-->
+<!--      <input type="submit" value="Save" class="btn btn-primary px-4">-->
+<!--      <input type="submit" value="Cancel" class="btn btn-outline-primary px-4 ml-md-4">-->
+<!--    </div>-->
   </div>
 </div>

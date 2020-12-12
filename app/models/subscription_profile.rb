@@ -4,10 +4,11 @@
 #
 #  id                     :bigint           not null, primary key
 #  active                 :boolean
-#  consumed_stream_size   :integer
-#  consumed_targets       :integer
-#  consumed_video_storage :integer
-#  consumed_viewer_count  :integer
+#  consumed_live_streams  :integer          default(0)
+#  consumed_stream_size   :integer          default(0)
+#  consumed_targets       :integer          default(0)
+#  consumed_video_storage :integer          default(0)
+#  consumed_viewer_count  :integer          default(0)
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  stripe_card_id         :string

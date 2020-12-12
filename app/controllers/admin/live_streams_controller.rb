@@ -1,5 +1,7 @@
 class Admin::LiveStreamsController < ApplicationController
+  before_action :get_subscription
   before_action :set_admin_live_stream, only: %i[show destroy new_target create_target destroy_target]
+  before_action :check_if_creation_allowed, only: %i[new create]
 
   layout "admin"
 
@@ -9,13 +11,16 @@ class Admin::LiveStreamsController < ApplicationController
   end
 
   # GET /admin/live_stream/1
-  def show; end
+  def show
+
+  end
 
   # GET /admin/live_stream/new
   def new
     @admin_live_stream = current_user.church.live_streams.new
-    @admin_live_stream.admin_simulcast_targets.new(platform: 'Facebook')
-    @admin_live_stream.admin_simulcast_targets.new(platform: 'Youtube')
+    (1..@subscription.targets).each do |_t|
+      @admin_live_stream.admin_simulcast_targets.new(platform: '')
+    end
   end
 
   # POST /admin/live_streams
@@ -33,10 +38,14 @@ class Admin::LiveStreamsController < ApplicationController
             success = false
             break
           end
+          # Increase consumed_live_streams subscription
+          @subscription_profile.increment!(:consumed_targets)
           target.update(mux_simulcast_id: target_resp.data.id)
         end
         if success
           @admin_live_stream.update mux_stream_id: mux_live_stream.data.id, mux_stream_key: mux_live_stream.data.stream_key
+          # Increase consumed_live_streams subscription
+          @subscription_profile.increment!(:consumed_live_streams)
           redirect_to @admin_live_stream, notice: 'Live stream was successfully created.'
         else
           @admin_live_stream.destroy
@@ -65,7 +74,12 @@ class Admin::LiveStreamsController < ApplicationController
   end
 
   def new_target
-    @target = @admin_live_stream.admin_simulcast_targets.new
+    if @subscription.targets >= @subscription_profile.consumed_targets
+      @target = @admin_live_stream.admin_simulcast_targets.new
+    else
+      flash[:error] = 'More targets not available.'
+      redirect_back(fallback_location: admin_live_streams_path)
+    end
   end
 
   def create_target
@@ -74,6 +88,8 @@ class Admin::LiveStreamsController < ApplicationController
       live_stream = MuxLiveStream.new
       target_resp = live_stream.add_simulcast_target(@admin_live_stream.mux_stream_id, @target.id, @target.url, @target.stream_key)
       if target_resp && target_resp&.data&.id
+        # Increase consumed_live_streams subscription
+        @subscription_profile.increment!(:consumed_targets)
         @target.update(mux_simulcast_id: target_resp.data.id)
         flash[:notice] = 'Target was successfully created.'
         redirect_to @admin_live_stream
@@ -122,5 +138,26 @@ class Admin::LiveStreamsController < ApplicationController
   def admin_simulcast_targets_params
     params.require(:admin_simulcast_target)
           .permit(:id, :platform, :url, :stream_key)
+  end
+
+  def check_if_creation_allowed
+    if @subscription_profile&.active
+      consumed_live_streams = @subscription_profile.consumed_live_streams
+      live_stream_limit = @subscription.live_streams
+      if consumed_live_streams >= live_stream_limit
+        flash[:error] = 'You have consumed the limits in your plan.'
+        redirect_back(fallback_location: admin_live_streams_path)
+      end
+    else
+      flash[:error] = 'You need to subscribe to a plan to add live streams.'
+      redirect_to admin_payment_methods_path
+    end
+  end
+
+  def get_subscription
+    if current_user.subscription_profile&.active
+      @subscription_profile = current_user.subscription_profile
+      @subscription = current_user.subscription_profile.subscription
+    end
   end
 end

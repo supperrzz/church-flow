@@ -40,7 +40,8 @@ class User < ApplicationRecord
 
   has_one :church, dependent: :destroy
   has_one :website, through: :church
-  has_one :subscription_profile
+  has_one :subscription_profile, dependent: :destroy
+
   # has_one_attached :profile_picture
   include ImageUploader::Attachment(:profile_picture)
 

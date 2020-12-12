@@ -16,13 +16,14 @@
             <%#= form.label :playback_policy %>
             <%#= form.select :playback_policy, Admin::LiveStream::PLAYBACK_POLICIES, {}, class: 'form-control', validate: false %>
           </div>-->
+          <h2>Targets</h2>
           <div class="row">
-            <%= form.fields_for :admin_simulcast_targets do |target| %>
+            <%= form.fields_for :admin_simulcast_targets, validate: false do |target| %>
               <%= render 'admin/live_streams/admin_simulcast_target_fields', f: target %>
             <% end %>
-            <div class="col-md-12 links mt-4">
-              <%= link_to_add_association 'Add target', form, :admin_simulcast_targets, class: 'btn btn-primary' %>
-            </div>
+<!--            <div class="col-md-12 links mt-4">-->
+              <%#= link_to_add_association 'Add target', form, :admin_simulcast_targets, class: 'btn btn-primary' %>
+<!--            </div>-->
           </div>
           <div class="actions mt-4">
             <%= form.submit 'Create live Stream', class: 'btn btn-primary' %>
