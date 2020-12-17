@@ -2,7 +2,8 @@
   <div class=" item col-md-6 col-lg-4 mb-4">
     <div class="card card-header-actions shadow-none">
       <div class="card-header indigo-text">
-        <%= link_to  sermon.title.truncate(30), edit_admin_media_sermon_path(sermon), class: "text-decoration-none" %>
+        <%= link_to sermon.title.truncate(30), edit_admin_media_sermon_path(sermon), class: "text-decoration-none",
+        title: sermon.title %>
         <div class="dropdown no-caret">
           <button class="actions-dd border-0 dropdown-toggle py-1 px-2 rounded" id="dropdownMenuButton" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Actions <i class="fa fa-caret-down ml-2" aria-hidden="true"></i>
@@ -59,7 +60,7 @@
             <label class="custom-control-label blue-text font-weight-500" for="<%= sermon.id %>">Publish</label>
           </div>
         <% end %>
-        <small class="m-0 indigo-text font-weight-500">Upload Date: <%= sermon.created_at.strftime("%m/%d/%Y") %></small>
+        <small class="m-0 text-muted font-weight-500">Upload Date: <%= sermon.created_at.strftime("%m/%d/%Y") %></small>
       </div>
     </div>
   </div>
@@ -80,7 +81,7 @@
         Nil
       <% end %>
     </td>
-    <td class="text-black"><%= sermon.title.truncate(30) %></td>
+    <td class="text-black" title="<%= sermon.title if sermon.title.length > 50 %>"><%= sermon.title.truncate(50) %></td>
     <td class="text-black">
       <%= form_with(class: 'form', model: sermon, url: admin_media_sermon_path(id: sermon.id, view: view), local: true) do |form| %>
         <div class="custom-control custom-switch">
