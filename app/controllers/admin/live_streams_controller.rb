@@ -18,9 +18,9 @@ class Admin::LiveStreamsController < ApplicationController
   # GET /admin/live_stream/new
   def new
     @admin_live_stream = current_user.church.live_streams.new
-    (1..@subscription.targets).each do |_t|
-      @admin_live_stream.admin_simulcast_targets.new(platform: '')
-    end
+    # (1..@subscription.targets).each do |_t|
+    #   @admin_live_stream.admin_simulcast_targets.new(platform: '')
+    # end
   end
 
   # POST /admin/live_streams
@@ -64,9 +64,13 @@ class Admin::LiveStreamsController < ApplicationController
 
   # DELETE /admin/live_streams/1
   def destroy
+    targets_count = @admin_live_stream.admin_simulcast_targets.count
     live_stream = MuxLiveStream.new
     delete_resp = live_stream.delete(@admin_live_stream)
     if delete_resp
+      # decrease consumed_live_streams subscription
+      @subscription_profile.decrement!(:consumed_live_streams)
+      @subscription_profile.decrement!(:consumed_targets, targets_count)
       redirect_to admin_live_streams_url, notice: 'Live stream was successfully destroyed.'
     else
       redirect_to admin_live_streams_path, error: 'Something went wrong.'
@@ -74,12 +78,12 @@ class Admin::LiveStreamsController < ApplicationController
   end
 
   def new_target
-    if @subscription.targets >= @subscription_profile.consumed_targets
+    # if @subscription.targets >= @subscription_profile.consumed_targets
       @target = @admin_live_stream.admin_simulcast_targets.new
-    else
-      flash[:error] = 'More targets not available.'
-      redirect_back(fallback_location: admin_live_streams_path)
-    end
+    # else
+    #   flash[:error] = 'More targets not available.'
+    #   redirect_back(fallback_location: admin_live_streams_path)
+    # end
   end
 
   def create_target
@@ -88,7 +92,7 @@ class Admin::LiveStreamsController < ApplicationController
       live_stream = MuxLiveStream.new
       target_resp = live_stream.add_simulcast_target(@admin_live_stream.mux_stream_id, @target.id, @target.url, @target.stream_key)
       if target_resp && target_resp&.data&.id
-        # Increase consumed_live_streams subscription
+        # Increase consumed_targets subscription
         @subscription_profile.increment!(:consumed_targets)
         @target.update(mux_simulcast_id: target_resp.data.id)
         flash[:notice] = 'Target was successfully created.'
@@ -109,8 +113,13 @@ class Admin::LiveStreamsController < ApplicationController
     if @target.present?
       # live_stream = MuxLiveStream.new
       # live_stream.delete_simulcast_target(@admin_live_stream.mux_stream_id, @target.mux_simulcast_id)
-      @target.destroy
-      flash.now[:success] = 'Target deleted'
+      if @target.destroy
+        # decrease consumed_targets subscription
+        @subscription_profile.decrement!(:consumed_targets)
+        flash.now[:success] = 'Target deleted'
+      else
+        flash.now[:error] = 'Target not deleted.'
+      end
     else
       flash.now[:error] = 'No target found'
     end
@@ -141,23 +150,26 @@ class Admin::LiveStreamsController < ApplicationController
   end
 
   def check_if_creation_allowed
-    if @subscription_profile&.active
-      consumed_live_streams = @subscription_profile.consumed_live_streams
-      live_stream_limit = @subscription.live_streams
-      if consumed_live_streams >= live_stream_limit
-        flash[:error] = 'You have consumed the limits in your plan.'
-        redirect_back(fallback_location: admin_live_streams_path)
-      end
-    else
-      flash[:error] = 'You need to subscribe to a plan to add live streams.'
-      redirect_to admin_payment_methods_path
-    end
+    true
+    # if @subscription_profile&.active
+    #   consumed_live_streams = @subscription_profile.consumed_live_streams
+    #   live_stream_limit = @subscription.live_streams
+    #   if consumed_live_streams >= live_stream_limit
+    #     flash[:error] = 'You have consumed the limits in your plan.'
+    #     redirect_back(fallback_location: admin_live_streams_path)
+    #   end
+    # else
+    #   flash[:error] = 'You need to subscribe to a plan to add live streams.'
+    #   redirect_to admin_payment_methods_path
+    # end
   end
 
   def get_subscription
     if current_user.subscription_profile&.active
       @subscription_profile = current_user.subscription_profile
       @subscription = current_user.subscription_profile.subscription
+    else
+      @subscription_profile = SubscriptionProfile.create(user: current_user) if current_user.subscription_profile.blank?
     end
   end
 end

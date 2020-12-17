@@ -7,7 +7,7 @@
 #  consumed_live_streams  :integer          default(0)
 #  consumed_stream_size   :integer          default(0)
 #  consumed_targets       :integer          default(0)
-#  consumed_video_storage :integer          default(0)
+#  consumed_video_storage :bigint           default(0)
 #  consumed_viewer_count  :integer          default(0)
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null

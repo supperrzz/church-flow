@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_12_065212) do
+ActiveRecord::Schema.define(version: 2020_12_12_212434) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -163,7 +163,7 @@ ActiveRecord::Schema.define(version: 2020_12_12_065212) do
     t.string "stripe_subscription_id"
     t.integer "consumed_stream_size", default: 0
     t.integer "consumed_targets", default: 0
-    t.integer "consumed_video_storage", default: 0
+    t.bigint "consumed_video_storage", default: 0
     t.integer "consumed_viewer_count", default: 0
     t.boolean "active"
     t.datetime "created_at", precision: 6, null: false
