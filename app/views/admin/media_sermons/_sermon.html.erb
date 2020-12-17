@@ -2,7 +2,7 @@
   <div class=" item col-md-6 col-lg-4 mb-4">
     <div class="card card-header-actions shadow-none">
       <div class="card-header indigo-text">
-        <%= sermon.title %>
+        <%= link_to  sermon.title.truncate(30), edit_admin_media_sermon_path(sermon), class: "text-decoration-none" %>
         <div class="dropdown no-caret">
           <button class="actions-dd border-0 dropdown-toggle py-1 px-2 rounded" id="dropdownMenuButton" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Actions <i class="fa fa-caret-down ml-2" aria-hidden="true"></i>
@@ -80,7 +80,7 @@
         Nil
       <% end %>
     </td>
-    <td class="text-black"><%= sermon.title %></td>
+    <td class="text-black"><%= sermon.title.truncate(30) %></td>
     <td class="text-black">
       <%= form_with(class: 'form', model: sermon, url: admin_media_sermon_path(id: sermon.id, view: view), local: true) do |form| %>
         <div class="custom-control custom-switch">
@@ -89,7 +89,7 @@
         </div>
       <% end %>
     </td>
-    <td class="text-black">Dec 3, 2020</td>
+    <td class="text-black"><%= sermon.created_at.strftime("%m/%d/%Y") %></td>
     <td>
       <% if sermon.video.present? %>
         <a class="mr-3 clipboard-copy-btn" data-clipboard-text="<%= sermon.get_video_url %>">

@@ -34,7 +34,7 @@
   border-radius: 0.25rem;
   margin-right: 0.5rem;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-  border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   color: #fff;
   border-color: #4878fc;
   display: inline-flex;
@@ -69,8 +69,8 @@ button:focus {
 .bg-zircon {
   background: $zircon;
 }
-.card.ht{
-  border-bottom:solid 10px #fff;
+.card.ht {
+  border-bottom: solid 10px #fff;
 }
 .card.card-header-actions {
   & .card-header {
@@ -98,7 +98,7 @@ button:focus {
   overflow-y: auto;
   overflow-x: hidden;
 }
-.video-library-list-view{
+.video-library-list-view {
   max-height: 63vh;
   overflow-y: auto;
   overflow-x: hidden;
@@ -125,20 +125,23 @@ button:focus {
     min-height: 210px;
   }
 }
-.uppy-FileInput-btn{
-	background: #4878fc;
-	color:#fff;
-	border:none;
-	font-size:0.875rem;
-	text-transform: capitalize;
-	border-radius: 0.25rem;
-	padding: 0.25rem 0.5rem;
+.uppy-FileInput-btn {
+  background: #4878fc;
+  color: #fff;
+  border: none;
+  font-size: 0.875rem;
+  text-transform: capitalize;
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.5rem;
   line-height: 1.5;
   border: 1px solid transparent;
 }
-.tbl-header th{
-  width:20%
+.uppy-ProgressBar {
+  background: #eeeeee;
 }
-.tbl-content td{
-  width:20%
+.tbl-header th {
+  width: 20%;
+}
+.tbl-content td {
+  width: 20%;
 }
