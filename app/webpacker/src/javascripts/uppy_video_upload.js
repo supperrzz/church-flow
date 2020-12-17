@@ -3,7 +3,7 @@ window.setupVideoUploadUppy = function () {
     const Uppy = require('@uppy/core')
     const Form = require('@uppy/form')
     const FileInput = require('@uppy/file-input')
-    const ProgressBar = require('@uppy/progress-bar')
+    const StatusBar = require('@uppy/status-bar')
     const AwsS3 = require('@uppy/aws-s3')
     const ms = require('ms')
 
@@ -51,10 +51,11 @@ window.setupVideoUploadUppy = function () {
                     };
                 });
         }
-    }).use(ProgressBar, {
+    }).use(StatusBar, {
         target: '.uppy_progress_bar',
+        hideUploadButton: true,
         hideAfterFinish: false
-    }).use(Form, {
+      }).use(Form, {
         target: '#video_library_form',
         resultName: 'video',
         getMetaFromForm: false,
@@ -64,7 +65,10 @@ window.setupVideoUploadUppy = function () {
         triggerUploadOnSubmit: false
     }).use(FileInput, {
         target: '.UppyForm',
-        replaceTargetContent: true
+        replaceTargetContent: true,
+        strings: {
+          chooseFiles: 'Choose files'
+        }
     })
 
     uppy.on('upload-success', (file, response) => {

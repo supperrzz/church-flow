@@ -951,6 +951,17 @@
     "@uppy/utils" "^3.2.5"
     preact "8.2.9"
 
+"@uppy/status-bar@^1.8.0":
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/@uppy/status-bar/-/status-bar-1.8.0.tgz#6db20146f65701a7dfaeeb28dd84b7113f5f26ac"
+  integrity sha512-l9CG8i47dWz4afZm+XjjSjqbVGkW6oEPA0hqyWhqi2ExN6sTt47mnIXwBtPEr3ZrYBjqQeeODDnQieyeKTYA6A==
+  dependencies:
+    "@transloadit/prettier-bytes" "0.0.7"
+    "@uppy/utils" "^3.2.5"
+    classnames "^2.2.6"
+    lodash.throttle "^4.1.1"
+    preact "8.2.9"
+
 "@uppy/store-default@^1.2.4":
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/@uppy/store-default/-/store-default-1.2.4.tgz#480f50cbf23f36158557a42b7699da0cf629d368"
@@ -1899,7 +1910,7 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@^2.2.5:
+classnames@^2.2.5, classnames@^2.2.6:
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
   integrity sha512-JR/iSQOSt+LQIWwrwEzJ9uk0xfN3mTVYMwt1Ir5mUcSN6pU+V4zQFFaJsclJbPuAUQH+yfWef6tm7l1quW3C8Q==
