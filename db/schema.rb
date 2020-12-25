@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_12_212434) do
+ActiveRecord::Schema.define(version: 2020_12_25_191512) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -153,6 +153,15 @@ ActiveRecord::Schema.define(version: 2020_12_12_212434) do
     t.datetime "updated_at", precision: 6, null: false
     t.text "logo_data"
     t.index ["user_id"], name: "index_churches_on_user_id"
+  end
+
+  create_table "livestream_stats", force: :cascade do |t|
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.jsonb "data"
+    t.string "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "subscription_profiles", force: :cascade do |t|
