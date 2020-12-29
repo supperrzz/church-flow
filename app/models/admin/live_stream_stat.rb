@@ -6,6 +6,7 @@
 #  asset_created_at     :datetime
 #  asset_duration       :float
 #  delivered_seconds    :float
+#  discarded_at         :datetime
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  admin_live_stream_id :bigint           not null
@@ -14,6 +15,7 @@
 # Indexes
 #
 #  index_admin_live_stream_stats_on_admin_live_stream_id  (admin_live_stream_id)
+#  index_admin_live_stream_stats_on_discarded_at          (discarded_at)
 #
 # Foreign Keys
 #
