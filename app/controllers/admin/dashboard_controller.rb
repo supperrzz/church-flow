@@ -11,10 +11,10 @@ class Admin::DashboardController < ApplicationController
     start_time = Time.now.beginning_of_month
     end_time = Time.now.end_of_month
     query = current_user.admin_live_stream_stats.where(asset_created_at: start_time..end_time)
-    @asset_duration = query.sum(:asset_duration) / 3600.0
+    @asset_duration = (query.sum(:asset_duration) / 3600.0).round(2)
     delivered_seconds = query.sum(:delivered_seconds)
     @visitors = if @asset_duration != 0
-                  delivered_seconds / @asset_duration
+                  (delivered_seconds / @asset_duration).round(2)
                 else
                   0
                 end
