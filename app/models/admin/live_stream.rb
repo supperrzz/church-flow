@@ -32,7 +32,7 @@ class Admin::LiveStream < ApplicationRecord
   has_many :admin_simulcast_targets, class_name: 'Admin::SimulcastTarget',
            foreign_key: :admin_live_stream_id, dependent: :destroy, inverse_of: :admin_live_stream
   has_many :admin_live_stream_stats, class_name: 'Admin::LiveStreamStat',
-           foreign_key: :admin_live_stream_id, dependent: :destroy
+           foreign_key: :admin_live_stream_id, dependent: :destroy, inverse_of: :admin_live_stream
 
   accepts_nested_attributes_for :admin_simulcast_targets, reject_if: :all_blank, allow_destroy: true
 

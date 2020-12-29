@@ -20,5 +20,7 @@
 #  fk_rails_...  (admin_live_stream_id => admin_live_streams.id)
 #
 class Admin::LiveStreamStat < ApplicationRecord
+  include Discard::Model
+
   belongs_to :admin_live_stream, class_name: 'Admin::LiveStream'
 end
