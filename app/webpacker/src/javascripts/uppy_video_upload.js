@@ -7,7 +7,7 @@ window.setupVideoUploadUppy = function () {
     const AwsS3 = require('@uppy/aws-s3')
     const ms = require('ms')
 
-    const uppy = new Uppy({
+    window.uppyObj = new Uppy({
         restrictions: {
             maxNumberOfFiles: 1,
             allowedFileTypes: ['video/mp4']
@@ -15,7 +15,7 @@ window.setupVideoUploadUppy = function () {
         allowMultipleUploads: false,
         autoProceed: true
     })
-    uppy.use(AwsS3, {
+    window.uppyObj.use(AwsS3, {
         timeout: ms('1 minute'),
         getUploadParameters(file) {
             // Send a request to our PHP signing endpoint.
@@ -66,12 +66,13 @@ window.setupVideoUploadUppy = function () {
     }).use(FileInput, {
         target: '.UppyForm',
         replaceTargetContent: true,
+        pretty: false,
         strings: {
           chooseFiles: 'Choose files'
         }
     })
 
-    uppy.on('upload-success', (file, response) => {
+    window.uppyObj.on('upload-success', (file, response) => {
         console.log(response);
         if(response.status === 200) {
             alert('Completed uploaded');
@@ -83,5 +84,13 @@ window.setupVideoUploadUppy = function () {
 $(document).on('turbolinks:load', function() {
     if(document.getElementById('video_library_form')) {
         window.setupVideoUploadUppy();
+    }
+});
+
+
+$(document).on('turbolinks:request-start', function() {
+    if(document.getElementById('video_library_form')) {
+        console.log('Reset input');
+        window.uppyObj.reset();
     }
 });
