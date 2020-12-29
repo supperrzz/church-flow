@@ -41,6 +41,8 @@ class User < ApplicationRecord
   has_one :church, dependent: :destroy
   has_one :website, through: :church
   has_many :media_sermons, class_name: 'Admin::MediaSermon', through: :church
+  has_many :live_streams, class_name: 'Admin::LiveStream', through: :church
+  has_many :admin_live_stream_stats, class_name: 'Admin::LiveStreamStat', through: :live_streams
   has_one :subscription_profile, dependent: :destroy
 
   # has_one_attached :profile_picture

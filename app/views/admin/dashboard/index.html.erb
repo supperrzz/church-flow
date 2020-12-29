@@ -17,24 +17,24 @@
         </div>
         <div class="row mt-3 text-center">
           <div class="col-12 mb-2">
-            <h4>Consumed Stream Size:</h4>
-            <div><%= @subscription_profile.consumed_stream_size %></div>
-          </div>
-          <div class="col-12 mb-2">
-            <h4>Consumed Live Stream:</h4>
-            <div><%= @subscription_profile.consumed_live_streams %></div>
-          </div>
-          <div class="col-12 mb-2">
-            <h4>Consumed Targets:</h4>
-            <div><%= @subscription_profile.consumed_targets %></div>
-          </div>
-          <div class="col-12 mb-2">
-            <h4>Consumed Video Storage:</h4>
-            <div><%= (@subscription_profile.consumed_video_storage / 1024 / 1024 / 1024.0).round(3) %> GB</div>
+            <h4>Consumed Stream Size (in Hours):</h4>
+            <div><%= @asset_duration %> <%= stream_size_limit %></div>
           </div>
           <div class="col-12 mb-2">
             <h4>Consumed Viewer Count:</h4>
-            <div><%= @subscription_profile.consumed_viewer_count %></div>
+            <div><%= @visitors %> <%= viewer_count_limit %></div>
+          </div>
+          <div class="col-12 mb-2">
+            <h4>Consumed Live Stream:</h4>
+            <div><%= @subscription_profile.consumed_live_streams %> <%= live_streams_limit %></div>
+          </div>
+          <div class="col-12 mb-2">
+            <h4>Consumed Targets:</h4>
+            <div><%= @subscription_profile.consumed_targets %> <%= targets_limit %></div>
+          </div>
+          <div class="col-12 mb-2">
+            <h4>Consumed Video Storage:</h4>
+            <div><%= (@subscription_profile.consumed_video_storage / 1024 / 1024 / 1024.0).round(3) %> GB <%= video_storage_limit %></div>
           </div>
         </div>
       </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_29_090503) do
+ActiveRecord::Schema.define(version: 2020_12_29_093744) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,7 +59,9 @@ ActiveRecord::Schema.define(version: 2020_12_29_090503) do
     t.datetime "asset_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "discarded_at"
     t.index ["admin_live_stream_id"], name: "index_admin_live_stream_stats_on_admin_live_stream_id"
+    t.index ["discarded_at"], name: "index_admin_live_stream_stats_on_discarded_at"
   end
 
   create_table "admin_live_streams", force: :cascade do |t|
