@@ -75,7 +75,7 @@
         </thead>
 
         <tbody>
-        <% @admin_live_stream.admin_simulcast_targets.each do |simulcast_target| %>
+        <% @simulcast_targets.each do |simulcast_target| %>
           <tr>
             <td><%= simulcast_target.platform %></td>
             <td><%= simulcast_target.url %></td>

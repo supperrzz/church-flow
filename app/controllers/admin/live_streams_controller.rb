@@ -7,12 +7,12 @@ class Admin::LiveStreamsController < ApplicationController
 
   # GET /admin/live_streams
   def index
-    @admin_live_streams = current_user.church.live_streams
+    @admin_live_streams = current_user.church.live_streams.kept
   end
 
   # GET /admin/live_stream/1
   def show
-
+    @simulcast_targets = @admin_live_stream.simulcast_targets.kept
   end
 
   # GET /admin/live_stream/new
@@ -79,7 +79,7 @@ class Admin::LiveStreamsController < ApplicationController
 
   def new_target
     # if @subscription.targets >= @subscription_profile.consumed_targets
-      @target = @admin_live_stream.admin_simulcast_targets.new
+    @target = @admin_live_stream.admin_simulcast_targets.new
     # else
     #   flash[:error] = 'More targets not available.'
     #   redirect_back(fallback_location: admin_live_streams_path)
@@ -109,7 +109,7 @@ class Admin::LiveStreamsController < ApplicationController
   end
 
   def destroy_target
-    @target = @admin_live_stream.admin_simulcast_targets.find_by(id: params[:target_id])
+    @target = @admin_live_stream.admin_simulcast_targets.kept.find_by(id: params[:target_id])
     if @target.present?
       # live_stream = MuxLiveStream.new
       # live_stream.delete_simulcast_target(@admin_live_stream.mux_stream_id, @target.mux_simulcast_id)
@@ -130,7 +130,7 @@ class Admin::LiveStreamsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_admin_live_stream
-    @admin_live_stream = current_user.church.live_streams.find_by(id: params[:id])
+    @admin_live_stream = current_user.church.live_streams.kept.find_by(id: params[:id])
     return unless @admin_live_stream.blank?
 
     flash[:error] = 'No live stream found'

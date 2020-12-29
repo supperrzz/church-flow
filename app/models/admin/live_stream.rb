@@ -3,6 +3,7 @@
 # Table name: admin_live_streams
 #
 #  id              :bigint           not null, primary key
+#  discarded_at    :datetime
 #  embed_code      :string
 #  mux_stream_key  :string
 #  name            :string
@@ -16,14 +17,17 @@
 #
 # Indexes
 #
-#  index_admin_live_streams_on_church_id   (church_id)
-#  index_admin_live_streams_on_embed_code  (embed_code)
+#  index_admin_live_streams_on_church_id     (church_id)
+#  index_admin_live_streams_on_discarded_at  (discarded_at)
+#  index_admin_live_streams_on_embed_code    (embed_code)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (church_id => churches.id)
 #
 class Admin::LiveStream < ApplicationRecord
+  include Discard::Model
+
   belongs_to :church
   has_many :admin_simulcast_targets, class_name: 'Admin::SimulcastTarget',
            foreign_key: :admin_live_stream_id, dependent: :destroy, inverse_of: :admin_live_stream

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_25_191512) do
+ActiveRecord::Schema.define(version: 2020_12_27_071928) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,7 +62,9 @@ ActiveRecord::Schema.define(version: 2020_12_25_191512) do
     t.string "status"
     t.string "playback_id"
     t.string "embed_code"
+    t.datetime "discarded_at"
     t.index ["church_id"], name: "index_admin_live_streams_on_church_id"
+    t.index ["discarded_at"], name: "index_admin_live_streams_on_discarded_at"
     t.index ["embed_code"], name: "index_admin_live_streams_on_embed_code"
   end
 
@@ -125,7 +127,9 @@ ActiveRecord::Schema.define(version: 2020_12_25_191512) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "platform"
     t.string "mux_simulcast_id"
+    t.datetime "discarded_at"
     t.index ["admin_live_stream_id"], name: "index_admin_simulcast_targets_on_admin_live_stream_id"
+    t.index ["discarded_at"], name: "index_admin_simulcast_targets_on_discarded_at"
   end
 
   create_table "admin_websites", force: :cascade do |t|

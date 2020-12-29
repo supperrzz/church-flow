@@ -32,7 +32,10 @@ class MuxLiveStream
 
   def delete(admin_live_stream)
     @live_api.delete_live_stream(admin_live_stream.mux_stream_id)
-    admin_live_stream.destroy
+    admin_live_stream.admin_simulcast_targets.each do |simulcast_target|
+      simulcast_target.discard
+    end
+    admin_live_stream.discard
   rescue MuxRuby::ApiError => e
     puts e.message
     false

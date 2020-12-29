@@ -102,3 +102,6 @@ gem 'interactor'
 
 # locally time with
 gem 'local_time'
+
+# Soft deletion done right
+gem 'discard', '~> 1.2'
