@@ -12,7 +12,7 @@ class Admin::LiveStreamsController < ApplicationController
 
   # GET /admin/live_stream/1
   def show
-    @simulcast_targets = @admin_live_stream.simulcast_targets.kept
+    @simulcast_targets = @admin_live_stream.admin_simulcast_targets.kept
   end
 
   # GET /admin/live_stream/new
