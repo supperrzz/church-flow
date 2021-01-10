@@ -64,13 +64,13 @@ class NotifyController < ApplicationController
     # Handle the event
     case @event.type
     when 'customer.subscription.updated'
-      @subscription = event.data.object # contains a Stripe::PaymentIntent
+      @subscription = @event.data.object # contains a Stripe::PaymentIntent
       puts 'Updated subscription!'
     when 'customer.subscription.deleted'
-      @subscription = event.data.object # contains a Stripe::PaymentMethod
+      @subscription = @event.data.object # contains a Stripe::PaymentMethod
       puts 'Deleted Subscription!'
     when 'customer.subscription.created'
-      @subscription = event.data.object # contains a Stripe::PaymentMethod
+      @subscription = @event.data.object # contains a Stripe::PaymentMethod
       puts 'Created Subscription!'
     else
       puts "Unhandled event type: #{event.type} for #{@subscription}"
