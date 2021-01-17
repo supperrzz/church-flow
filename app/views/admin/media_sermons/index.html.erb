@@ -15,17 +15,19 @@
         <a href="<%= admin_media_sermons_path(view: 'table') %>" class="<%= params[:view] != 'grid' ? 'text-dark' : 'text-muted' %>"><i class="fas fa-list-ul"></i></a>
       </div>
       <% if params[:view] == 'grid' %>
-        <% @admin_media_sermons.in_groups_of(3).each do |group| %>
-          <div class="video-library-list mt-3">
-            <div class="row">
-              <% group.each do |admin_media_sermon| %>
-                <% if admin_media_sermon.present? %>
-                  <%= render 'sermon', sermon: admin_media_sermon, view: params[:view] %>
+        <div class="video-library-grid-view">
+          <% @admin_media_sermons.in_groups_of(3).each do |group| %>
+            <div class="video-library-list mt-3">
+              <div class="row">
+                <% group.each do |admin_media_sermon| %>
+                  <% if admin_media_sermon.present? %>
+                    <%= render 'sermon', sermon: admin_media_sermon, view: params[:view] %>
+                  <% end %>
                 <% end %>
-              <% end %>
+              </div>
             </div>
-          </div>
-        <% end %>
+          <% end %>
+        </div>
       <% else %>
       <div class="mt-3">
         <div class="tbl-header">

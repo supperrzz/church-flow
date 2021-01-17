@@ -60,7 +60,7 @@ class NotifyController < ApplicationController
       status 400
       return
     end
-
+    # TODO: Complete stripe subscriptions implementations
     # Handle the event
     case @event.type
     when 'customer.subscription.updated'
@@ -73,10 +73,10 @@ class NotifyController < ApplicationController
       @subscription = @event.data.object # contains a Stripe::PaymentMethod
       puts 'Created Subscription!'
     else
-      puts "Unhandled event type: #{event.type} for #{@subscription}"
+      puts "Unhandled event type: #{@event.type} for #{@subscription}"
     end
 
-    render json: { success: "Received Webhook #{event.type}" }
+    render json: { success: "Received Webhook #{@event.type}" }
   end
 
   private

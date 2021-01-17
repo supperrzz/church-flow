@@ -103,6 +103,11 @@ button:focus {
   overflow-y: auto;
   overflow-x: hidden;
 }
+.video-library-grid-view {
+  max-height: 73vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
 .video-placeholder {
   background: #f9f9f9;
   padding-bottom: 56.25%;

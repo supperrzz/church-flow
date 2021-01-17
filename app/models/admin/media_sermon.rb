@@ -33,6 +33,8 @@ class Admin::MediaSermon < ApplicationRecord
   include VideoUploader::Attachment(:video)
   include ImageUploader::Attachment(:thumbnail)
 
+  validates :title, presence: true
+
   before_destroy :delete_hls_video
 
   def get_video_url
