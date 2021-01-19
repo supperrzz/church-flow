@@ -113,8 +113,8 @@ Rails.application.configure do
   config.active_storage.service = :amazon
 
   config.action_mailer.default_url_options = {
-    host: 'sda.live',
-    protocol: 'http:'
+    host: ENV['DOMAIN'],
+    protocol: 'https:'
   }
 
   config.action_mailer.delivery_method = :smtp
