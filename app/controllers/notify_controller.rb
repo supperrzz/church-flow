@@ -147,7 +147,7 @@ class NotifyController < ApplicationController
       puts 'timestamp: ' + timestamp
       puts 'signature: ' + signature
       puts signed_payload = timestamp.gsub('t=', '') + '.' + request.raw_post
-      puts hash = OpenSSL::HMAC.hexdigest('sha256', ENV['mux_secret'], signed_payload)
+      puts hash = OpenSSL::HMAC.hexdigest('sha256', ENV['MUX_SIGNING_SECRET'], signed_payload)
       puts expected_signature = Base64.encode64(hash)
       puts signature.gsub('v1=', '') == expected_signature
     else

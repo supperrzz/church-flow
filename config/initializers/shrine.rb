@@ -9,10 +9,10 @@ if Rails.env.development?
   }
 else
   s3_options = {
-    bucket: 'sda-live',
+    bucket: ENV['S3_BUCKET'],
     region: 'us-west-1',
-    access_key_id: ENV['access_key_id'],
-    secret_access_key: ENV['secret_access_key']
+    access_key_id: ENV['ACCESS_KEY_ID'],
+    secret_access_key: ENV['SECRET_ACCESS_KEY']
   }
 
   Shrine.storages = {
