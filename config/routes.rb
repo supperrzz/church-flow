@@ -1,6 +1,5 @@
 require 'sidekiq/web'
 Rails.application.routes.draw do
-  mount Sidekiq::Web => '/sidekiq'
 
   namespace :members do
     get 'home/index'
@@ -78,6 +77,8 @@ Rails.application.routes.draw do
   end
 
   authenticated :user, lambda { |u| u.super_admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+
     root to: 'home#index', as: :super_admin_root
     resources :admins
 

@@ -34,8 +34,7 @@ class Admin::MediaSermonsController < ApplicationController
         if video_json[0].present?
           video_data = build_media_json(video_json[0])
           @admin_media_sermon.update video_data: video_data
-          obj = ThumbnailGenerate.new
-          obj.create(@admin_media_sermon)
+          ThumbnailGenerateJob.perform_later(@admin_media_sermon.id)
           # @admin_media_sermon.generate_hls_video if create_admin_media_sermon_params[:video].present?
         end
       end
@@ -53,8 +52,7 @@ class Admin::MediaSermonsController < ApplicationController
         if video_json[0].present?
           video_data = build_media_json(video_json[0])
           @admin_media_sermon.update video_data: video_data
-          obj = ThumbnailGenerate.new
-          obj.create(@admin_media_sermon)
+          ThumbnailGenerateJob.perform_later(@admin_media_sermon.id)
           # @admin_media_sermon.generate_hls_video if create_admin_media_sermon_params[:video].present?
         end
       end
