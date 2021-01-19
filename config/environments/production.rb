@@ -129,4 +129,5 @@ Rails.application.configure do
   }
 
   config.hosts << /[a-z0-9]+\.sda\.live/
+  config.hosts << /[a-z0-9]+\.churchflow\.io/
 end
