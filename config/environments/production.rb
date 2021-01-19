@@ -119,13 +119,13 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              'smtp.gmail.com',
-    port:                 587,
-    domain:               'gmail.com',
-    user_name:            ENV['USERNAME'],
-    password:             ENV['PASSWORD'],
-    authentication:       'plain',
-    enable_starttls_auto: true
+    :user_name => ENV['SENDGRID_USERNAME'],
+    :password => ENV['SENDGRID_API_KEY'],
+    :domain => ENV['SENDGRID_DOMAIN'],
+    :address => ENV['SENDGRID_ADDRESS'],
+    :port => 587,
+    :authentication => :plain,
+    :enable_starttls_auto => true
   }
 
   config.hosts << /[a-z0-9]+\.sda\.live/
