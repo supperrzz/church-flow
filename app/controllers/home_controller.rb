@@ -36,6 +36,10 @@ class HomeController < ApplicationController
     end
   end
 
+  def privacy; end
+
+  def terms; end
+
   private
 
   def s3_bucket
