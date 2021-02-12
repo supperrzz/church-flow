@@ -9,8 +9,7 @@ class CreateSermonFromMuxJob < ApplicationJob
     admin_media_sermon = live_stream.church.media_sermons.create(title: title, video_remote_url: url)
     return unless admin_media_sermon.persisted?
 
-    obj = ThumbnailGenerate.new
-    obj.create(admin_media_sermon)
+    ThumbnailGenerateJob.perform_later(admin_media_sermon.id)
     # sermon = live_stream.church.media_sermons.create(video_remote_url: url)
     # sermon.generate_hls_video
   end

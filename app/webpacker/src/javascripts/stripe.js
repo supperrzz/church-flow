@@ -1,7 +1,7 @@
 import { loadStripe } from '@stripe/stripe-js';
 
 async function setupStripe() {
-    let stripe = await loadStripe('pk_test_51HtdhkEXvu73OOK1WeSZAZllGyabfphdP6c9Uzq9qNiqEg4CL22OfALzrGfddtxfe9dyvqLCeF4smeuaBX1duMXd00gU2rd1pp')
+    let stripe = await loadStripe('pk_live_51HtdhkEXvu73OOK1XlTm5xgL5va5zHH4obl1toPY9dAvXOGaKFv3ihSjKOciRwyS4e7crFt5Xb45cQihHXxfHHpm00znPrxhTs')
 
     let form = document.getElementById('payment-form');
     if(form != null) {
