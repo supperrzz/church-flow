@@ -3,38 +3,63 @@
   icon: "fa-home"  } 
 %>
 
-<div class="container-fluid mt-n20">
-  <div class="card p-4 mb-5">
+<div class="container mt-n20 mb-5">
+  <div class="card">
     <div class="card-body">
-      <div class="col-xxl-4 col-xl-12">
-        <div class="row align-items-center">
-            <div class="col-6 m-auto">
-                <div class="text-center px-4 mb-4 mb-xl-0 mb-xxl-4">
-                    <h1 class="text-primary">Welcome Back, <%= current_user.fname %>!</h1>
-                    <p class="text-gray-700 mb-0">Stay tuned, more features are on the way! Do you have an idea for a new feature? <a href="">click here</a> to submit your idea.</p>
+        <div class="row mb-3">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body p-4">
+                <div class="">
+                  <h2 class="text-primary">Welcome back, <%= current_user.fname %>.</h2>
+                  <p class="mb-0">Stay tuned, more great features are on the way!</p>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
-        <div class="row mt-3 text-center">
-          <div class="col-12 mb-2">
-            <h4>Consumed Stream Size (in Hours):</h4>
-            <div><%= @asset_duration %> <%= stream_size_limit %></div>
+        <div class="row">
+          <div class="col-8 mb-2">
+            <div class="card">
+              <div style="padding-bottom:56.25%;position:relative"><div style="position:absolute;height:100%;width:100%" class="bg-gray-600 text-muted rounded-top d-flex justify-content-center align-items-center"><h5>Stream Offline</h5></div></div>
+              <div class="card-body">
+                  <div class="d-flex align-items-center justify-content-between">
+                    <div>
+                      <button href="#" class="btn btn-primary lift" role="button">Start Stream <i class="fas fa-play-circle ml-2"></i></button>
+                    </div>
+                    <div class="stream-targets">
+                      <span class="mr-1 text-black-25">Stream Targets:</span>
+                      <button class="btn btn-facebook lift">
+                          <i class="fab fa-facebook-f"></i>
+                      </button>
+                      <button class="btn btn-google lift">
+                          <i class="fab fa-youtube"></i>
+                      </button>
+                      <button class="btn btn-blue lift">
+                          <i class="fas fa-tv"></i>
+                      </button>
+                      <button href="#" class="btn btn-light btn-sm ml-1" role="button">Settings</button>
+                    </div>
+                  </div>
+              </div>
+            </div>
           </div>
-          <div class="col-12 mb-2">
-            <h4>Consumed Viewer Count:</h4>
-            <div><%= @visitors %> <%= viewer_count_limit %></div>
-          </div>
-          <div class="col-12 mb-2">
-            <h4>Consumed Live Stream:</h4>
-            <div><%= @subscription_profile.consumed_live_streams %> <%= live_streams_limit %></div>
-          </div>
-          <div class="col-12 mb-2">
-            <h4>Consumed Targets:</h4>
-            <div><%= @subscription_profile.consumed_targets %> <%= targets_limit %></div>
-          </div>
-          <div class="col-12 mb-2">
-            <h4>Consumed Video Storage:</h4>
-            <div><%= (@subscription_profile.consumed_video_storage / 1024 / 1024 / 1024.0).round(3) %> GB <%= video_storage_limit %></div>
+          <div class="col-4">
+            <div class="card">
+              <div class="card-header">
+                <h4>Stream Schedule</h4>
+                <p class="mb-0 small">Here's what you have coming up.</p>
+              </div>
+              <div class="card-body">
+                <div class="text-black-25">No scheduled streams.</div>
+              </div>
+              <a class="card-footer" href="#">
+                  <div class="d-flex align-items-center justify-content-between small text-body">
+                      <span>Schedule a new stream</span>
+                      <i class="fas fa-angle-right"></i>
+                  </div>
+              </a>
+            </div>
           </div>
         </div>
       </div>

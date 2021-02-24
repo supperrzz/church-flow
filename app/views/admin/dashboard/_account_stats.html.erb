@@ -1,0 +1,36 @@
+<div class="col-12">
+  <div class="row">
+    <div class="col-4">
+      <div class="card shadow-none">
+        <div class="card-body">
+          <h5>Video Storage</h5>
+            <div><span class="h1 text-primary"><%= (@subscription_profile.consumed_video_storage / 1024 / 1024 / 1024.0).round(3).to_i %></span> <%= video_storage_limit %></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="card shadow-none">
+        <div class="card-body">
+          <h5>Stream Time</h5>
+          <div><span class="h1 text-primary"><%= @subscription_profile.consumed_stream_size %></span> / <%= @subscription.stream_size %><span class="small"> hrs</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="card shadow-none">
+        <div class="card-body">
+          <h5>Viewer Count</h5>
+          <div><span class="h1 text-primary"><%= @visitors %></span> <%= viewer_count_limit %></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-4 d-none">
+      <h5>Consumed Live Stream:</h5>
+      <div><%= @subscription_profile.consumed_live_streams %> <%= live_streams_limit %></div>
+    </div>
+    <div class="col-4 d-none">
+      <h5>Consumed Targets:</h5>
+      <div><%= @subscription_profile.consumed_targets %> <%= targets_limit %></div>
+    </div>
+  </div>
+</div>
