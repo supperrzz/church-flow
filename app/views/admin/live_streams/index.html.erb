@@ -1,36 +1,42 @@
 
 <%= render partial: 'shared/simple_page_header', locals: { 
-    title: 'Stream',
-    btn_text: 'Add Live Stream',
-    link: new_admin_live_stream_path,
-    icon: 'fa-video' } %>
+  title: 'Stream',
+  btn_text: 'Add Live Stream',
+  link: new_admin_live_stream_path,
+  icon: 'fa-video' } %>
 
-
-<div class="container-fluid mt-n20">
-  <div class="card p-4 mb-5">
-    <div class="table-responsive">
-      <table class="table table-striped table-borderless mb-0">
-        <thead>
-          <tr>
-            <th class="text-black font-weight-500">Id</th>
-            <th class="text-black font-weight-500">Name</th>
-            <th class="text-black font-weight-500">Playback policy</th>
-            <th colspan="2"></th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <% @admin_live_streams.each do |admin_live_stream| %>
+<div class="container mt-n20">
+  <div class="card mb-5">
+    <div class="card-body">
+      <% if @admin_live_streams.length > 0 %>
+      <div class="table-responsive">
+        <table class="table table-striped table-borderless mb-0">
+          <thead>
             <tr>
-              <td class="text-black"><%= admin_live_stream.id %></td>
-              <td class="text-black"><%= admin_live_stream.name %></td>
-              <td class="text-black"><%= admin_live_stream.playback_policy %></td>
-              <td><%= link_to 'View', admin_live_stream %></td>
-              <td><%= link_to 'Delete', admin_live_stream, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <th class="text-black font-weight-400 small">Id</th>
+              <th class="text-black font-weight-400 small">Name</th>
+              <th class="text-black font-weight-400 small">Playback policy</th>
+              <th colspan="2"></th>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            <% @admin_live_streams.each do |admin_live_stream| %>
+              <tr>
+                <td class="text-black"><%= admin_live_stream.id %></td>
+                <td class="text-black"><%= admin_live_stream.name %></td>
+                <td class="text-black"><%= admin_live_stream.playback_policy %></td>
+                <td><%= link_to 'View', admin_live_stream %></td>
+                <td><%= link_to 'Delete', admin_live_stream, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <% else %>
+        <div class="alert alert-light" role="alert">
+            You don't have any livestreams yet.
+          </div>
+      <% end %>
     </div>
   </div>
 </div>
