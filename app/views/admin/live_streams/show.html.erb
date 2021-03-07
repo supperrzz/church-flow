@@ -4,94 +4,77 @@
   link: new_admin_live_stream_path,
   icon: 'fa-video' } %>
 
-<div class="container-fluid mt-n20">
- <div class="card p-4 mb-5">
-   <%= link_to(admin_live_streams_path, class: 'close position-absolute') do %>
-     <%= image_tag('img/icon_close.png') %>
-   <% end %>
-  <div class="row mt-4">
-    <div class="col-md-6">
-      <h3 class="indigo-text mb-3">Video Feed</h3>
-      <video id="video" width="100%" controls></video>
-      <% if @admin_live_stream.status == 'active' %>
-        <script>
-            poster = "https://image.mux.com/<%= @admin_live_stream.playback_id %>/thumbnail.jpg";
-            videoSrc = 'https://stream.mux.com/<%= @admin_live_stream.playback_id %>.m3u8';
-            let playerInstance = jwplayer('video');
-            playerInstance.setup({
-                file: videoSrc,
-                image: poster,
-                controls: true
-            })
-        </script>
-        <h4 id="no-live-stream" hidden>Stream is offline.</h4>
-      <% else %>
-        <h3 id="no-live-stream">Stream is offline.</h3>
-      <% end %>
-    </div>
-
-    <div class="col-md-6">
-      <h3 class="indigo-text mb-3">Stream Detail</h3>
-      <p>
-        <strong>Name:</strong>
-        <%= @admin_live_stream.name %>
-      </p>
-
-      <p>
-        <strong>Playback policy:</strong>
-        <%= @admin_live_stream.playback_policy %>
-      </p>
-
-      <p>
-        <strong>Endpoint to Broadcast:</strong>
-        <div><span class="badge badge-secondary p-2 rounded20">rtmp://global-live.mux.com:5222/app</span>
-          <a title="Copy" class="clipboard-copy-btn" data-clipboard-text="rtmp://global-live.mux.com:5222/app"><i class="fa fa-copy mr-2"></i></a>
-         (Standard RTMP entry point. Compatible with the majority of streaming applications and services.)</div>
-        <div><span class="badge badge-secondary p-2 rounded20">
-        rtmps://global-live.mux.com:443/app</span>
-        <a title="Copy" class="clipboard-copy-btn" data-clipboard-text="rtmps://global-live.mux.com:443/app"><i class="fa fa-copy mr-2"></i></a>
-        (Secure RTMPS entry point. Compatible with less streaming applications, but offers a higher level of security.)</div>
-      </p>
-
-      <p>
-        <strong>Stream Key:</strong>
-        <%= @admin_live_stream.mux_stream_key %>
-      </p>
-      <div id="embed-code-container">
-        <%= render partial: 'admin/live_streams/embed_code_partial', locals: { embed_code: @admin_live_stream.embed_code } %>
+<div class="container mt-n20">
+ <div class="card mb-5">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6">
+        <h3 class="mb-3">Video Feed</h3>
+        <video id="video" width="100%" controls></video>
+        <% if @admin_live_stream.status == 'active' %>
+          <script>
+              poster = "https://image.mux.com/<%= @admin_live_stream.playback_id %>/thumbnail.jpg";
+              videoSrc = 'https://stream.mux.com/<%= @admin_live_stream.playback_id %>.m3u8';
+              let playerInstance = jwplayer('video');
+              playerInstance.setup({
+                  file: videoSrc,
+                  image: poster,
+                  controls: true
+              })
+          </script>
+          <h4 id="no-live-stream" hidden>Stream is offline.</h4>
+        <% else %>
+          <h3 id="no-live-stream">Stream is offline.</h3>
+        <% end %>
+        <div id="embed-code-container">
+          <%= render 'embed_code_partial', embed_code: @admin_live_stream.embed_code %>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <h3 class="mb-3">Stream Details</h3>
+        <div class="card mb-3">
+          <div class="card-body">
+              <h6 class="font-weight-500 mb-0">Broadcast Endpoint:</h6>
+              <div class="d-inline-block mb-2">rtmp://global-live.mux.com:5222/app</div>
+                <a title="Copy" class="clipboard-copy-btn" data-clipboard-text="rtmp://global-live.mux.com:5222/app"><i class="fa fa-copy ml-2"></i></a>
+              <div>
+              <h6 class="font-weight-500 mb-0">Stream Key:</h6>
+              <small><%= @admin_live_stream.mux_stream_key %></small>
+              <a title="Copy" class="clipboard-copy-btn" data-clipboard-text="<%= @admin_live_stream.mux_stream_key%>"><i class="fa fa-copy ml-2"></i></a>
+          </div>
+        </div>
+        </div>
+        <div class="stream-targets">
+          <table class="table">
+            <thead>
+            <tr>
+              <th>Platform</th>
+              <th>Endpoint</th>
+              <th>Stream Key</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+              <% @simulcast_targets.each do |simulcast_target| %>
+                <tr>
+                  <td><%= simulcast_target.platform %></td>
+                  <td><%= simulcast_target.url %></td>
+                  <td><%= simulcast_target.stream_key %></td>
+                  <td>
+                    <%= link_to 'Delete', admin_destroy_target_path(target_id: simulcast_target.id), class: 'btn btn-danger', data: { confirm: 'Are you sure ?' }, method: :delete %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <%= link_to 'New Target', admin_new_target_path, class: 'btn btn-sm btn-primary' %>
+        </div>
       </div>
     </div>
+    <!--<div class="actions">-->
+    <!--<input type="submit" value="Save" class="btn btn-primary px-4">-->
+    <!--<input type="submit" value="Cancel" class="btn btn-outline-primary px-4 ml-md-4">-->
+    <!--</div>-->
   </div>
-   <div class="row mt-3">
-     <%= link_to 'New Target', admin_new_target_path, class: 'btn btn-primary' %>
-     <table class="table mt-3">
-        <thead>
-        <tr>
-          <th>Platform</th>
-          <th>Endpoint</th>
-          <th>Stream Key</th>
-          <th></th>
-        </tr>
-        </thead>
-
-        <tbody>
-        <% @simulcast_targets.each do |simulcast_target| %>
-          <tr>
-            <td><%= simulcast_target.platform %></td>
-            <td><%= simulcast_target.url %></td>
-            <td><%= simulcast_target.stream_key %></td>
-            <td>
-              <%= link_to 'Delete', admin_destroy_target_path(target_id: simulcast_target.id), class: 'btn btn-danger',
-                          data: { confirm: 'Are you sure ?' }, method: :delete %>
-            </td>
-          </tr>
-        <% end %>
-        </tbody>
-      </table>
-   </div>
-<!--    <div class="actions">-->
-<!--      <input type="submit" value="Save" class="btn btn-primary px-4">-->
-<!--      <input type="submit" value="Cancel" class="btn btn-outline-primary px-4 ml-md-4">-->
-<!--    </div>-->
   </div>
 </div>
