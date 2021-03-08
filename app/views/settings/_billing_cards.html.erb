@@ -38,7 +38,7 @@
       </div>
     </div>
   <% else %>
-    <% if @subscription.cancel_at_period_end %>
+    <% if @subscription_profile&.active && @subscription.cancel_at_period_end %>
       <div class="col-12 mb-3">
         <div class="card h-100 overflow-hidden">
           <div class="card-body p-0">

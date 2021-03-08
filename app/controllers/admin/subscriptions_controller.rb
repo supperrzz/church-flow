@@ -22,9 +22,9 @@ class Admin::SubscriptionsController < ApplicationController
         else
           flash[:notice] = 'Subscription successful.'
           @subscription_profile.update stripe_subscription_id: response.subscription.id,
-                                       stripe_item_id: response.subscription.items.data[0].id,
-                                       subscription_id: subscription.id,
-                                       active: true
+          stripe_item_id: response.subscription.items.data[0].id,
+          subscription_id: subscription.id,
+          active: true
         end
       end
       redirect_to settings_profile_path

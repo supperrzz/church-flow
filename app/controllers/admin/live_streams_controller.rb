@@ -172,7 +172,11 @@ class Admin::LiveStreamsController < ApplicationController
       @subscription_profile = current_user.subscription_profile
       @subscription = current_user.subscription_profile.subscription
     else
-      @subscription_profile = SubscriptionProfile.create(user: current_user) if current_user.subscription_profile.blank?
+      if current_user.subscription_profile.blank?
+        @subscription_profile = SubscriptionProfile.create(user: current_user) 
+      else 
+        @subscription_profile = current_user.subscription_profile
+      end
     end
   end
 end
