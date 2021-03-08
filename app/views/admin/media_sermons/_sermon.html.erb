@@ -1,8 +1,8 @@
 <% if view == 'grid' %>
   <div class=" item col-md-6 col-lg-4 mb-4">
     <div class="card card-header-actions shadow-none">
-      <div class="card-header">
-        <%= link_to sermon.title&.truncate(30), edit_admin_media_sermon_path(sermon), class: "text-decoration-none text-gray-700", title: sermon.title %>
+      <div class="card-header small">
+       <%= link_to sermon.title&.truncate(30), edit_admin_media_sermon_path(sermon), class: "text-decoration-none text-gray-700", title: sermon.title %> 
         <div class="dropdown no-caret">
           <button class="btn-sm border-0 dropdown-toggle py-1 px-2 rounded" id="dropdownMenuButton" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Actions <i class="fa fa-caret-down ml-2" aria-hidden="true"></i>
@@ -53,10 +53,10 @@
         <%= form_with(class: 'form', model: sermon, local: true) do |form| %>
           <div class="custom-control custom-switch d-flex">
             <%= form.check_box :published, { id: sermon.id, class: 'custom-control-input', onchange: 'this.form.submit()' } %>
-            <label class="custom-control-label blue-text font-weight-500 small m-0 d-flex flex-column-reverse" for="<%= sermon.id %>">Publish</label>
+            <label class="custom-control-label blue-text small m-0 d-flex flex-column-reverse" for="<%= sermon.id %>">Publish</label>
           </div>
         <% end %>
-        <small class="text-xs m-0 text-muted font-weight-500">Uploaded: <%= sermon.created_at.strftime("%m/%d/%Y") %></small>
+        <small class="text-xs m-0 text-muted">Uploaded: <%= sermon.created_at.strftime("%m/%d/%Y") %></small>
       </div>
     </div>
   </div>

@@ -19,23 +19,23 @@
   <div class="row">
     <div class="col-6">
       <div class="form-group">
-        <%= f.label :fname, 'First Name', class: 'text-black font-weight-500' %>
+        <%= f.label :fname, 'First Name', class: 'text-black' %>
         <%= f.text_field :fname, class: 'form-control' %>
       </div>
     </div>
     <div class="col-6">
       <div class="form-group">
-        <%= f.label :lname, 'Last Name', class: 'text-black font-weight-500' %>
+        <%= f.label :lname, 'Last Name', class: 'text-black' %>
         <%= f.text_field :lname, class: 'form-control' %>
       </div>
     </div>
   </div>
   <div class="form-group">
-    <%= f.label :email, class: 'text-black font-weight-500' %>
+    <%= f.label :email, class: 'text-black' %>
     <%= f.email_field :email, class: 'form-control' %>
   </div>
   <div class="form-group">
-    <%= f.label :time_zone, class: 'text-black font-weight-500' %>
+    <%= f.label :time_zone, class: 'text-black' %>
     <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.all, {}, class: 'form-control' %>
   </div>
   <%= link_to('Delete My Account', settings_profile_path, method: :delete, class: 'btn btn-outline-red mt-2', data: { confirm: 'Are you sure you want to delete. This action can\'t be reverted.' }) %>

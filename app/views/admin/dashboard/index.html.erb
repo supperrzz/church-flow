@@ -11,7 +11,7 @@
             <div class="card">
               <div class="card-body p-4">
                 <div class="">
-                  <h2 class="font-weight-500">Welcome back, <%= current_user.fname %>.</h2>
+                  <h2>Welcome back, <%= current_user.fname %>.</h2>
                   <p class="mb-0 text-gray-600 small">Stay tuned, more great features are on the way!</p>
                 </div>
               </div>
@@ -20,34 +20,37 @@
         </div>
         <div class="row">
           <div class="col-8 mb-2">
-            <div class="card">
-              <div style="padding-bottom:56.25%;position:relative"><div style="position:absolute;height:100%;width:100%" class="bg-gray-600 text-muted rounded-top d-flex justify-content-center align-items-center"><h5>Stream Offline</h5></div></div>
-              <div class="card-body">
-                  <div class="d-flex align-items-center justify-content-between">
-                    <div>
-                      <button href="#" class="btn btn-primary lift" role="button">Start Stream <i class="fas fa-play-circle ml-2"></i></button>
+            <% if @admin_live_stream.blank? %>
+              <%= render 'null_stream' %>
+            <% else %>
+              <%= render 'shared/stream_feed' %>
+              <div class="card mt-3">
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between">
+                      <div>
+                        <a href="#" class="btn btn-primary disabled" role="button">Start Stream <i class="fas fa-play-circle ml-2"></i></a>
+                      </div>
+                      <div class="stream-targets">
+                        <span class="text-xs mr-1 text-black-25">Stream Targets:</span>
+                        <label class="btn btn-facebook mb-0">
+                          <input type="checkbox"> <i class="fab ml-2 fa-facebook-f"></i>
+                        </label>
+                        <label class="btn btn-google mb-0">
+                          <input type="checkbox"> <i class="fab ml-2 fa-youtube"></i>
+                        </label>
+                        <label class="btn btn-blue mb-0">
+                          <input type="checkbox">  <i class="fas ml-2 fa-tv"></i>
+                        </label>
+                      </div>
                     </div>
-                    <div class="stream-targets">
-                      <span class="mr-1 text-black-25">Stream Targets:</span>
-                      <button class="btn btn-facebook lift">
-                          <i class="fab fa-facebook-f"></i>
-                      </button>
-                      <button class="btn btn-google lift">
-                          <i class="fab fa-youtube"></i>
-                      </button>
-                      <button class="btn btn-blue lift">
-                          <i class="fas fa-tv"></i>
-                      </button>
-                      <button href="#" class="btn btn-light btn-sm ml-1" role="button">Settings</button>
-                    </div>
-                  </div>
+                </div>
               </div>
-            </div>
+            <% end %>
           </div>
           <div class="col-4">
             <div class="card">
               <div class="card-header">
-                <h4>Stream Schedule</h4>
+                <h5>Stream Schedule</h5>
                 <p class="mb-0 small text-gray-600">Here's what you have coming up.</p>
               </div>
               <div class="card-body">

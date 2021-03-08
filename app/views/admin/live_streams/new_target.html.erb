@@ -1,10 +1,10 @@
 <%= render partial: 'shared/header', locals: { 
-  title: 'Add Target to Dev Stream',
-  icon: '' } %>
+  title: "Add Target",
+  icon: 'fa-network-wired' } %>
 
-<div class="container-fluid mt-n20">
-  <div class="card p-4 mb-5">
-    <div class="mt-4">
+<div class="container mt-n20">
+  <div class="card mb-5">
+    <div class="card-body">
       <%= link_to(:back, class: 'close position-absolute') do %>
         <%= image_tag('img/icon_close.png') %>
       <% end %>
@@ -12,20 +12,20 @@
         <div class="col-lg-12">
           <!-- <h4>Add Target to <%= @admin_live_stream.name %></h4> -->
           <div class="form-group">
-            <%= f.label :platform, class: 'text-black font-weight-500' %>
+            <%= f.label :platform, class: 'text-black' %>
             <%= f.text_field :platform, class: 'form-control' %>
           </div>
           <div class="form-group">
-            <%= f.label :url, class: 'text-black font-weight-500' %>
+            <%= f.label :url, class: 'text-black text-uppercase' %>
             <%= f.text_field :url, class: 'form-control' %>
           </div>
           <div class="form-group">
-            <%= f.label :stream_key, class: 'text-black font-weight-500' %>
+            <%= f.label :stream_key, class: 'text-black' %>
             <%= f.text_field :stream_key, class: 'form-control' %>
           </div>
           <div class="mt-4">
             <%= submit_tag 'Add Target', class: 'btn btn-primary' %>
-            <%#= link_to 'Cancel', admin_create_target_path, class: 'btn btn-outline-primary px-4 ml-md-4' %>
+            <%= link_to 'Cancel', :back, class: 'btn btn-outline-primary px-4 ml-md-2' %>
           </div>
         </div>
       <% end %>

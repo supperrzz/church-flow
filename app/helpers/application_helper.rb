@@ -13,7 +13,7 @@ module ApplicationHelper
   def sortable(column, title = nil)
     title ||= column.titleize
     direction = column == params[:sort] && params[:direction] == 'asc' ? 'desc' : 'asc'
-    link_to title, admin_media_sermons_path(sort: column, direction: direction, view: 'table'), class: 'text-dark font-weight-500'
+    link_to title, admin_media_sermons_path(sort: column, direction: direction, view: 'table'), class: 'text-dark'
   end
 
   def sort_icon(column)

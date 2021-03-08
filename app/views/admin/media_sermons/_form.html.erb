@@ -8,7 +8,7 @@
           <% if admin_media_sermon.id.blank? %>
             <div class="col-md-4">
               <div class="form-group position-relative">
-                <%= form.label :video, class: 'text-black font-weight-500' %>
+                <%= form.label :video, class: 'text-black' %>
                 <br/>
                 <% if admin_media_sermon.get_video_url.present? %>
                   <div id="video-player"></div>
@@ -39,7 +39,7 @@
           <% end %>
           <div class="col-md-4">
             <div class="form-group position-relative">
-              <%= form.label :thumbnail, class: 'text-black font-weight-500' %>
+              <%= form.label :thumbnail, class: 'text-black' %>
               <br/>
 <!--              <iframe width="100%" height="250" src="https://www.youtube.com/embed/9xwazD5SyVg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>-->
               <% if admin_media_sermon.get_thumbnail_url.present? %>
@@ -58,17 +58,17 @@
           </div>
         </div>
         <div class="form-group">
-          <%= form.label :title, class: 'text-black font-weight-500 mt-3' %>
+          <%= form.label :title, class: 'text-black mt-3' %>
           <%= form.text_field :title, class: 'form-control' %>
         </div>
 
         <div class="form-group">
-          <%= form.label :speaker, class: 'text-black font-weight-500' %>
+          <%= form.label :speaker, class: 'text-black' %>
           <%= form.text_field :speaker, class: 'form-control' %>
         </div>
 
         <div class="form-group">
-          <%= form.label :scripture, class: 'text-black font-weight-500' %>
+          <%= form.label :scripture, class: 'text-black' %>
           <%= form.text_field :scripture, class: 'form-control' %>
         </div>
 
@@ -98,7 +98,7 @@
         -->
       <div class="actions">
         <%= form.submit 'Save', class: 'btn btn-primary px-4' %>
-        <%= link_to 'Cancel', admin_media_sermons_path, class: 'btn btn-outline-primary px-4 ml-md-4' %>
+        <%= link_to 'Cancel', admin_media_sermons_path, class: 'btn btn-outline-primary px-4 ml-md-2' %>
       </div>
     </div>
   </div>
