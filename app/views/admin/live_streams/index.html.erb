@@ -1,6 +1,6 @@
 
 <%= render partial: 'shared/simple_page_header', locals: { 
-  title: 'Stream',
+  title: 'Live Stream',
   btn_text: 'Add Live Stream',
   link: new_admin_live_stream_path,
   icon: 'fa-video' } %>
@@ -33,9 +33,18 @@
         </table>
       </div>
       <% else %>
-        <div class="alert alert-light" role="alert">
-            You don't have any livestreams yet.
+        <div class="card">
+          <div class="card-body py-5">
+            <div class="d-flex flex-column justify-content-center">
+              <%= render 'shared/null_icon' %>
+              <div class="text-center px-0 px-lg-5 mx-auto" style="max-width:600px;">
+                <h2 class="mb-1">No streams yet.</h2>
+                <p class="mb-3">Click the button below to create your first stream.</p>
+                <%= link_to  "Create Stream", new_admin_live_stream_path, class: "btn btn-primary" %>
+              </div>
+            </div>
           </div>
+        </div>
       <% end %>
     </div>
   </div>

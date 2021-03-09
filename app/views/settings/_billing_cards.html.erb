@@ -45,8 +45,8 @@
             <div class="alert alert-light d-flex flex-column align-items-center" role="alert">
               Your subscription is set to cancel on: <%= local_time(DateTime.strptime(@subscription.cancel_at.to_s,'%s')) %>
               <div class="d-flex align-items-center mt-4">
-              <%= link_to 'Restart Subscription', admin_restart_subscription_path, class: 'btn btn-sm btn-danger mr-3 lift', method: :post %>
-              <%= link_to 'Change Subscription', admin_subscriptions_path, class: 'btn btn-sm btn-primary lift' %>
+              <%= link_to 'Restart Subscription', admin_restart_subscription_path, class: 'btn btn-danger mr-3 lift', method: :post %>
+              <%= link_to 'Change Subscription', admin_subscriptions_path, class: 'btn btn-primary lift' %>
               </div>
             </div>
           </div>
@@ -58,7 +58,7 @@
           <div class="card-body p-0">
             <div class="alert alert-light d-flex flex-column align-items-center" role="alert">
               No active subscriptions at this time. 
-              <%= link_to 'Select a subscription', admin_subscriptions_path, class: 'btn btn-sm btn-primary lift mt-4' %>
+              <%= link_to 'Select a subscription', admin_subscriptions_path, class: 'btn btn-primary mt-3' %>
             </div>
           </div>
         </div>
