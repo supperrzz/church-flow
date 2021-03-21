@@ -1,7 +1,4 @@
-<%= render partial: 'shared/header', locals: {
-  title: 'Billing Settings',
-  icon: 'fa-dollar-sign' } %>
-
+<%= render partial: 'shared/header', locals: { title: 'Billing Settings', icon: 'fa-dollar-sign' } %>
 <div class="container-fluid mt-n20">
   <div class="card pl-4 pr-4 pt-4 mb-5">
     <% if @subscription_profile&.active %>
@@ -42,7 +39,6 @@
                 <h5 class="card-title"><%= card.brand %> ending with <%= card.last4 %></h5>
                 <p class="card-text">Expiring on <%= card.exp_month %>/<%= card.exp_year %></p>
                 <% if @subscription_profile.stripe_card_id == card.id %>
-                  <p class="card-text">Default</p>
                 <% else %>
                   <%= link_to('Set as default', admin_set_default_payment_method_path(id: card.id), method: :post, class: 'btn btn-primary') %>
                 <% end %>

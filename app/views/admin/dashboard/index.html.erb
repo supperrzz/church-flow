@@ -1,40 +1,69 @@
-<%= render partial: "shared/header", locals: { 
-  title: "Dashboard",
-  icon: "fa-home"  } 
-%>
+<%= render partial: 'shared/simple_page_header', locals: { 
+  title: 'Dashoard',
+  btn_text: 'View Schedule',
+  icon: 'fa-table',
+  link: admin_events_path } %>
 
-<div class="container-fluid mt-n20">
-  <div class="card p-4 mb-5">
+<div class="container mt-n20">
+  <div class="card mb-5">
     <div class="card-body">
-      <div class="col-xxl-4 col-xl-12">
-        <div class="row align-items-center">
-            <div class="col-6 m-auto">
-                <div class="text-center px-4 mb-4 mb-xl-0 mb-xxl-4">
-                    <h1 class="text-primary">Welcome Back, <%= current_user.fname %>!</h1>
-                    <p class="text-gray-700 mb-0">Stay tuned, more features are on the way! Do you have an idea for a new feature? <a href="">click here</a> to submit your idea.</p>
+        <div class="row mb-3">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body p-4">
+                <div class="">
+                  <h2>Welcome back, <%= current_user.fname %>.</h2>
+                  <p class="mb-0 text-gray-600 small">Stay tuned, more great features are on the way!</p>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
-        <div class="row mt-3 text-center">
-          <div class="col-12 mb-2">
-            <h4>Consumed Stream Size (in Hours):</h4>
-            <div><%= @asset_duration %> <%= stream_size_limit %></div>
+        <div class="row">
+          <div class="col-8 mb-2">
+            <% if @admin_live_stream.blank? %>
+              <%= render 'null_stream' %>
+            <% else %>
+              <%= render 'shared/stream_feed' %>
+              <%# <div class="card mt-3">
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between">
+                      <div>
+                        <a href="#" class="btn btn-primary disabled" role="button">Start Stream <i class="fas fa-play-circle ml-2"></i></a>
+                      </div>
+                      <div class="stream-targets">
+                        <span class="text-xs mr-1 text-black-25">Stream Targets:</span>
+                        <label class="btn btn-facebook mb-0">
+                          <input type="checkbox"> <i class="fab ml-2 fa-facebook-f"></i>
+                        </label>
+                        <label class="btn btn-google mb-0">
+                          <input type="checkbox"> <i class="fab ml-2 fa-youtube"></i>
+                        </label>
+                        <label class="btn btn-blue mb-0">
+                          <input type="checkbox">  <i class="fas ml-2 fa-tv"></i>
+                        </label>
+                      </div>
+                    </div>
+                </div>
+              </div> %>
+            <% end %>
           </div>
-          <div class="col-12 mb-2">
-            <h4>Consumed Viewer Count:</h4>
-            <div><%= @visitors %> <%= viewer_count_limit %></div>
-          </div>
-          <div class="col-12 mb-2">
-            <h4>Consumed Live Stream:</h4>
-            <div><%= @subscription_profile.consumed_live_streams %> <%= live_streams_limit %></div>
-          </div>
-          <div class="col-12 mb-2">
-            <h4>Consumed Targets:</h4>
-            <div><%= @subscription_profile.consumed_targets %> <%= targets_limit %></div>
-          </div>
-          <div class="col-12 mb-2">
-            <h4>Consumed Video Storage:</h4>
-            <div><%= (@subscription_profile.consumed_video_storage / 1024 / 1024 / 1024.0).round(3) %> GB <%= video_storage_limit %></div>
+          <div class="col-4">
+            <div class="card">
+              <div class="card-header">
+                <h5>Stream Schedule</h5>
+                <p class="mb-0 small text-gray-600">Here's what you have coming up.</p>
+              </div>
+              <div class="card-body">
+                <div class="text-black-25">No scheduled streams.</div>
+              </div>
+              <a class="card-footer" href="#">
+                  <div class="d-flex align-items-center justify-content-between small text-body">
+                      <span>Schedule a new stream</span>
+                      <i class="fas fa-angle-right"></i>
+                  </div>
+              </a>
+            </div>
           </div>
         </div>
       </div>
