@@ -35,5 +35,12 @@
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
-
+.env
 .idea/
+.DS_Store
+app/.DS_Store
+config/.DS_Store
+lib/.DS_Store
+public/.DS_Store
+.env
+.swp

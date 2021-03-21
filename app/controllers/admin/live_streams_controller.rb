@@ -8,6 +8,9 @@ class Admin::LiveStreamsController < ApplicationController
   # GET /admin/live_streams
   def index
     @admin_live_streams = current_user.church.live_streams.kept
+    if @admin_live_streams.length == 1
+      redirect_to @admin_live_streams.first      
+    end
   end
 
   # GET /admin/live_stream/1
@@ -169,7 +172,11 @@ class Admin::LiveStreamsController < ApplicationController
       @subscription_profile = current_user.subscription_profile
       @subscription = current_user.subscription_profile.subscription
     else
-      @subscription_profile = SubscriptionProfile.create(user: current_user) if current_user.subscription_profile.blank?
+      if current_user.subscription_profile.blank?
+        @subscription_profile = SubscriptionProfile.create(user: current_user) 
+      else 
+        @subscription_profile = current_user.subscription_profile
+      end
     end
   end
 end

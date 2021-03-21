@@ -17,15 +17,17 @@
   color: $green;
 }
 .table-striped tbody tr:nth-of-type(odd) {
-  background: $link-water;
+  background: $grey;
 }
 .table td {
   vertical-align: middle;
 }
-.custom-file-input-button::-webkit-file-upload-button, .uppy-FileInput-input::-webkit-file-upload-button {
+.custom-file-input-button::-webkit-file-upload-button,
+.uppy-FileInput-input::-webkit-file-upload-button {
   display: none;
 }
-.custom-file-input-button::before, .uppy-FileInput-input::before {
+.custom-file-input-button::before,
+.uppy-FileInput-input::before {
   content: 'Choose File';
   border: 1px solid transparent;
   padding: 0.25rem 0.5rem;
@@ -56,12 +58,9 @@ button:focus {
 .close {
   right: 15px;
   top: 15px;
-}
-.btn-primary {
-  background: $blue;
-}
-.blue-text {
-  color: $blue;
+  img {
+    width: 12px;
+  }
 }
 .indigo-text {
   color: $indigo;
@@ -102,6 +101,18 @@ button:focus {
   max-height: 63vh;
   overflow-y: auto;
   overflow-x: hidden;
+  & .thumbnail {
+    width: 120px;
+  }
+  & .status {
+    width: 120px;
+  }
+  & .upload-date {
+    width: 150px;
+  }
+  & .actions {
+    width: 120px;
+  }
 }
 .video-library-grid-view {
   max-height: 73vh;
@@ -143,10 +154,4 @@ button:focus {
 }
 .uppy-ProgressBar {
   background: #eeeeee;
-}
-.tbl-header th {
-  width: 20%;
-}
-.tbl-content td {
-  width: 20%;
 }

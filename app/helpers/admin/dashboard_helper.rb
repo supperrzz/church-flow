@@ -12,10 +12,10 @@ module Admin::DashboardHelper
   end
 
   def video_storage_limit
-    @subscription&.video_storage ? "out of #{@subscription&.video_storage} GB" : ''
+    @subscription&.video_storage ? "/ #{@subscription&.video_storage} gb" : ''
   end
 
   def viewer_count_limit
-    @subscription&.viewer_count ? "out of #{@subscription&.viewer_count}" : ''
+    @subscription&.viewer_count ? "/ #{@subscription&.viewer_count}" : ''
   end
 end

@@ -1,16 +1,19 @@
 // Override and add to Bootstrap card style defaults
 
 .card {
-  box-shadow: $box-shadow;
   .card-header {
-    font-weight: 500;
+    // font-weight: 500;
+    background-color: $grey;
+  }
+  .card-footer {
+    background-color: $grey;
   }
   // Sets the color of the card header to primary unless a background utility class is being used
-  &:not([class*='bg-']) {
-    .card-header {
-      color: $primary;
-    }
-  }
+  // &:not([class*='bg-']) {
+  //   .card-header {
+  //     // color: $primary;
+  //   }
+  // }
 }
 
 .card.bg-dark {

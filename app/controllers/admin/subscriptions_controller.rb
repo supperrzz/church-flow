@@ -22,12 +22,12 @@ class Admin::SubscriptionsController < ApplicationController
         else
           flash[:notice] = 'Subscription successful.'
           @subscription_profile.update stripe_subscription_id: response.subscription.id,
-                                       stripe_item_id: response.subscription.items.data[0].id,
-                                       subscription_id: subscription.id,
-                                       active: true
+          stripe_item_id: response.subscription.items.data[0].id,
+          subscription_id: subscription.id,
+          active: true
         end
       end
-      redirect_to admin_payment_methods_path
+      redirect_to settings_profile_path
     else
       flash[:error] = 'No cards added yet. Please add card.'
       redirect_to new_admin_payment_method_path
@@ -41,7 +41,7 @@ class Admin::SubscriptionsController < ApplicationController
     else
       flash[:notice] = 'Subscription cancelled.'
     end
-    redirect_to admin_payment_methods_path
+    redirect_to settings_profile_path
   end
 
   def restart
@@ -51,7 +51,7 @@ class Admin::SubscriptionsController < ApplicationController
     else
       flash[:notice] = 'Subscription restarted.'
     end
-    redirect_to admin_payment_methods_path
+    redirect_to settings_profile_path
   end
 
   def change
@@ -66,7 +66,7 @@ class Admin::SubscriptionsController < ApplicationController
     else
       flash[:notice] = 'Subscription changed.'
     end
-    redirect_to admin_payment_methods_path
+    redirect_to settings_profile_path
   end
 
   private
