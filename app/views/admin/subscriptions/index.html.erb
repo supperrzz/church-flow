@@ -11,12 +11,12 @@
             </div>
             <div class="card-body">
               <div class="">
-                <p class="font-weight-500">Plan Details:</p>
+                <h4 class="font-weight-400">Plan Details:</h4>
                 <ul style="list-style:square;padding-left:20px">
                   <li><%= subscription.live_streams %> Live Streams</li>
                   <li><%= subscription.stream_size %> hours live stream per month</li>
                   <li><%= subscription.targets %> targets (ex: facebook, youtube ..)</li>
-                  <li><%= subscription.viewer_count %> users on livestreams.</li>
+                  <li><%= subscription.viewer_count %> users on livestreams</li>
                   <li><%= subscription.video_storage %> GB of video storage to build gallery</li>
                 </ul>
                 <h5 class="price mt-3 mb-3 font-weight-300"><%= number_to_currency(subscription.price) %><span class="small italic">/month</span></h5>
