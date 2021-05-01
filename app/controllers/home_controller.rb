@@ -44,7 +44,7 @@ class HomeController < ApplicationController
 
   def s3_bucket
     s3 = Aws::S3::Resource.new(
-      region: 'us-west-1',
+      region: 'us-east-2',
       access_key_id: ENV['ACCESS_KEY_ID'],
       secret_access_key: ENV['SECRET_ACCESS_KEY']
     )
