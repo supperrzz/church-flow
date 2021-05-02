@@ -20,7 +20,7 @@ window.setupVideoUploadUppy = function () {
         getUploadParameters(file) {
             // Send a request to our PHP signing endpoint.
             return fetch(
-                's3/fetch_signed_url',
+                '/s3/fetch_signed_url',
                 {
                     method: 'post',
                     // Send and receive JSON.
@@ -39,6 +39,7 @@ window.setupVideoUploadUppy = function () {
                     return response.json();
                 })
                 .then((data) => {
+                    console.log("aws response: "+JSON.parse(data));
                     // Return an object in the correct shape.
                     return {
                         method: data.method,
