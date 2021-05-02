@@ -11,7 +11,7 @@ class GenerateHlsJob < ApplicationJob
       # Pipeline id in AWS
       pipeline_id = '1592507063390-7ensc0'
       input_key = input_key
-      region = 'us-west-1'
+      region = 'us-east-2'
       hls_64k_audio_preset_id = '1351620000001-200071'
       hls_0400k_preset_id     = '1351620000001-200050'
       hls_0600k_preset_id     = '1351620000001-200040'
