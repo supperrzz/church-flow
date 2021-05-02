@@ -20,7 +20,7 @@ window.setupVideoUploadUppy = function () {
         getUploadParameters(file) {
             // Send a request to our PHP signing endpoint.
             return fetch(
-                '/s3/fetch_signed_url',
+                's3/fetch_signed_url',
                 {
                     method: 'post',
                     // Send and receive JSON.
