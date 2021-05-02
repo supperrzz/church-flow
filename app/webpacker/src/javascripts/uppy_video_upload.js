@@ -39,7 +39,6 @@ window.setupVideoUploadUppy = function () {
                     return response.json();
                 })
                 .then((data) => {
-                    console.log("aws response: "+JSON.parse(data));
                     // Return an object in the correct shape.
                     return {
                         method: data.method,
